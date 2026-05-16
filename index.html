@@ -2,45 +2,19 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#050e1f">
 <meta name="color-scheme" content="dark">
-<meta name="format-detection" content="telephone=no">
 <title>AIMED OS · Residentes GO · Joinville · Maio 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%23050e1f'/%3E%3Ctext x='32' y='46' font-family='Playfair Display, Georgia, serif' font-size='42' font-weight='900' fill='%23c9a84c' text-anchor='middle' font-style='italic'%3EA%3C/text%3E%3C/svg%3E">
-
-<!-- PWA · Ilusão Nativa (iOS + Android) -->
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="AIMED">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="application-name" content="AIMED">
-
-<!-- Ícone tela inicial · iOS "Adicionar à Tela Inicial" -->
-<link rel="apple-touch-icon" sizes="180x180" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='40' fill='%23050e1f'/%3E%3Ctext x='90' y='130' font-family='Georgia, Playfair Display, serif' font-size='118' font-weight='900' fill='%23c9a84c' text-anchor='middle' font-style='italic'%3EA%3C/text%3E%3C/svg%3E">
-
-<!-- Open Graph · WhatsApp + Facebook + LinkedIn -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="AIMED OS · Residentes GO · Joinville · Maio 2026">
 <meta property="og:description" content="O primeiro curso de IA especificamente para residentes de Ginecologia e Obstetrícia no Brasil. Metodologia AIMED · MDV · InovaMed.">
 <meta property="og:locale" content="pt_BR">
 <meta property="og:url" content="https://mbulabarros.github.io/aimed-residentes-go/">
-<meta property="og:site_name" content="AIMED · InovaMed">
 <meta property="og:image" content="https://inovamed.pro/wp-content/uploads/2026/02/Gemini_Generated_Image_pwtbbkpwtbbkpwtb-1-scaled.jpeg">
-<meta property="og:image:secure_url" content="https://inovamed.pro/wp-content/uploads/2026/02/Gemini_Generated_Image_pwtbbkpwtbbkpwtb-1-scaled.jpeg">
-<meta property="og:image:type" content="image/jpeg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="AIMED Residentes GO — Curso de IA em Ginecologia e Obstetrícia">
-
-<!-- Twitter / X / LinkedIn -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="AIMED OS · Residentes GO · Joinville · Maio 2026">
-<meta name="twitter:description" content="O primeiro curso de IA especificamente para residentes de Ginecologia e Obstetrícia no Brasil. Metodologia AIMED · MDV · InovaMed.">
-<meta name="twitter:image" content="https://inovamed.pro/wp-content/uploads/2026/02/Gemini_Generated_Image_pwtbbkpwtbbkpwtb-1-scaled.jpeg">
-
 <meta name="description" content="AIMED Residentes GO — Curso presencial de IA em Ginecologia e Obstetrícia. Metodologia autoral do Dr. Mbula Barros. Joinville, 22-23 de maio de 2026.">
 <meta name="author" content="Dr. Mbula Luzingu Barros">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -91,8 +65,6 @@ body {
   overflow-y: auto;
   z-index: 100;
   transition: transform 0.3s ease;
-  padding-top: env(safe-area-inset-top);
-  padding-bottom: env(safe-area-inset-bottom);
 }
 #sidebar::-webkit-scrollbar { width: 4px; }
 #sidebar::-webkit-scrollbar-track { background: transparent; }
@@ -239,8 +211,8 @@ body {
   background: rgba(5,14,31,0.92);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border-dim);
-  padding: env(safe-area-inset-top) max(40px, env(safe-area-inset-right)) 0 max(40px, env(safe-area-inset-left));
-  min-height: 56px;
+  padding: 0 40px;
+  height: 56px;
   display: flex;
   align-items: center;
   gap: 16px;
@@ -394,6 +366,36 @@ body {
 /* ── ROLE TABLE (AIMED components) ── */
 .role-table { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border-dim); margin: 24px 0; }
 .role-row { display: grid; grid-template-columns: 40px 1fr 2fr; align-items: start; padding: 16px 20px; border-bottom: 1px solid var(--border-dim); gap: 16px; transition: background 0.18s; }
+
+/* ── Componentes AIMED · cards individuais coloridos ── */
+.aimed-comp { display: grid; grid-template-columns: 64px 1fr; gap: 18px; padding: 20px 22px; border-radius: var(--radius); margin: 16px 0; border: 1px solid var(--border-dim); border-left: 4px solid var(--gold); background: rgba(255,255,255,0.015); transition: background 0.2s; }
+.aimed-comp:hover { background: rgba(255,255,255,0.03); }
+.aimed-comp.c-a { border-left-color: var(--teal); }
+.aimed-comp.c-i { border-left-color: var(--gold); }
+.aimed-comp.c-m { border-left-color: var(--purple); }
+.aimed-comp.c-e { border-left-color: var(--green); }
+.aimed-comp.c-d { border-left-color: var(--coral); }
+.aimed-comp-letter { font-family: 'Playfair Display', serif; font-size: 2.4rem; font-weight: 900; font-style: italic; line-height: 0.9; align-self: start; }
+.aimed-comp.c-a .aimed-comp-letter { color: var(--teal); }
+.aimed-comp.c-i .aimed-comp-letter { color: var(--gold); }
+.aimed-comp.c-m .aimed-comp-letter { color: var(--purple); }
+.aimed-comp.c-e .aimed-comp-letter { color: var(--green); }
+.aimed-comp.c-d .aimed-comp-letter { color: var(--coral); }
+.aimed-comp-head { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
+.aimed-comp-name { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.25rem; font-weight: 700; }
+.aimed-comp.c-a .aimed-comp-name { color: var(--teal); }
+.aimed-comp.c-i .aimed-comp-name { color: var(--gold); }
+.aimed-comp.c-m .aimed-comp-name { color: var(--purple); }
+.aimed-comp.c-e .aimed-comp-name { color: var(--green); }
+.aimed-comp.c-d .aimed-comp-name { color: var(--coral); }
+.aimed-comp-color { font-size: 0.66rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-muted); font-weight: 600; padding: 4px 10px; border-radius: 12px; border: 1px solid var(--border-dim); }
+.aimed-comp-body { font-size: 0.86rem; color: var(--text-dim); line-height: 1.6; }
+.aimed-comp-body strong { color: var(--text); }
+@media (max-width: 600px) {
+  .aimed-comp { grid-template-columns: 48px 1fr; gap: 12px; padding: 16px; }
+  .aimed-comp-letter { font-size: 2rem; }
+  .aimed-comp-name { font-size: 1.05rem; }
+}
 .role-row:last-child { border-bottom: none; }
 .role-row:hover { background: var(--border-dim); }
 .role-letter { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 900; font-style: italic; color: var(--gold); line-height: 1; }
@@ -596,8 +598,8 @@ body {
 .prompt-box .aimed-a { color: var(--teal); }
 .prompt-box .aimed-i { color: var(--gold); }
 .prompt-box .aimed-m { color: var(--purple); }
-.prompt-box .aimed-e { color: var(--coral); }
-.prompt-box .aimed-d { color: var(--green); }
+.prompt-box .aimed-e { color: var(--green); }
+.prompt-box .aimed-d { color: var(--coral); }
 .prompt-box .field { color: var(--gold-light); font-style: italic; }
 .prompt-actions { display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
 .btn-copy {
@@ -1027,9 +1029,6 @@ body {
       <button class="overlay-close" onclick="fecharSobre()">✕</button>
     </div>
     <div class="overlay-body">
-      <div style="margin-bottom:20px;border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);height:180px;background:var(--navy-light);box-shadow:var(--shadow)">
-        <img src="https://inovamed.pro/wp-content/uploads/2026/02/Gemini_Generated_Image_pwtbbkpwtbbkpwtb-1-scaled.jpeg" alt="Dr. Mbula Luzingu Barros · AIMED · InovaMed" style="width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block" loading="lazy">
-      </div>
       <div class="callout">
         <div class="callout-label">Intensivista Pediátrico · Desenvolvedor · Autor</div>
         <p>Médico pediatra intensivista com experiência em UTI cardíaca cirúrgica pediátrica. Fundador da InovaMed e criador da metodologia AIMED — o primeiro framework autoral de prompts clínicos de alta performance do Brasil.</p>
@@ -1117,22 +1116,73 @@ const PROGRAMA = [
       id:'metodologia-aimed-go', horario:'16:15–17:15', titulo:'Metodologia AIMED — A Anatomia do Prompt Médico',
       summary:'O momento fundacional da marca. A dissecação ao vivo de um prompt GO construído componente a componente — e a diferença que cada peça faz na qualidade da resposta.',
       avatar:'Meop-9OeIXc',
-      conteudo:`<h3>Por que a maioria dos prompts médicos falha</h3>
-<p>Há uma diferença brutal entre o que a IA consegue entregar e o que a maioria dos médicos recebe. Não é falha da ferramenta — é falha do comando. Quando a residente escreve <em>"qual o manejo de pré-eclâmpsia grave?"</em>, a IA precisa adivinhar: qual paciente, qual idade gestacional, quais comorbidades, qual serviço, quais recursos, qual é o ponto de decisão que realmente importa. O resultado é uma resposta que poderia ter saído de qualquer livro-texto de 2015.</p>
-<p>A <strong>Metodologia AIMED</strong> resolve isso. Cinco componentes, cada um não-negociável. Juntos, levantam o teto da resposta da IA de genérica para clinicamente precisa.</p>
+      conteudo:`<h3>O que é AIMED</h3>
+<p>O <strong>AIMED</strong> é um framework estruturado de engenharia de prompts criado para transformar solicitações clínicas vagas em comandos precisos, reprodutíveis e seguros. Ele traduz metodologias complexas de prompt engineering (como RACE, CRISPE e RTF) para um vocabulário clínico em português, reduzindo o atrito cognitivo do médico durante o uso.</p>
+<p>A força da metodologia não está em preencher um formulário rígido — está na <strong>sinergia dos cinco componentes</strong>. Eles funcionam de forma semelhante à passagem de um caso para uma interconsulta: cada parte cumpre um papel, e a falta de uma compromete o todo.</p>
+
 <h3>Os 5 componentes</h3>
-<div class="role-table">
-<div class="role-row"><div class="role-letter">A</div><div><div class="role-name">Assistente</div></div><div class="role-desc">Define quem a IA é. Especialidade, experiência, viés clínico. <strong>É a variável de maior impacto.</strong> Um "A" vago produz toda a cadeia vaga. Um "A" preciso — "obstetra especialista em alto risco, 15 anos de maternidade de referência, viés para conduta proativa em emergência hipertensiva" — levanta o teto de tudo que vem depois.</div></div>
-<div class="role-row"><div class="role-letter">I</div><div><div class="role-name">Informações</div></div><div class="role-desc">O contexto clínico completo do caso. IG, antecedentes, sinais vitais, labs, exame fetal. Quanto mais preciso, mais precisa a resposta. A IA não adivinha — ela usa o que você dá.</div></div>
-<div class="role-row"><div class="role-letter">M</div><div><div class="role-name">Missão</div></div><div class="role-desc">O que exatamente você quer. Conduta imediata? Diagnóstico diferencial? Cálculo de dose? Uma missão vaga gera resposta vaga. Uma missão precisa — "condutas nos próximos 15 minutos e plano para as próximas 2 horas" — gera resposta acionável.</div></div>
-<div class="role-row"><div class="role-letter">E</div><div><div class="role-name">Estrutura</div></div><div class="role-desc">Como você quer a resposta. Numerada? Com doses em destaque? Por prioridade de urgência? Sem estrutura pedida, a IA escolhe por você — e raramente escolhe o que é mais útil no plantão.</div></div>
-<div class="role-row"><div class="role-letter">D</div><div><div class="role-name">Diretrizes</div></div><div class="role-desc">Os limites do que a IA pode e não pode fazer. Recursos disponíveis, protocolos de referência, o que nunca sugerir sem confirmação manual. O "D" é o que torna o prompt clinicamente seguro.</div></div>
+
+<div class="aimed-comp c-a">
+  <div class="aimed-comp-letter">A</div>
+  <div>
+    <div class="aimed-comp-head">
+      <span class="aimed-comp-name">Assistente</span>
+      <span class="aimed-comp-color">Teal</span>
+    </div>
+    <div class="aimed-comp-body">O comando começa definindo o <strong>papel profissional</strong> da IA. Isso é fundamental porque os modelos mudam completamente o nível de detalhe, o vocabulário e a priorização clínica dependendo do papel atribuído. Pedir para a IA atuar como um "assistente geral" gera uma resposta diferente de instruí-la a ser um "obstetra especialista em alto risco, com 15 anos de maternidade de referência". <strong>É a variável de maior impacto</strong> de toda a metodologia.</div>
+  </div>
 </div>
-<div class="callout"><div class="callout-label">O princípio mais importante do AIMED</div><p>A especificidade no campo <strong>Assistente</strong> é a variável de maior impacto. Não é o tamanho do prompt — é a precisão do papel que você atribui à IA. Uma residente que aprende isso hoje já é diferente das que não fizeram o curso.</p></div>
+
+<div class="aimed-comp c-i">
+  <div class="aimed-comp-letter">I</div>
+  <div>
+    <div class="aimed-comp-head">
+      <span class="aimed-comp-name">Informações</span>
+      <span class="aimed-comp-color">Dourado</span>
+    </div>
+    <div class="aimed-comp-body">Refere-se ao <strong>contexto clínico</strong> da paciente que o modelo precisa para trabalhar: idade, idade gestacional, sinais vitais, exames, medicações em uso, tempo de evolução. O erro mais comum dos médicos é a omissão de dados por acharem que a IA "vai entender mesmo assim". Como a IA não examina a paciente, quanto mais ricas as informações digitadas, mais precisa é a resposta.</div>
+  </div>
+</div>
+
+<div class="aimed-comp c-m">
+  <div class="aimed-comp-letter">M</div>
+  <div>
+    <div class="aimed-comp-head">
+      <span class="aimed-comp-name">Missão</span>
+      <span class="aimed-comp-color">Roxo</span>
+    </div>
+    <div class="aimed-comp-body">É o <strong>coração do prompt</strong>: define exatamente a tarefa a ser executada. Um comando como "analise este caso" é ineficaz. Uma missão bem desenhada é direta — por exemplo: <em>"Liste os três diagnósticos diferenciais mais prováveis, em ordem decrescente de probabilidade, com a justificativa clínica para cada um."</em> Missão vaga gera resposta vaga. Missão precisa gera resposta acionável.</div>
+  </div>
+</div>
+
+<div class="aimed-comp c-e">
+  <div class="aimed-comp-letter">E</div>
+  <div>
+    <div class="aimed-comp-head">
+      <span class="aimed-comp-name">Estrutura</span>
+      <span class="aimed-comp-color">Verde</span>
+    </div>
+    <div class="aimed-comp-body">Especifica <strong>como você quer visualizar</strong> a resposta — tabela comparativa, lista em tópicos, resumo rápido. É uma verdadeira <em>funcionalidade clínica</em>: em momentos de fadiga e alta demanda cognitiva (como plantões noturnos), visualizar uma conduta em tabela esquematizada poupa tempo e esforço mental em comparação à leitura de parágrafos corridos.</div>
+  </div>
+</div>
+
+<div class="aimed-comp c-d">
+  <div class="aimed-comp-letter">D</div>
+  <div>
+    <div class="aimed-comp-head">
+      <span class="aimed-comp-name">Diretrizes</span>
+      <span class="aimed-comp-color">Coral</span>
+    </div>
+    <div class="aimed-comp-body">É a <strong>camada final de segurança clínica</strong>. Estabelece regras, limites e considerações éticas que a IA é obrigada a obedecer. Com as Diretrizes, você pode exigir que a IA se baseie apenas em evidências de nível A ou B, que alerte explicitamente se uma conduta for apenas consenso de especialistas, ou que considere populações vulneráveis — como neonatos prematuros, gestantes com insuficiência renal ou pacientes em uso crônico de anticoagulantes.</div>
+  </div>
+</div>
+
+<div class="callout"><div class="callout-label">A sinergia do acrônimo</div><p>A eficácia do AIMED depende da união dessas cinco partes. Um comando sem <strong>Informações</strong> produz respostas genéricas; sem uma <strong>Estrutura</strong>, a leitura fica cansativa; sem <strong>Diretrizes</strong>, a recomendação pode ser clinicamente perigosa. Quando alinhados, esses cinco elementos fazem com que a IA deixe de ser apenas um "mecanismo de busca sofisticado" e passe a operar como um verdadeiro <strong>colaborador clínico</strong>.</p></div>
+
 <h3>A dissecação ao vivo — caso MDV</h3>
 <p>Vamos construir um prompt componente a componente. A cada adição, rodamos na IA e observamos a resposta mudar. O exercício não é ver o resultado final — é ver a diferença que cada componente faz.</p>
 <div class="case-dossier"><div class="case-header"><div class="case-badge">Caso Demonstração</div><div class="case-id">MDV · Demo · 29 semanas</div></div><div class="case-grid"><div><div class="case-section-title">Paciente</div><div class="case-item"><span class="case-key">Idade</span><span class="case-val">29 anos, G1P0</span></div><div class="case-item"><span class="case-key">IG</span><span class="case-val">29 semanas (USG 1º tri)</span></div><div class="case-item"><span class="case-key">Local</span><span class="case-val">Enfermaria obstétrica MDV</span></div></div><div><div class="case-section-title">Situação</div><div class="case-item"><span class="case-key">Quadro</span><span class="case-val">Pré-eclâmpsia grave</span></div><div class="case-item"><span class="case-key">PA</span><span class="case-val case-critical">170 × 112 mmHg</span></div><div class="case-item"><span class="case-key">Evento</span><span class="case-val case-critical">Crise convulsiva tônico-clônica 90s</span></div></div></div></div>
-<p>Primeiro sem AIMED — depois adicionamos cada componente. A resposta muda visivelmente a cada passo. Ao final, a diferença entre o prompt raso e o prompt AIMED completo é o que justifica cada segundo deste curso.</p>`,
+<p>Primeiro <strong>sem AIMED</strong> — depois adicionamos cada componente. A resposta muda visivelmente a cada passo. Ao final, a diferença entre o prompt raso e o prompt AIMED completo é o que justifica cada segundo deste curso. Use o seletor de níveis <strong>N1 · N2 · N3</strong> no topo da página para alternar entre as três versões do prompt abaixo.</p>`,
       prompts:{
         titulo:'Metodologia AIMED — Evolução do Prompt',
         subtitulo:'Observe como a resposta muda a cada componente adicionado',
@@ -2463,7 +2513,21 @@ let currentSpecFilter='todos';
 function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);}
 function copiarSincrono(text){try{const ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);return true;}catch(e){return false;}}
 async function copyToClipboard(text,btn){try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(text);}else{copiarSincrono(text);}if(btn){const orig=btn.innerHTML;btn.innerHTML='✓ Copiado!';btn.style.background='var(--green)';btn.style.color='var(--navy)';setTimeout(()=>{btn.innerHTML=orig;btn.style.background='';btn.style.color='';},2000);}showToast('Prompt copiado!');}catch(e){copiarSincrono(text);showToast('Copiado!');}}
-function openAI(platform,text){const enc=encodeURIComponent(text);const urls={chatgpt:`https://chatgpt.com/?q=${enc}`,claude:`https://claude.ai/new?q=${enc}`,gemini:`https://gemini.google.com/app?q=${enc}`};window.open(urls[platform]||urls.claude,'_blank');}
+function openAI(platform,text){
+  const enc=encodeURIComponent(text);
+  if(platform==='gemini'){
+    // Gemini não suporta ?q= — copia para clipboard e mostra instrução
+    const doOpen=()=>{showToast('Prompt copiado — cole no Gemini com Ctrl+V');setTimeout(()=>window.open('https://gemini.google.com/app','_blank','noopener'),700);};
+    if(navigator.clipboard&&window.isSecureContext){
+      navigator.clipboard.writeText(text).then(doOpen).catch(()=>{copiarSincrono(text);doOpen();});
+    } else {
+      copiarSincrono(text);doOpen();
+    }
+    return;
+  }
+  const urls={chatgpt:`https://chatgpt.com/?q=${enc}`,claude:`https://claude.ai/new?q=${enc}`};
+  window.open(urls[platform]||urls.claude,'_blank','noopener');
+}
 function toggleSidebar(){const s=document.getElementById('sidebar');const o=document.getElementById('sidebarOverlay');s.classList.toggle('open');o.classList.toggle('show');}
 function showBiblioteca(){const ov=document.getElementById('biblioteca-overlay');ov.classList.add('open');const body=document.getElementById('biblioteca-body');body.innerHTML=renderBiblioteca();body.querySelectorAll('.lib-card').forEach(card=>{card.addEventListener('click',e=>{if(e.target.closest('.lib-actions'))return;card.classList.toggle('open');});});}
 function fecharBiblioteca(){document.getElementById('biblioteca-overlay').classList.remove('open');}
@@ -2471,7 +2535,7 @@ function showLogistica(){document.getElementById('logistica-overlay').classList.
 function fecharLogistica(){document.getElementById('logistica-overlay').classList.remove('open');}
 function abrirSobre(){document.getElementById('sobre-overlay').classList.add('open');}
 function fecharSobre(){document.getElementById('sobre-overlay').classList.remove('open');}
-function setLevel(n){currentLevel=n;[1,2,3].forEach(i=>{document.getElementById('lvl'+i).classList.toggle('active',i===n);});const m=PROGRAMA.flatMap(b=>b.modulos).find(m=>m.id===currentModuleId);if(m&&m.prompts)renderPromptBox(m);}
+function setLevel(n){currentLevel=n;[1,2,3].forEach(i=>{document.getElementById('lvl'+i).classList.toggle('active',i===n);});const m=PROGRAMA.flatMap(b=>b.modulos).find(m=>m.id===currentModuleId);if(m&&m.prompts){const w=document.getElementById('prompt-box-wrapper');if(w)w.innerHTML=renderPromptBox(m);}}
 // ═══════════════════════════════════════════════════════════════════
 // AVALIAÇÃO · Pesquisa pré-pós (T0/T1/T2) + Diário semanal
 // Salvamento: localStorage. Envio: WhatsApp via wa.me/?text=
@@ -2971,7 +3035,7 @@ function renderPromptBox(modulo){
 <div class="prompt-actions">
 <button class="btn-copy" onclick="copyToClipboard(document.getElementById('prompt-text-${modulo.id}').innerText,this)">📋 Copiar prompt</button>
 <button class="btn-open claude" onclick="openAI('claude',document.getElementById('prompt-text-${modulo.id}').innerText)">Abrir no Claude</button>
-<button class="btn-open gemini" onclick="openAI('gemini',document.getElementById('prompt-text-${modulo.id}').innerText)">Abrir no Gemini</button>
+<button class="btn-open gemini" title="O Gemini não aceita prompt pela URL. O texto será copiado e o Gemini abrirá — basta colar (Ctrl+V) na caixa de chat." onclick="openAI('gemini',document.getElementById('prompt-text-${modulo.id}').innerText)">Abrir no Gemini</button>
 <button class="btn-open gpt" onclick="openAI('chatgpt',document.getElementById('prompt-text-${modulo.id}').innerText)">Abrir no GPT</button>
 </div>
 </div></div>`;
@@ -2993,7 +3057,7 @@ function renderModule(modulo,bloco){
 </div>
 ${avatarHtml}
 <div class="module-body">${aplicarGlossario(modulo.conteudo)}</div>
-${renderPromptBox(modulo)}${renderModuleNav(modulo.id)}`;
+<div id="prompt-box-wrapper">${renderPromptBox(modulo)}</div>${renderModuleNav(modulo.id)}`;
 }
 
 // ── NAVIGATE ──
