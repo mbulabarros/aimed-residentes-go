@@ -2558,7 +2558,7 @@ function renderT0(){
 function renderT1(){
   const s=evalLoad('t1');
   return `
-<div class="eval-pane" data-pane="t1" id="pane-t1">
+<div class="eval-pane active" data-pane="t1" id="pane-t1">
   <h3>T1 · Logo Após o Curso</h3>
   <p class="eval-context">Responda <strong>no domingo 24/05, à noite</strong>. Use o <strong>mesmo apelido</strong> do T0. Mede o impacto imediato.</p>
   ${renderEspecialidadeItem(s.especialidade)}
@@ -2613,7 +2613,7 @@ function renderT2(){
   const s=evalLoad('t2');
   const prompts=['🔬 Pesquisa Orquestrada GO','⚔️ Consilium Adversarium Ultra','💊 Farmacológica Blindada GO','🚨 Emergência Obstétrica GO','📊 Análise CTG + USG','🕯️ Revisão de Óbito Materno','🛡️ Anti-Alucinação GO','⏱️ Consulta Pré-Plantão GO','🤰 Pré-natal Alto Risco AIMED'];
   return `
-<div class="eval-pane" data-pane="t2" id="pane-t2">
+<div class="eval-pane active" data-pane="t2" id="pane-t2">
   <h3>T2 · Após 4 Semanas</h3>
   <p class="eval-context">Responda <strong>no final do Bloco 5 (Semana 4)</strong>. Use o <strong>mesmo apelido</strong>. É o que vale para a publicação.</p>
   ${renderEspecialidadeItem(s.especialidade)}
@@ -2664,7 +2664,7 @@ function renderT2(){
 // ── PAINEL DIÁRIO (4 semanas) ──
 function renderDiario(){
   const s=evalLoad('diario');
-  let html=`<div class="eval-pane" data-pane="diario" id="pane-diario">
+  let html=`<div class="eval-pane active" data-pane="diario" id="pane-diario">
     <h3>Diário Semanal · Bloco 5</h3>
     <p class="eval-context">Preencha ao fim de cada semana, durante as 4 semanas pós-curso. Pode atualizar quando quiser. Envie 1 vez por semana.</p>
     <div class="eval-item">
