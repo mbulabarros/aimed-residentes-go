@@ -1,0 +1,12 @@
+*.docx
+*.doc
+*.xlsx
+*.xls
+*.csv
+/privado/
+/_interno/
+/backup/
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
