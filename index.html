@@ -635,6 +635,151 @@ body {
 .btn-open.gpt:hover { border-color: var(--purple); color: var(--purple); }
 
 /* ── BIBLIOTECA ── */
+/* ── TELA DE BOAS-VINDAS PRÉ-CURSO ── */
+.pre-curso-overlay {
+  position: fixed; inset: 0;
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #050e1f 0%, #0a1a35 70%, #112244 100%);
+  padding: 24px;
+  overflow-y: auto;
+  animation: preCursoFadeIn 0.4s ease-out;
+}
+.pre-curso-overlay.open { display: flex; }
+@keyframes preCursoFadeIn { from { opacity: 0; } to { opacity: 1; } }
+.pre-curso-card {
+  max-width: 620px;
+  width: 100%;
+  text-align: center;
+  padding: clamp(28px, 5vw, 48px) clamp(20px, 4vw, 36px);
+  position: relative;
+}
+.pre-curso-close {
+  position: absolute;
+  top: 8px; right: 8px;
+  background: transparent;
+  border: none;
+  color: var(--text-dim);
+  font-size: 1.4rem;
+  cursor: pointer;
+  padding: 8px 12px;
+  transition: color 0.2s;
+}
+.pre-curso-close:hover { color: var(--gold); }
+.pre-curso-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.66rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 18px;
+}
+.pre-curso-countdown {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  color: var(--gold);
+  line-height: 0.95;
+  margin: 18px 0 8px;
+}
+.pre-curso-countdown-num {
+  font-size: clamp(4rem, 14vw, 7rem);
+  font-weight: 900;
+  color: var(--gold-light);
+  display: block;
+}
+.pre-curso-countdown-label {
+  font-size: clamp(1.1rem, 2.4vw, 1.5rem);
+  color: var(--text-dim);
+  font-style: normal;
+  font-family: 'Playfair Display', serif;
+  font-weight: 400;
+}
+.pre-curso-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+  color: var(--text);
+  font-weight: 700;
+  margin: 14px 0 6px;
+  line-height: 1.2;
+}
+.pre-curso-title em { color: var(--gold); font-style: italic; }
+.pre-curso-date {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 32px;
+}
+.pre-curso-tagline {
+  color: var(--text);
+  font-size: 0.92rem;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+.pre-curso-checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0 auto 28px;
+  max-width: 460px;
+}
+.pre-curso-action {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 20px;
+  background: rgba(201,168,76,0.05);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  font-size: 0.88rem;
+  transition: all 0.2s;
+  width: 100%;
+}
+.pre-curso-action:hover {
+  background: rgba(201,168,76,0.12);
+  border-color: var(--gold);
+  transform: translateY(-1px);
+}
+.pre-curso-action-num {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--gold);
+  min-width: 24px;
+}
+.pre-curso-action-text { flex: 1; }
+.pre-curso-action-title { font-weight: 600; color: var(--text); margin-bottom: 2px; }
+.pre-curso-action-sub { font-size: 0.74rem; color: var(--text-dim); }
+.pre-curso-action-arrow { color: var(--gold); font-size: 1.1rem; flex-shrink: 0; }
+.pre-curso-skip {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  cursor: pointer;
+  padding: 12px 20px;
+  font-family: inherit;
+  letter-spacing: 0.06em;
+  transition: color 0.2s;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 3px;
+}
+.pre-curso-skip:hover { color: var(--gold); text-decoration-color: var(--gold); }
+@media (max-width: 600px) {
+  .pre-curso-card { padding: 28px 16px; }
+  .pre-curso-action { padding: 14px 16px; font-size: 0.84rem; }
+  .pre-curso-action-num { font-size: 1.2rem; }
+}
+
 #biblioteca-overlay, #logistica-overlay, #sobre-overlay, #avaliacao-overlay {
   position: fixed; inset: 0;
   z-index: 200;
@@ -1200,6 +1345,48 @@ body {
         </div>
       </div>
     </div>
+  </div>
+</div>
+
+<!-- TELA DE BOAS-VINDAS PRÉ-CURSO -->
+<div id="pre-curso-overlay" class="pre-curso-overlay">
+  <div class="pre-curso-card">
+    <button class="pre-curso-close" onclick="fecharPreCurso()" aria-label="Fechar">✕</button>
+    <div class="pre-curso-eyebrow">AIMED Residentes GO · 2026</div>
+    <div class="pre-curso-countdown">
+      <span class="pre-curso-countdown-num" id="pre-curso-num">4</span>
+      <span class="pre-curso-countdown-label" id="pre-curso-label">dias para o curso</span>
+    </div>
+    <div class="pre-curso-title">Bem-vinda ao <em>AIMED</em></div>
+    <div class="pre-curso-date">22 e 23 de Maio · Hotel Le Canard · Joinville</div>
+    <div class="pre-curso-tagline">Três passos rápidos antes da sexta:</div>
+    <div class="pre-curso-checklist">
+      <button class="pre-curso-action" onclick="navegarDePreCurso('t0')">
+        <span class="pre-curso-action-num">1</span>
+        <span class="pre-curso-action-text">
+          <div class="pre-curso-action-title">Preencher o T0 da pesquisa</div>
+          <div class="pre-curso-action-sub">5 minutos · linha de base antes do curso</div>
+        </span>
+        <span class="pre-curso-action-arrow">→</span>
+      </button>
+      <button class="pre-curso-action" onclick="navegarDePreCurso('logistica')">
+        <span class="pre-curso-action-num">2</span>
+        <span class="pre-curso-action-text">
+          <div class="pre-curso-action-title">Configurar suas IAs</div>
+          <div class="pre-curso-action-sub">Gemini · Claude · ChatGPT · NotebookLM</div>
+        </span>
+        <span class="pre-curso-action-arrow">→</span>
+      </button>
+      <button class="pre-curso-action" onclick="navegarDePreCurso('metodologia')">
+        <span class="pre-curso-action-num">3</span>
+        <span class="pre-curso-action-text">
+          <div class="pre-curso-action-title">Conhecer a metodologia AIMED</div>
+          <div class="pre-curso-action-sub">A anatomia do prompt médico em 5 componentes</div>
+        </span>
+        <span class="pre-curso-action-arrow">→</span>
+      </button>
+    </div>
+    <button class="pre-curso-skip" onclick="fecharPreCurso()">Continuar para o conteúdo do curso</button>
   </div>
 </div>
 
@@ -3554,10 +3741,56 @@ function renderLogistica(){
 </div>`;
 }
 
+// ═══════════════════════════════════════════════════════════════════
+// TELA DE BOAS-VINDAS PRÉ-CURSO
+// Aparece se: curso ainda não começou + usuária nunca fechou antes
+// ═══════════════════════════════════════════════════════════════════
+const CURSO_INICIO = new Date('2026-05-22T16:00:00-03:00');
+
+function diasParaCurso(){
+  const agora=new Date();
+  const diff=CURSO_INICIO-agora;
+  if(diff<0)return -1;
+  return Math.floor(diff/(1000*60*60*24));
+}
+
+function abrirPreCurso(){
+  const dias=diasParaCurso();
+  const numEl=document.getElementById('pre-curso-num');
+  const labelEl=document.getElementById('pre-curso-label');
+  if(dias===0){numEl.textContent='Hoje';numEl.style.fontSize='clamp(2.6rem, 8vw, 4.2rem)';labelEl.textContent='começa o curso';}
+  else if(dias===1){numEl.textContent='1';labelEl.textContent='dia para o curso';}
+  else {numEl.textContent=dias;labelEl.textContent='dias para o curso';}
+  document.getElementById('pre-curso-overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+function fecharPreCurso(){
+  document.getElementById('pre-curso-overlay').classList.remove('open');
+  document.body.style.overflow='';
+  try{localStorage.setItem('aimed_precurso_visto','1');}catch(e){}
+}
+
+function navegarDePreCurso(acao){
+  fecharPreCurso();
+  setTimeout(()=>{
+    if(acao==='t0'){showAvaliacao();}
+    else if(acao==='logistica'){showLogistica();}
+    else if(acao==='metodologia'){navigateTo('metodologia-aimed-go');}
+  },200);
+}
+
 // ── INIT ──
 document.addEventListener('DOMContentLoaded',()=>{
   buildSidebar();
   navigateTo('abertura-go');
+  // Decide se mostra tela pré-curso
+  const dias=diasParaCurso();
+  let jaVisto=false;
+  try{jaVisto=localStorage.getItem('aimed_precurso_visto')==='1';}catch(e){}
+  if(dias>=0&&!jaVisto){
+    setTimeout(abrirPreCurso,300);
+  }
 });
 </script>
 </body>
