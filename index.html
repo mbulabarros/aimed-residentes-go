@@ -1640,6 +1640,78 @@ body {
 /* Botão "❓" na sidebar — herda do sidebar-btn */
 .sidebar-btn.btn-instrucoes .sidebar-btn-icon { color: var(--gold); }
 
+/* ── RESPONSIVIDADE MOBILE · MANUAL ── */
+@media (max-width: 700px) {
+  /* Reduz padding do overlay para ganhar largura na tela do celular */
+  .overlay-body { padding: 18px 16px; }
+  .overlay-header { padding: 20px 16px 16px; }
+  .overlay-title { font-size: 1.25rem; }
+
+  .instr-hero {
+    padding: 18px 16px;
+    border-radius: var(--radius);
+  }
+  .instr-title { font-size: 1.32rem; line-height: 1.2; }
+  .instr-intro { font-size: 0.85rem; }
+  .instr-eyebrow { font-size: 0.58rem; }
+
+  /* Índice: 1 coluna no celular, com altura menor */
+  .instr-toc { grid-template-columns: 1fr; gap: 6px; margin-bottom: 22px; }
+  .instr-toc-btn { padding: 10px 12px; font-size: 0.8rem; }
+
+  /* Seção de acordeão */
+  .instr-section-header { padding: 12px 14px; gap: 11px; }
+  .instr-section-icon { width: 30px; height: 30px; font-size: 0.95rem; }
+  .instr-section-title { font-size: 0.9rem; }
+  .instr-section-body { padding: 0 14px; }
+  .instr-section.open .instr-section-body { padding: 4px 14px 18px; }
+  .instr-section-body h4 { font-size: 0.85rem; margin: 14px 0 6px; }
+  .instr-section-body p { font-size: 0.84rem; line-height: 1.55; }
+  .instr-section-body ul, .instr-section-body ol {
+    font-size: 0.84rem; line-height: 1.6; margin-left: 18px;
+  }
+
+  /* Cards de plataforma (iOS/Android, Gemini/Claude/...) em coluna única */
+  .instr-platform-grid { grid-template-columns: 1fr; gap: 10px; }
+  .instr-platform { padding: 13px 14px; }
+  .instr-platform-name { font-size: 0.76rem; }
+  .instr-platform ol { font-size: 0.78rem; margin-left: 16px; }
+
+  /* Grid dos 5 componentes AIMED: 2 colunas no celular */
+  .instr-aimed-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+  }
+  .instr-aimed-comp { padding: 10px 8px; }
+  .instr-aimed-letter { font-size: 1.2rem; }
+  .instr-aimed-name { font-size: 0.66rem; }
+  .instr-aimed-desc { font-size: 0.68rem; line-height: 1.35; }
+
+  /* Atalhos de teclado: empilha em coluna */
+  .instr-kbd-row { gap: 6px; }
+  .instr-kbd-item {
+    padding: 7px 10px;
+    font-size: 0.74rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .instr-tip {
+    padding: 10px 12px;
+    font-size: 0.8rem;
+    border-radius: 0 6px 6px 0;
+  }
+}
+
+/* Telas muito estreitas (iPhone SE, etc) */
+@media (max-width: 380px) {
+  .overlay-body { padding: 16px 12px; }
+  .overlay-header { padding: 18px 12px 14px; }
+  .instr-title { font-size: 1.15rem; }
+  .instr-aimed-grid { grid-template-columns: 1fr; }
+  .instr-platform ol { font-size: 0.76rem; }
+}
+
 /* ═══════════════════════════════════════════════════════════════
    PRÉ-CURSO · QUARTA AÇÃO (TOUR)
    ═══════════════════════════════════════════════════════════════ */
