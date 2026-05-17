@@ -1398,6 +1398,261 @@ body {
 }
 
 /* ═══════════════════════════════════════════════════════════════
+   INSTRUÇÕES · COMO USAR O AIMED OS · v1.3
+   ═══════════════════════════════════════════════════════════════ */
+.instr-hero {
+  background: linear-gradient(135deg, rgba(201,168,76,0.10) 0%, rgba(201,168,76,0.02) 100%);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px 26px;
+  margin-bottom: 22px;
+}
+.instr-eyebrow {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+.instr-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.15;
+  margin-bottom: 8px;
+}
+.instr-title em { color: var(--gold); font-style: italic; }
+.instr-intro {
+  font-size: 0.92rem;
+  color: var(--text-dim);
+  line-height: 1.55;
+}
+.instr-intro strong { color: var(--text); }
+
+.instr-toc {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 8px;
+  margin-bottom: 26px;
+}
+.instr-toc-btn {
+  background: var(--navy);
+  border: 1px solid var(--border-dim);
+  border-radius: var(--radius);
+  padding: 11px 14px;
+  display: flex; align-items: center; gap: 10px;
+  cursor: pointer;
+  color: var(--text-dim);
+  font-family: inherit;
+  font-size: 0.82rem;
+  text-align: left;
+  transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+}
+.instr-toc-btn:hover {
+  border-color: var(--gold);
+  color: var(--text);
+  background: rgba(201,168,76,0.04);
+}
+.instr-toc-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--gold);
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.instr-section {
+  border: 1px solid var(--border-dim);
+  border-radius: var(--radius);
+  margin-bottom: 12px;
+  overflow: hidden;
+  transition: border-color 0.15s ease;
+}
+.instr-section.open { border-color: var(--gold); }
+.instr-section-header {
+  display: flex; align-items: center; gap: 14px;
+  padding: 16px 20px;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  width: 100%;
+  text-align: left;
+  font-family: inherit;
+  color: var(--text);
+  transition: background 0.12s ease;
+}
+.instr-section-header:hover { background: rgba(201,168,76,0.04); }
+.instr-section-icon {
+  width: 34px; height: 34px;
+  border-radius: 8px;
+  background: var(--gold-pale);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.05rem;
+  flex-shrink: 0;
+}
+.instr-section-title {
+  font-size: 0.98rem;
+  font-weight: 600;
+  flex: 1;
+}
+.instr-section-chevron {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  transition: transform 0.2s ease, color 0.15s ease;
+}
+.instr-section.open .instr-section-chevron {
+  transform: rotate(180deg);
+  color: var(--gold);
+}
+.instr-section-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  padding: 0 20px;
+}
+.instr-section.open .instr-section-body {
+  max-height: 4000px;
+  padding: 4px 20px 22px;
+}
+.instr-section-body h4 {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 18px 0 8px;
+}
+.instr-section-body h4:first-child { margin-top: 6px; }
+.instr-section-body p {
+  font-size: 0.88rem;
+  color: var(--text-dim);
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+.instr-section-body p strong { color: var(--text); }
+.instr-section-body ul, .instr-section-body ol {
+  font-size: 0.88rem;
+  color: var(--text-dim);
+  line-height: 1.65;
+  margin: 4px 0 14px 22px;
+}
+.instr-section-body li { margin-bottom: 6px; }
+.instr-section-body li strong { color: var(--text); }
+
+.instr-kbd-row {
+  display: flex; gap: 10px; flex-wrap: wrap;
+  margin: 8px 0 14px;
+}
+.instr-kbd-item {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--navy);
+  border: 1px solid var(--border-dim);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 0.78rem;
+  color: var(--text-dim);
+}
+.instr-kbd-item kbd {
+  background: var(--navy-mid);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 7px;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--gold);
+  font-weight: 600;
+}
+
+.instr-platform-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 12px;
+  margin: 12px 0 16px;
+}
+.instr-platform {
+  background: var(--navy);
+  border: 1px solid var(--border-dim);
+  border-radius: 10px;
+  padding: 14px 16px;
+}
+.instr-platform-name {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--gold);
+  margin-bottom: 8px;
+  display: flex; align-items: center; gap: 6px;
+}
+.instr-platform ol {
+  font-size: 0.8rem;
+  margin: 0 0 0 18px;
+  line-height: 1.55;
+}
+
+.instr-tip {
+  display: flex; gap: 12px;
+  background: rgba(79,195,195,0.06);
+  border-left: 3px solid var(--teal);
+  border-radius: 0 8px 8px 0;
+  padding: 12px 14px;
+  margin: 12px 0;
+  font-size: 0.83rem;
+  color: var(--text-dim);
+  line-height: 1.55;
+}
+.instr-tip-icon { color: var(--teal); flex-shrink: 0; font-weight: 700; }
+
+.instr-aimed-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 8px;
+  margin: 12px 0 16px;
+}
+.instr-aimed-comp {
+  background: var(--navy);
+  border: 1px solid var(--border-dim);
+  border-radius: 8px;
+  padding: 12px 10px;
+  text-align: center;
+}
+.instr-aimed-letter {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: var(--gold);
+  font-style: italic;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.instr-aimed-name {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.instr-aimed-desc {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+/* Botão "❓" na sidebar — herda do sidebar-btn */
+.sidebar-btn.btn-instrucoes .sidebar-btn-icon { color: var(--gold); }
+
+/* ═══════════════════════════════════════════════════════════════
+   PRÉ-CURSO · QUARTA AÇÃO (TOUR)
+   ═══════════════════════════════════════════════════════════════ */
+.pre-curso-action.tour-action {
+  border-color: var(--gold);
+  background: rgba(201,168,76,0.06);
+}
+.pre-curso-action.tour-action .pre-curso-action-num {
+  background: var(--gold);
+  color: var(--navy);
+}
+
+/* ═══════════════════════════════════════════════════════════════
    PDF · BOTÕES DE EXPORTAÇÃO NA BIBLIOTECA
    ═══════════════════════════════════════════════════════════════ */
 .lib-pdf-toolbar {
@@ -1595,6 +1850,9 @@ body {
       <span class="ssb-label">Buscar no curso…</span>
       <span class="ssb-shortcut" id="ssb-shortcut">Ctrl K</span>
     </button>
+    <button class="sidebar-btn btn-instrucoes" onclick="abrirInstrucoes()">
+      <span class="sidebar-btn-icon">❓</span> Como usar o AIMED OS
+    </button>
     <button class="sidebar-btn" onclick="showLogistica()">
       <span class="sidebar-btn-icon">🏨</span> Logística do Curso
     </button>
@@ -1752,10 +2010,18 @@ body {
     </div>
     <div class="pre-curso-title">Bem-vinda ao <em>AIMED</em></div>
     <div class="pre-curso-date">22 e 23 de Maio · Hotel Le Canard · Joinville</div>
-    <div class="pre-curso-tagline">Três passos rápidos antes da sexta:</div>
+    <div class="pre-curso-tagline">Quatro passos rápidos antes da sexta:</div>
     <div class="pre-curso-checklist">
-      <button class="pre-curso-action" onclick="navegarDePreCurso('t0')">
+      <button class="pre-curso-action tour-action" onclick="navegarDePreCurso('instrucoes')">
         <span class="pre-curso-action-num">1</span>
+        <span class="pre-curso-action-text">
+          <div class="pre-curso-action-title">Conhecer o AIMED OS em 90 segundos</div>
+          <div class="pre-curso-action-sub">Tour rápido da plataforma · busca, PDF, app no celular</div>
+        </span>
+        <span class="pre-curso-action-arrow">→</span>
+      </button>
+      <button class="pre-curso-action" onclick="navegarDePreCurso('t0')">
+        <span class="pre-curso-action-num">2</span>
         <span class="pre-curso-action-text">
           <div class="pre-curso-action-title">Preencher o T0 da pesquisa</div>
           <div class="pre-curso-action-sub">5 minutos · linha de base antes do curso</div>
@@ -1763,7 +2029,7 @@ body {
         <span class="pre-curso-action-arrow">→</span>
       </button>
       <button class="pre-curso-action" onclick="navegarDePreCurso('logistica')">
-        <span class="pre-curso-action-num">2</span>
+        <span class="pre-curso-action-num">3</span>
         <span class="pre-curso-action-text">
           <div class="pre-curso-action-title">Configurar suas IAs</div>
           <div class="pre-curso-action-sub">Gemini · Claude · ChatGPT · NotebookLM</div>
@@ -1771,7 +2037,7 @@ body {
         <span class="pre-curso-action-arrow">→</span>
       </button>
       <button class="pre-curso-action" onclick="navegarDePreCurso('metodologia')">
-        <span class="pre-curso-action-num">3</span>
+        <span class="pre-curso-action-num">4</span>
         <span class="pre-curso-action-text">
           <div class="pre-curso-action-title">Conhecer a metodologia AIMED</div>
           <div class="pre-curso-action-sub">A anatomia do prompt médico em 5 componentes</div>
@@ -1780,6 +2046,325 @@ body {
       </button>
     </div>
     <button class="pre-curso-skip" onclick="fecharPreCurso()">Continuar para o conteúdo do curso</button>
+  </div>
+</div>
+
+<!-- INSTRUÇÕES · COMO USAR O AIMED OS -->
+<div id="instrucoes-overlay">
+  <div class="overlay-backdrop" onclick="fecharInstrucoes()"></div>
+  <div class="overlay-panel">
+    <div class="overlay-header">
+      <div>
+        <div class="overlay-title">Como usar o AIMED OS</div>
+        <div class="overlay-sub">Manual rápido da plataforma · 5 minutos para conhecer tudo</div>
+      </div>
+      <button class="overlay-close" onclick="fecharInstrucoes()" aria-label="Fechar">✕</button>
+    </div>
+    <div class="overlay-body">
+
+      <div class="instr-hero">
+        <div class="instr-eyebrow">Bem-vinda à plataforma</div>
+        <div class="instr-title">O AIMED OS é o <em>seu portal-livro-ferramenta</em> do curso</div>
+        <div class="instr-intro">Foi construído para acompanhar você antes, durante e depois dos dois dias presenciais. <strong>Permanente, sem expiração</strong>, instalável como app no celular. Esta página é o manual rápido — abra sempre que tiver dúvida sobre alguma função.</div>
+      </div>
+
+      <div class="instr-toc">
+        <button class="instr-toc-btn" onclick="abrirInstrSecao('navegar')"><span class="instr-toc-num">01</span> Navegar pelo conteúdo</button>
+        <button class="instr-toc-btn" onclick="abrirInstrSecao('busca')"><span class="instr-toc-num">02</span> Usar a busca (Ctrl+K)</button>
+        <button class="instr-toc-btn" onclick="abrirInstrSecao('pdf')"><span class="instr-toc-num">03</span> Gerar e salvar PDFs</button>
+        <button class="instr-toc-btn" onclick="abrirInstrSecao('instalar')"><span class="instr-toc-num">04</span> Instalar como app no celular</button>
+        <button class="instr-toc-btn" onclick="abrirInstrSecao('aimed')"><span class="instr-toc-num">05</span> A metodologia AIMED</button>
+        <button class="instr-toc-btn" onclick="abrirInstrSecao('pesquisa')"><span class="instr-toc-num">06</span> Questionários T0/T1/T2</button>
+        <button class="instr-toc-btn" onclick="abrirInstrSecao('ias')"><span class="instr-toc-num">07</span> Configurar suas IAs</button>
+      </div>
+
+      <!-- 01 NAVEGAR -->
+      <div class="instr-section" id="instr-navegar">
+        <button class="instr-section-header" onclick="toggleInstrSecao('navegar')">
+          <div class="instr-section-icon">🧭</div>
+          <div class="instr-section-title">01 · Navegar pelo conteúdo</div>
+          <div class="instr-section-chevron">▼</div>
+        </button>
+        <div class="instr-section-body">
+          <h4>Estrutura geral</h4>
+          <p>O curso está organizado em <strong>5 blocos</strong>, cada um com seu papel:</p>
+          <ul>
+            <li><strong>Bloco 1 · Arquiteto</strong> — sexta tarde · fundamentos da metodologia AIMED</li>
+            <li><strong>Bloco 2 · Clínico GO</strong> — sexta noite · aplicação obstétrica (CTG, USG, cálculos)</li>
+            <li><strong>Bloco 3 · Pesquisador</strong> — sábado manhã · da dúvida à pergunta PICO</li>
+            <li><strong>Bloco 4 · Integrador</strong> — sábado tarde · caso composto MDV + ética</li>
+            <li><strong>Bloco 5 · Crescimento</strong> — pós-curso · 4 semanas de consolidação</li>
+          </ul>
+
+          <h4>Como circular entre os módulos</h4>
+          <ul>
+            <li>Clique em qualquer módulo da <strong>sidebar esquerda</strong> para abrir.</li>
+            <li>No final de cada módulo, use os botões <strong>"← Anterior"</strong> e <strong>"Próximo →"</strong>.</li>
+            <li>O <strong>breadcrumb no topo</strong> (ex: "Bloco 2 › Cálculos MDV") sempre mostra onde você está.</li>
+          </ul>
+
+          <h4>Os 3 níveis de profundidade (N1 · N2 · N3)</h4>
+          <p>No canto superior direito de cada módulo com prompts, há três botões: <strong>N1, N2, N3</strong>. Eles trocam a versão do prompt em tempo real:</p>
+          <ul>
+            <li><strong>N1 · Direto</strong> — pergunta simples, sem framework. Para começar.</li>
+            <li><strong>N2 · Padrão</strong> — prompt com caso clínico estruturado. Uso diário.</li>
+            <li><strong>N3 · AIMED Completo</strong> — ferramenta clínica completa, para incorporar à rotina.</li>
+          </ul>
+          <div class="instr-tip"><span class="instr-tip-icon">💡</span><span>Comece sempre no <strong>N2</strong>. É o que será trabalhado em aula. N1 é para casos triviais, N3 é a forma definitiva da ferramenta.</span></div>
+
+          <h4>Glossário interativo</h4>
+          <p>Termos sublinhados em pontilhado (ex: <strong>MgSO4</strong>, <strong>CTG</strong>, <strong>HELLP</strong>) mostram a definição quando você passa o mouse ou toca neles. São 41 termos no total.</p>
+        </div>
+      </div>
+
+      <!-- 02 BUSCA -->
+      <div class="instr-section" id="instr-busca">
+        <button class="instr-section-header" onclick="toggleInstrSecao('busca')">
+          <div class="instr-section-icon">🔍</div>
+          <div class="instr-section-title">02 · Usar a busca universal (Ctrl+K)</div>
+          <div class="instr-section-chevron">▼</div>
+        </button>
+        <div class="instr-section-body">
+          <p>A busca varre <strong>todo o conteúdo do curso</strong> — módulos, prompts, glossário, biblioteca e logística — em um único campo. Use sempre que quiser achar algo rápido.</p>
+
+          <h4>Atalhos para abrir</h4>
+          <div class="instr-kbd-row">
+            <div class="instr-kbd-item"><kbd>Ctrl</kbd><kbd>K</kbd> abre a busca (Windows/Linux)</div>
+            <div class="instr-kbd-item"><kbd>⌘</kbd><kbd>K</kbd> abre a busca (Mac)</div>
+            <div class="instr-kbd-item"><kbd>/</kbd> também abre</div>
+          </div>
+          <p>Ou clique no botão <strong>"🔍 Buscar no curso…"</strong> no topo da sidebar.</p>
+
+          <h4>Dentro da busca</h4>
+          <div class="instr-kbd-row">
+            <div class="instr-kbd-item"><kbd>↑</kbd><kbd>↓</kbd> navega entre resultados</div>
+            <div class="instr-kbd-item"><kbd>Enter</kbd> abre o selecionado</div>
+            <div class="instr-kbd-item"><kbd>Esc</kbd> fecha</div>
+          </div>
+
+          <h4>Exemplos de busca que funcionam bem</h4>
+          <ul>
+            <li><strong>"MgSO4"</strong> — encontra o módulo de cálculos, o termo no glossário e o prompt da farmacológica blindada</li>
+            <li><strong>"PICO"</strong> — leva ao módulo de pesquisa orquestrada e ao prompt do transformador PICO</li>
+            <li><strong>"hotel"</strong> ou <strong>"le canard"</strong> — abre a logística no item Local do Curso</li>
+            <li><strong>"eclampsia"</strong> — funciona com ou sem acento (busca acento-insensível)</li>
+            <li><strong>"CTG"</strong> — todos os contextos onde cardiotocografia aparece</li>
+          </ul>
+
+          <div class="instr-tip"><span class="instr-tip-icon">💡</span><span>A busca também encontra <strong>esta página de instruções</strong>. Pesquise "instalar app" ou "como usar" para ver.</span></div>
+        </div>
+      </div>
+
+      <!-- 03 PDF -->
+      <div class="instr-section" id="instr-pdf">
+        <button class="instr-section-header" onclick="toggleInstrSecao('pdf')">
+          <div class="instr-section-icon">📥</div>
+          <div class="instr-section-title">03 · Gerar e salvar PDFs</div>
+          <div class="instr-section-chevron">▼</div>
+        </button>
+        <div class="instr-section-body">
+          <p>Você pode salvar os prompts da Biblioteca AIMED GO como PDFs para usar offline no celular, imprimir, ou compartilhar com colegas.</p>
+
+          <h4>Como gerar</h4>
+          <ol>
+            <li>Abra a <strong>Biblioteca AIMED GO</strong> pela sidebar.</li>
+            <li>Para baixar todos: clique em <strong>"📥 Baixar índice geral"</strong> no topo.</li>
+            <li>Para baixar um prompt específico: expanda o card e clique em <strong>"📥 PDF"</strong>.</li>
+            <li>O navegador abre a janela de impressão — escolha <strong>"Salvar como PDF"</strong> no destino.</li>
+            <li>O PDF é salvo na pasta de Downloads do seu dispositivo.</li>
+          </ol>
+
+          <h4>O que cada PDF contém</h4>
+          <ul>
+            <li><strong>Cabeçalho dourado AIMED</strong> com a data em que foi gerado.</li>
+            <li><strong>O prompt completo</strong> em monospace, pronto para copiar e colar.</li>
+            <li><strong>Instruções de uso</strong> ("como usar este prompt").</li>
+            <li><strong>Rodapé</strong> com a URL permanente do AIMED OS.</li>
+          </ul>
+
+          <div class="instr-tip"><span class="instr-tip-icon">💡</span><span>No celular, ao salvar como PDF, escolha enviá-lo para o app <strong>"Arquivos"</strong> (iOS) ou para o <strong>Google Drive</strong> (Android). Assim ele fica acessível offline no plantão.</span></div>
+        </div>
+      </div>
+
+      <!-- 04 INSTALAR -->
+      <div class="instr-section" id="instr-instalar">
+        <button class="instr-section-header" onclick="toggleInstrSecao('instalar')">
+          <div class="instr-section-icon">📱</div>
+          <div class="instr-section-title">04 · Instalar como app no celular</div>
+          <div class="instr-section-chevron">▼</div>
+        </button>
+        <div class="instr-section-body">
+          <p>O AIMED OS funciona como <strong>aplicativo nativo</strong> no celular — sem app store, sem download de MB. Uma vez instalado, abre em tela cheia, com ícone próprio, e funciona <strong>mesmo sem internet</strong> (cache do PWA).</p>
+
+          <div class="instr-platform-grid">
+            <div class="instr-platform">
+              <div class="instr-platform-name">📱 iPhone / iPad · Safari</div>
+              <ol>
+                <li>Abra o site no Safari.</li>
+                <li>Toque no botão <strong>compartilhar</strong> (quadrado com seta para cima).</li>
+                <li>Role e toque em <strong>"Adicionar à Tela de Início"</strong>.</li>
+                <li>Confirme o nome "AIMED GO" e toque em <strong>"Adicionar"</strong>.</li>
+                <li>Toque no ícone — abre em tela cheia.</li>
+              </ol>
+            </div>
+            <div class="instr-platform">
+              <div class="instr-platform-name">🤖 Android · Chrome</div>
+              <ol>
+                <li>Abra o site no Chrome.</li>
+                <li>Toque nos <strong>três pontinhos</strong> (canto superior direito).</li>
+                <li>Procure <strong>"Instalar aplicativo"</strong> ou <strong>"Adicionar à tela inicial"</strong>.</li>
+                <li>Confirme. Ícone vai para a gaveta de apps.</li>
+                <li>Toque — abre como app nativo.</li>
+              </ol>
+            </div>
+          </div>
+
+          <div class="instr-tip"><span class="instr-tip-icon">💡</span><span>No Android, se a opção "Instalar aplicativo" não aparecer no menu, segure o ícone de recarregar (🔄) e escolha <strong>"Recarregar ignorando o cache"</strong>. Aguarde 30 segundos e tente de novo.</span></div>
+
+          <h4>Por que instalar?</h4>
+          <ul>
+            <li><strong>Tela cheia</strong> — sem barra de endereço, máximo aproveitamento.</li>
+            <li><strong>Ícone próprio</strong> — "A" dourado em fundo navy, identidade AIMED.</li>
+            <li><strong>Acesso instantâneo</strong> — um toque, plantão ou madrugada.</li>
+            <li><strong>Cache local</strong> — depois da primeira visita, abre rápido mesmo em 3G.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 05 AIMED -->
+      <div class="instr-section" id="instr-aimed">
+        <button class="instr-section-header" onclick="toggleInstrSecao('aimed')">
+          <div class="instr-section-icon">🧠</div>
+          <div class="instr-section-title">05 · A metodologia AIMED em 5 componentes</div>
+          <div class="instr-section-chevron">▼</div>
+        </button>
+        <div class="instr-section-body">
+          <p>O <strong>AIMED</strong> é a metodologia autoral por trás de todos os prompts deste curso. É um framework estruturado para transformar dúvidas clínicas em comandos precisos e reprodutíveis para a IA.</p>
+
+          <div class="instr-aimed-grid">
+            <div class="instr-aimed-comp">
+              <div class="instr-aimed-letter">A</div>
+              <div class="instr-aimed-name">Assistente</div>
+              <div class="instr-aimed-desc">Papel da IA. A variável de maior impacto.</div>
+            </div>
+            <div class="instr-aimed-comp">
+              <div class="instr-aimed-letter">I</div>
+              <div class="instr-aimed-name">Informações</div>
+              <div class="instr-aimed-desc">Dados da paciente, contexto clínico.</div>
+            </div>
+            <div class="instr-aimed-comp">
+              <div class="instr-aimed-letter">M</div>
+              <div class="instr-aimed-name">Missão</div>
+              <div class="instr-aimed-desc">A pergunta concreta a ser respondida.</div>
+            </div>
+            <div class="instr-aimed-comp">
+              <div class="instr-aimed-letter">E</div>
+              <div class="instr-aimed-name">Estrutura</div>
+              <div class="instr-aimed-desc">Como a resposta deve ser organizada.</div>
+            </div>
+            <div class="instr-aimed-comp">
+              <div class="instr-aimed-letter">D</div>
+              <div class="instr-aimed-name">Diretrizes</div>
+              <div class="instr-aimed-desc">Restrições, segurança, fontes.</div>
+            </div>
+          </div>
+
+          <p>Cada prompt N3 do curso é construído com os cinco componentes na ordem. A força não está em preencher cada campo — está na <strong>sinergia entre eles</strong>, como na passagem de um caso para uma interconsulta.</p>
+
+          <div class="instr-tip"><span class="instr-tip-icon">💡</span><span>Quer entender a fundo? Vá para o módulo <strong>"Metodologia AIMED · A Anatomia do Prompt Médico"</strong> (Bloco 1, sexta tarde). Lá tem a dissecação completa, com exemplos.</span></div>
+        </div>
+      </div>
+
+      <!-- 06 PESQUISA -->
+      <div class="instr-section" id="instr-pesquisa">
+        <button class="instr-section-header" onclick="toggleInstrSecao('pesquisa')">
+          <div class="instr-section-icon">📊</div>
+          <div class="instr-section-title">06 · Questionários T0 · T1 · T2 (pesquisa)</div>
+          <div class="instr-section-chevron">▼</div>
+        </button>
+        <div class="instr-section-body">
+          <p>O AIMED Residentes GO é também um <strong>estudo de educação médica</strong>. Os três questionários medem o impacto real do curso na sua prática.</p>
+
+          <h4>Os três momentos</h4>
+          <ul>
+            <li><strong>T0 · Antes do curso</strong> — responda <strong>antes do dia 22/05</strong>. 5 minutos. Linha de base.</li>
+            <li><strong>T1 · Logo após o curso</strong> — responda no <strong>domingo 24/05 à noite</strong>. Impacto imediato + NPS.</li>
+            <li><strong>T2 · 4 semanas depois</strong> — responda em <strong>22/06/2026</strong>. Mede o que sobreviveu na sua rotina.</li>
+          </ul>
+
+          <h4>Como preencher</h4>
+          <ol>
+            <li>Clique em <strong>"📊 Avaliação · Pesquisa"</strong> na sidebar.</li>
+            <li>Selecione a aba T0, T1 ou T2.</li>
+            <li>Preencha. As respostas <strong>são salvas automaticamente</strong> conforme você digita.</li>
+            <li>Ao final, clique em <strong>"📱 Enviar pelo grupo WhatsApp"</strong>.</li>
+            <li>O texto formatado é gerado — cole no grupo do curso.</li>
+          </ol>
+
+          <h4>Apelido de pareamento — o detalhe importante</h4>
+          <p>No T0, você escolhe um <strong>apelido</strong> (ex: "ML47" = iniciais + dois últimos dígitos do telefone). <strong>Use exatamente o mesmo apelido nos três questionários.</strong> Sem ele, não é possível parear suas respostas e seus dados ficam fora da análise.</p>
+
+          <div class="instr-tip"><span class="instr-tip-icon">💡</span><span>O certificado do curso é emitido após o envio do <strong>T1</strong>. O T2 é voluntário, mas é onde mora a evidência real do efeito de longo prazo — vale a pena.</span></div>
+        </div>
+      </div>
+
+      <!-- 07 IAS -->
+      <div class="instr-section" id="instr-ias">
+        <button class="instr-section-header" onclick="toggleInstrSecao('ias')">
+          <div class="instr-section-icon">⚙️</div>
+          <div class="instr-section-title">07 · Configurar Gemini · Claude · ChatGPT · NotebookLM</div>
+          <div class="instr-section-chevron">▼</div>
+        </button>
+        <div class="instr-section-body">
+          <p>Para aproveitar o curso ao máximo, configure as IAs <strong>antes da sexta-feira</strong>. Cada uma tem um papel específico no fluxo AIMED.</p>
+
+          <div class="instr-platform-grid">
+            <div class="instr-platform">
+              <div class="instr-platform-name">🔷 Gemini · Busca</div>
+              <ol>
+                <li>Acesse <strong>gemini.google.com</strong>.</li>
+                <li>Crie um <strong>Gem personalizado GO</strong>.</li>
+                <li>Cole o "Perfil Clínico GO/MDV" do módulo de Personalização (Bloco 1).</li>
+                <li>Ative o <strong>Google Scholar</strong> nas opções.</li>
+              </ol>
+            </div>
+            <div class="instr-platform">
+              <div class="instr-platform-name">🟠 Claude · Análise crítica</div>
+              <ol>
+                <li>Acesse <strong>claude.ai</strong>.</li>
+                <li>Crie um <strong>Projeto chamado "GO/MDV"</strong>.</li>
+                <li>Cole o Perfil Clínico nas instruções do projeto.</li>
+                <li>Use para análise de artigos em PDF.</li>
+              </ol>
+            </div>
+            <div class="instr-platform">
+              <div class="instr-platform-name">🟢 ChatGPT · Síntese</div>
+              <ol>
+                <li>Acesse <strong>chat.openai.com</strong>.</li>
+                <li>Crie um <strong>GPT personalizado GO</strong>.</li>
+                <li>Cole o Perfil Clínico nas instruções.</li>
+                <li>Use para sintetizar análises do Claude.</li>
+              </ol>
+            </div>
+            <div class="instr-platform">
+              <div class="instr-platform-name">📓 NotebookLM · Memória</div>
+              <ol>
+                <li>Acesse <strong>notebooklm.google.com</strong>.</li>
+                <li>Crie um <strong>Caderno "Memória Clínica MDV"</strong>.</li>
+                <li>Carregue protocolos MDV + diretrizes FEBRASGO + dados Dariza.</li>
+                <li>Use para consultas internas ao próprio acervo.</li>
+              </ol>
+            </div>
+          </div>
+
+          <div class="instr-tip"><span class="instr-tip-icon">💡</span><span>O detalhe completo, com prompts prontos para colar, está em <strong>"Personalização das IAs · Gemini + Claude GO/MDV"</strong> (Bloco 1, sexta tarde). Aqui é só o resumo.</span></div>
+
+          <h4>Sem conseguir configurar antes?</h4>
+          <p>Sem problema. Os primeiros minutos do café da sexta-feira (18h00–18h15) são reservados para resolver dúvidas de configuração com apoio direto. Traga o celular ou notebook carregado.</p>
+        </div>
+      </div>
+
+    </div>
   </div>
 </div>
 
@@ -3319,6 +3904,27 @@ function showLogistica(){document.getElementById('logistica-overlay').classList.
 function fecharLogistica(){document.getElementById('logistica-overlay').classList.remove('open');}
 function abrirSobre(){document.getElementById('sobre-overlay').classList.add('open');}
 function fecharSobre(){document.getElementById('sobre-overlay').classList.remove('open');}
+
+// ── INSTRUÇÕES · COMO USAR O AIMED OS ──
+function abrirInstrucoes(){
+  document.getElementById('instrucoes-overlay').classList.add('open');
+}
+function fecharInstrucoes(){
+  document.getElementById('instrucoes-overlay').classList.remove('open');
+}
+function toggleInstrSecao(id){
+  const sec = document.getElementById('instr-'+id);
+  if(!sec) return;
+  sec.classList.toggle('open');
+}
+function abrirInstrSecao(id){
+  // Fecha todas, abre a escolhida e rola até ela
+  document.querySelectorAll('.instr-section').forEach(s=>s.classList.remove('open'));
+  const sec = document.getElementById('instr-'+id);
+  if(!sec) return;
+  sec.classList.add('open');
+  setTimeout(()=>sec.scrollIntoView({behavior:'smooth',block:'start'}),60);
+}
 function setLevel(n){currentLevel=n;[1,2,3].forEach(i=>{document.getElementById('lvl'+i).classList.toggle('active',i===n);});const m=PROGRAMA.flatMap(b=>b.modulos).find(m=>m.id===currentModuleId);if(m&&m.prompts){const w=document.getElementById('prompt-box-wrapper');if(w)w.innerHTML=renderPromptBox(m);}}
 // ═══════════════════════════════════════════════════════════════════
 // AVALIAÇÃO · Pesquisa pré-pós (T0/T1/T2) + Diário semanal
@@ -4218,6 +4824,7 @@ function navegarDePreCurso(acao){
     if(acao==='t0'){showAvaliacao();}
     else if(acao==='logistica'){showLogistica();}
     else if(acao==='metodologia'){navigateTo('metodologia-aimed-go');}
+    else if(acao==='instrucoes'){abrirInstrucoes();}
   },200);
 }
 
@@ -4351,6 +4958,28 @@ function construirIndiceBusca(){
       meta:'Pesquisa AIMED',
       textoBusca: normalizar(t+' avaliacao pesquisa nps likert apelido'),
       acao: ()=>showAvaliacao()
+    });
+  });
+  // 7) Instruções · Como usar o AIMED OS
+  const INSTRUCOES = [
+    {id:'navegar', titulo:'Como navegar pelo conteúdo', desc:'Sidebar, blocos, breadcrumb, níveis N1/N2/N3, glossário interativo', extra:'sidebar bloco modulo nivel n1 n2 n3 breadcrumb glossario navegacao'},
+    {id:'busca', titulo:'Como usar a busca universal (Ctrl+K)', desc:'Atalhos de teclado, exemplos, navegação por seta', extra:'ctrl k cmd k atalho teclado busca pesquisa enter esc seta'},
+    {id:'pdf', titulo:'Como gerar e salvar PDFs', desc:'Baixar prompts individuais ou índice geral da Biblioteca', extra:'pdf imprimir salvar baixar download biblioteca offline'},
+    {id:'instalar', titulo:'Como instalar como app no celular', desc:'iPhone (Safari) e Android (Chrome) · tela inicial · tela cheia', extra:'instalar pwa app celular iphone ipad android safari chrome tela inicial home screen icone'},
+    {id:'aimed', titulo:'A metodologia AIMED em 5 componentes', desc:'Assistente · Informações · Missão · Estrutura · Diretrizes', extra:'aimed metodologia framework prompt componente assistente informacoes missao estrutura diretrizes'},
+    {id:'pesquisa', titulo:'Questionários T0 · T1 · T2 (pesquisa)', desc:'Três momentos de avaliação · apelido de pareamento · certificado', extra:'t0 t1 t2 pesquisa avaliacao questionario apelido pareamento certificado'},
+    {id:'ias', titulo:'Configurar Gemini · Claude · ChatGPT · NotebookLM', desc:'Como personalizar cada IA para GO/MDV antes da sexta', extra:'configurar gemini claude chatgpt gpt notebooklm ia personalizar gem projeto'}
+  ];
+  INSTRUCOES.forEach(i=>{
+    idx.push({
+      tipo:'instrucao',
+      grupo:'Como usar o AIMED OS',
+      icone:'❓',
+      titulo: i.titulo,
+      descricao: i.desc,
+      meta: 'Manual da plataforma',
+      textoBusca: normalizar(i.titulo+' '+i.desc+' '+(i.extra||'')),
+      acao: ()=>{ abrirInstrucoes(); setTimeout(()=>abrirInstrSecao(i.id),120); }
     });
   });
   return idx;
