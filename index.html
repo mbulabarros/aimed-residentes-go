@@ -1784,7 +1784,7 @@ body {
 </div>
 
 <!-- BUSCA UNIVERSAL OVERLAY -->
-<div id="busca-overlay" role="dialog" aria-label="Busca no curso" aria-modal="true">
+<div id="busca-overlay" role="dialog" aria-label="Busca no curso" aria-modal="true" onclick="fecharBusca()">
   <div class="busca-panel" onclick="event.stopPropagation()">
     <div class="busca-input-wrap">
       <span class="busca-icon">🔍</span>
@@ -1807,8 +1807,6 @@ body {
     </div>
   </div>
 </div>
-<div class="overlay-backdrop" onclick="fecharBusca()" style="display:none" id="busca-backdrop"></div>
-
 <!-- ÁREA DE IMPRESSÃO (PDF) -->
 <div id="print-area"></div>
 
@@ -4255,7 +4253,7 @@ function construirIndiceBusca(){
         descricao: mod.summary || `Bloco ${bloco.numero} · ${bloco.role}`,
         meta: `Bloco ${bloco.numero} · ${bloco.role} · ${mod.horario||''}`,
         textoBusca: baseTexto + ' bloco ' + bloco.numero + ' ' + normalizar(bloco.role),
-        acao: ()=>{ fecharBusca(); navigateTo(mod.id); }
+        acao: ()=>navigateTo(mod.id)
       });
       // 1b) Prompts dentro de módulos (N1/N2/N3)
       if(mod.prompts){
@@ -4270,7 +4268,7 @@ function construirIndiceBusca(){
             descricao: niv.desc || mod.prompts.subtitulo || '',
             meta: `Em: ${mod.titulo}`,
             textoBusca: normalizar((mod.prompts.titulo||'')+' '+(niv.label||'')+' '+(niv.desc||'')+' '+(niv.texto||'')+' '+mod.titulo),
-            acao: ()=>{ fecharBusca(); navigateTo(mod.id); }
+            acao: ()=>navigateTo(mod.id)
           });
         });
       }
@@ -4286,7 +4284,7 @@ function construirIndiceBusca(){
       descricao: item.desc || '',
       meta: 'Biblioteca · prompt clínico',
       textoBusca: normalizar(item.titulo+' '+item.desc+' '+item.prompt),
-      acao: ()=>{ fecharBusca(); showBiblioteca(); setTimeout(()=>{
+      acao: ()=>{ showBiblioteca(); setTimeout(()=>{
         const card=document.getElementById('lib-'+item.id);
         if(card){ card.classList.add('open'); card.scrollIntoView({behavior:'smooth',block:'center'}); }
       },120); }
@@ -4302,7 +4300,7 @@ function construirIndiceBusca(){
       descricao: def,
       meta: 'Glossário GO',
       textoBusca: normalizar(termo+' '+def),
-      acao: ()=>{ fecharBusca(); showToast(`${termo}: ${def}`); }
+      acao: ()=>showToast(`${termo}: ${def}`)
     });
   });
   // 4) Logística — itens-chave hardcoded para busca rápida
@@ -4325,7 +4323,7 @@ function construirIndiceBusca(){
       descricao: l.d,
       meta: 'Logística · Hotel Le Canard',
       textoBusca: normalizar(l.t+' '+l.d),
-      acao: ()=>{ fecharBusca(); showLogistica(); }
+      acao: ()=>showLogistica()
     });
   });
   // 5) Sobre / Autor
@@ -4337,7 +4335,7 @@ function construirIndiceBusca(){
     descricao:'Médico intensivista pediátrico · Arquiteto de IA · Fundador da InovaMed · Autor da metodologia AIMED.',
     meta:'Autoria',
     textoBusca: normalizar('mbula luzingu barros inovamed aimed intensivista pediatrico santa catarina 100 pontos ses sc autor'),
-    acao: ()=>{ fecharBusca(); abrirSobre(); }
+    acao: ()=>abrirSobre()
   });
   // 6) Avaliação
   ['T0 · Antes do Curso','T1 · Logo Após o Curso','T2 · Após 4 Semanas','Diário Clínico AIMED'].forEach((t,i)=>{
@@ -4352,7 +4350,7 @@ function construirIndiceBusca(){
                 : 'Registro pessoal contínuo do uso de IA no plantão',
       meta:'Pesquisa AIMED',
       textoBusca: normalizar(t+' avaliacao pesquisa nps likert apelido'),
-      acao: ()=>{ fecharBusca(); showAvaliacao(); }
+      acao: ()=>showAvaliacao()
     });
   });
   return idx;
@@ -4468,7 +4466,7 @@ function renderResultadosBusca(q){
     html += `<div class="busca-group-label">${g}</div>`;
     grupos[g].forEach(r=>{
       const isActive = idxGlobal===buscaResultadoAtivo;
-      html += `<div class="busca-result ${isActive?'active':''}" data-idx="${idxGlobal}" onclick="ativarResultadoBusca(${idxGlobal})">
+      html += `<div class="busca-result ${isActive?'active':''}" data-idx="${idxGlobal}" onclick="ativarResultadoBusca(${idxGlobal}, event)">
         <div class="busca-result-icon">${r.icone}</div>
         <div class="busca-result-body">
           <div class="busca-result-title">${highlightTermos(r.titulo, q)}</div>
@@ -4482,9 +4480,18 @@ function renderResultadosBusca(q){
   box.innerHTML = html;
 }
 
-function ativarResultadoBusca(idx){
+function ativarResultadoBusca(idx, ev){
+  // Parar borbulhamento defensivamente — evita que o clique chegue em
+  // listeners atrás (toggle de overlay, navigateTo de sidebar, etc).
+  if(ev){
+    try{ ev.preventDefault(); ev.stopPropagation(); }catch(e){}
+  }
   const r = buscaResultadosAtuais[idx];
-  if(r && typeof r.acao==='function') r.acao();
+  if(!r || typeof r.acao !== 'function') return;
+  // Fechamos a busca PRIMEIRO, depois disparamos a ação num tick separado.
+  // Isso garante que nenhum click residual da busca afete a navegação.
+  fecharBusca();
+  setTimeout(()=>{ try{ r.acao(); }catch(e){ console.error('Busca·ação falhou:',e); } }, 60);
 }
 
 function moverResultadoBusca(delta){
@@ -4537,7 +4544,7 @@ function inicializarBusca(){
     else if(e.key==='Enter'){
       e.preventDefault();
       if(buscaResultadosAtuais[buscaResultadoAtivo]){
-        ativarResultadoBusca(buscaResultadoAtivo);
+        ativarResultadoBusca(buscaResultadoAtivo, e);
       }
     }
   });
