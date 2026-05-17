@@ -4108,24 +4108,51 @@ let currentSpecFilter='todos';
 function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);}
 function copiarSincrono(text){try{const ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);return true;}catch(e){return false;}}
 async function copyToClipboard(text,btn){try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(text);}else{copiarSincrono(text);}if(btn){const orig=btn.innerHTML;btn.innerHTML='✓ Copiado!';btn.style.background='var(--green)';btn.style.color='var(--navy)';setTimeout(()=>{btn.innerHTML=orig;btn.style.background='';btn.style.color='';},2000);}showToast('Prompt copiado!');}catch(e){copiarSincrono(text);showToast('Copiado!');}}
+function abrirNovaAba(url){
+  // Estratégia mais robusta contra popup blockers:
+  // Anchor element <a target="_blank"> + .click() programático é interpretado
+  // pelo navegador como navegação direta (não popup), mesmo dentro de onclick.
+  // window.open com features string ('noopener') é frequentemente bloqueado
+  // por Chrome/Safari quando a URL alvo dispara redirects (caso do gemini.google.com/app → accounts.google.com).
+  try{
+    const a=document.createElement('a');
+    a.href=url;
+    a.target='_blank';
+    a.rel='noopener noreferrer';
+    a.style.display='none';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    return true;
+  }catch(e){
+    // Fallback: window.open SEM features string (evita interpretação como popup)
+    const w=window.open(url,'_blank');
+    if(w){ try{w.opener=null;}catch(_){ } return true; }
+    return false;
+  }
+}
 function openAI(platform,text){
   const enc=encodeURIComponent(text);
   if(platform==='gemini'){
-    // CRÍTICO · abrir a aba IMEDIATAMENTE (síncrono, no mesmo tick do click)
-    // para preservar o "user gesture" e escapar do popup blocker.
-    // Se o open for adiado por setTimeout ou Promise.then, o navegador mata silenciosamente.
-    window.open('https://gemini.google.com/app','_blank','noopener');
-    // Copiar o prompt em paralelo (assíncrono é OK aqui — a aba já abriu)
-    const onCopy=()=>showToast('Prompt copiado — cole no Gemini com Ctrl+V');
+    // Em mobile (especialmente iOS Safari), a ordem importa:
+    // 1º copiar SÍNCRONO (preserva o user gesture para o clipboard)
+    // 2º copiar async como reforço (alguns navegadores ignoram execCommand)
+    // 3º abrir a aba (último, para que abertura não "consuma" o gesture antes da cópia)
+    const okSync=copiarSincrono(text);
     if(navigator.clipboard&&window.isSecureContext){
-      navigator.clipboard.writeText(text).then(onCopy).catch(()=>{copiarSincrono(text);onCopy();});
+      // Reforço — em desktop async é mais confiável; em iOS, se falhar, o sync já garantiu
+      navigator.clipboard.writeText(text).catch(()=>{});
+    }
+    const aberto=abrirNovaAba('https://gemini.google.com/app');
+    if(aberto){
+      showToast(okSync?'Prompt copiado — cole no Gemini com Ctrl+V (ou toque longo · Colar)':'Abra o Gemini e cole o prompt manualmente');
     } else {
-      copiarSincrono(text);onCopy();
+      showToast('Popup bloqueado · prompt copiado · abra gemini.google.com manualmente');
     }
     return;
   }
   const urls={chatgpt:`https://chatgpt.com/?q=${enc}`,claude:`https://claude.ai/new?q=${enc}`};
-  window.open(urls[platform]||urls.claude,'_blank','noopener');
+  abrirNovaAba(urls[platform]||urls.claude);
 }
 function toggleSidebar(){const s=document.getElementById('sidebar');const o=document.getElementById('sidebarOverlay');s.classList.toggle('open');o.classList.toggle('show');}
 function showBiblioteca(){const ov=document.getElementById('biblioteca-overlay');ov.classList.add('open');const body=document.getElementById('biblioteca-body');body.innerHTML=renderBiblioteca();body.querySelectorAll('.lib-card').forEach(card=>{card.addEventListener('click',e=>{if(e.target.closest('.lib-actions'))return;card.classList.toggle('open');});});}
@@ -4532,7 +4559,7 @@ function enviarWhatsApp(tab){
   evalSaveNow(tab);
   const msg=formatarMensagem(tab);
   const url='https://wa.me/?text='+encodeURIComponent(msg);
-  window.open(url,'_blank','noopener');
+  abrirNovaAba(url);
   showToast('Abrindo WhatsApp — escolha o grupo');
 }
 
