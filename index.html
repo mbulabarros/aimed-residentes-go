@@ -2709,9 +2709,10 @@ body {
       <div class="gemini-step-num">2</div>
       <div class="gemini-step-body">
         <div class="gemini-step-title">Abrir o Gemini e colar</div>
-        <a class="gemini-open-link" href="https://gemini.google.com" target="_blank" rel="noopener noreferrer">🔗 Abrir gemini.google.com</a>
+        <a class="gemini-open-link gemini-open-app" id="gemini-open-app" href="intent://gemini.google.com/app#Intent;scheme=https;package=com.google.android.apps.bard;S.browser_fallback_url=https%3A%2F%2Fgemini.google.com;end" style="display:none;margin-bottom:8px">📱 Abrir no app Gemini</a>
+        <a class="gemini-open-link" href="https://gemini.google.com" target="_blank" rel="noopener noreferrer">🔗 Abrir no navegador</a>
         <div class="gemini-fallback">
-          Se o link não abrir, digite <strong>gemini.google.com</strong> na barra de endereços do navegador. Já no Gemini, toque longo na caixa de chat → <strong>Colar</strong> (celular) ou <strong>Ctrl+V</strong> (PC).
+          Se nenhum link abrir, digite <strong>gemini.google.com</strong> na barra de endereços. Já no Gemini, toque longo na caixa de chat → <strong>Colar</strong> (celular) ou <strong>Ctrl+V</strong> (PC).
         </div>
       </div>
     </div>
@@ -4273,6 +4274,7 @@ function copiarPromptParaIA(elementId){
   return true;
 }
 // ── MODAL GEMINI · fluxo à prova de bala para mobile ──
+const IS_ANDROID = /Android/i.test(navigator.userAgent) && !/wv|FB_IAB|FBAN|FBAV|Instagram|Line|WhatsApp/i.test(navigator.userAgent);
 let _geminiModalTexto='';
 function abrirGeminiModal(elementId){
   const el=document.getElementById(elementId);
@@ -4284,6 +4286,11 @@ function abrirGeminiModal(elementId){
   // Reset visual do botão copiar
   const btn=document.getElementById('gemini-copy-btn');
   if(btn){btn.classList.remove('copiado');btn.textContent='📋 Copiar prompt';}
+  // Mostrar botão "Abrir no app" apenas em Android Chrome (intent:// URL)
+  // Em iOS o app abre via Universal Links automaticamente pelo https://; em desktop não há app.
+  // WebView (WhatsApp, Instagram, etc.) também não suporta intent:// bem — ocultar.
+  const appBtn=document.getElementById('gemini-open-app');
+  if(appBtn)appBtn.style.display=IS_ANDROID?'block':'none';
   document.getElementById('gemini-modal').classList.add('open');
   // Best effort: copiar já na abertura (alguns navegadores aceitam, outros não)
   try{copiarSincrono(_geminiModalTexto);}catch(e){}
