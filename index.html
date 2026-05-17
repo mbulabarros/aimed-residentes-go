@@ -1150,6 +1150,62 @@ body {
   .module-header h1 { font-size: 1.7rem; }
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   .tdc-table · responsivo mobile
+   Tabela dos 12 protocolos (TdC) tem 4 colunas — estoura no celular.
+   Solução: scroll horizontal com indicador visual + padding reduzido.
+   ═══════════════════════════════════════════════════════════════ */
+@media (max-width: 700px) {
+  .tdc-table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+    /* Indicador visual de scroll com gradiente nas bordas */
+    background:
+      linear-gradient(to right, var(--navy) 30%, transparent),
+      linear-gradient(to right, transparent, var(--navy) 70%) right,
+      linear-gradient(to right, rgba(201,168,76,0.15), transparent),
+      linear-gradient(to left, rgba(201,168,76,0.15), transparent) right;
+    background-repeat: no-repeat;
+    background-size: 40px 100%, 40px 100%, 14px 100%, 14px 100%;
+    background-attachment: local, local, scroll, scroll;
+  }
+  .tdc-table th, .tdc-table td {
+    padding: 8px 10px;
+    font-size: 0.72rem;
+    white-space: normal;
+  }
+  .tdc-table th {
+    font-size: 0.6rem;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   .role-row · responsivo mobile
+   Grid 40px+1fr+2fr fica apertado abaixo de 700px.
+   Solução: empilhar (flex column) com a letra como cabeçalho.
+   ═══════════════════════════════════════════════════════════════ */
+@media (max-width: 700px) {
+  .role-row {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 14px 16px;
+  }
+  .role-row .role-letter {
+    font-size: 1.1rem;
+    color: var(--gold);
+  }
+  .role-row .role-name {
+    font-size: 0.85rem;
+    padding-top: 0;
+  }
+  .role-row .role-desc {
+    font-size: 0.78rem;
+  }
+}
+
 /* ── GLOSSARY TOOLTIP ── */
 .gloss {
   border-bottom: 1px dotted var(--gold);
@@ -1713,6 +1769,36 @@ body {
 }
 
 /* ═══════════════════════════════════════════════════════════════
+   CASO-MDV · GRIDS RESPONSIVOS (vitais · lab · feto)
+   Substitui os grids inline que não respondiam a mobile.
+   ═══════════════════════════════════════════════════════════════ */
+.case-dossier-row {
+  display: grid;
+  gap: 10px;
+  margin-top: 10px;
+}
+.case-dossier-row.cols-3 { grid-template-columns: repeat(3, 1fr); }
+.case-dossier-row.cols-4 { grid-template-columns: repeat(4, 1fr); }
+/* Itens dentro precisam permitir encolher (default min-width:auto causa overflow) */
+.case-dossier-row > .case-item { min-width: 0; }
+.case-dossier-row > .case-item .case-val { word-break: break-word; }
+
+/* Tablet · 700px → 2 colunas em ambos */
+@media (max-width: 700px) {
+  .case-dossier-row.cols-3,
+  .case-dossier-row.cols-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+/* Celular muito estreito · 380px → 1 coluna */
+@media (max-width: 380px) {
+  .case-dossier-row.cols-3,
+  .case-dossier-row.cols-4 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
    PRÉ-CURSO · QUARTA AÇÃO (TOUR)
    ═══════════════════════════════════════════════════════════════ */
 .pre-curso-action.tour-action {
@@ -1775,6 +1861,18 @@ body {
    IMPRESSÃO · MODO PDF
    ═══════════════════════════════════════════════════════════════ */
 @media print {
+  /* CRÍTICO · forçar html/body a ficarem brancos
+     (sem isso o background navy escuro vaza para a impressão) */
+  html, body {
+    background: white !important;
+    background-color: white !important;
+    color: #1a1a1a !important;
+  }
+  /* Preservar cores específicas do AIMED (dourado do header, etc) */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
   /* Esconde tudo da interface */
   body * { visibility: hidden; }
   #sidebar, #topbar, #busca-overlay,
@@ -3258,7 +3356,7 @@ RECURSOS DISPONÍVEIS: [CC disponível? UTI neonatal? Staff presente?]
 </div>
 <div style="border-top:1px solid var(--border-dim);margin-top:20px;padding-top:20px">
 <div class="case-section-title">Vitais e Exame Físico</div>
-<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:10px">
+<div class="case-dossier-row cols-3">
 <div class="case-item" style="flex-direction:column;gap:2px;border:none;padding:10px;background:rgba(248,113,113,0.08);border-radius:8px"><span class="case-key">PA (x2, 15min)</span><span class="case-val case-critical" style="font-size:1rem">162 × 105 mmHg</span></div>
 <div class="case-item" style="flex-direction:column;gap:2px;border:none;padding:10px;background:var(--navy);border-radius:8px"><span class="case-key">FC</span><span class="case-val">102 bpm</span></div>
 <div class="case-item" style="flex-direction:column;gap:2px;border:none;padding:10px;background:var(--navy);border-radius:8px"><span class="case-key">SpO2</span><span class="case-val">97% RA</span></div>
@@ -3268,7 +3366,7 @@ RECURSOS DISPONÍVEIS: [CC disponível? UTI neonatal? Staff presente?]
 </div></div>
 <div style="border-top:1px solid var(--border-dim);margin-top:16px;padding-top:16px">
 <div class="case-section-title">Laboratório (urgência — 2h atrás)</div>
-<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:10px">
+<div class="case-dossier-row cols-4">
 <div class="case-item" style="flex-direction:column;gap:2px;border:none;padding:10px;background:rgba(248,113,113,0.1);border-radius:8px"><span class="case-key">Plaquetas</span><span class="case-val case-critical">98.000</span></div>
 <div class="case-item" style="flex-direction:column;gap:2px;border:none;padding:10px;background:rgba(248,113,113,0.1);border-radius:8px"><span class="case-key">TGO</span><span class="case-val case-critical">118 U/L</span></div>
 <div class="case-item" style="flex-direction:column;gap:2px;border:none;padding:10px;background:rgba(248,113,113,0.1);border-radius:8px"><span class="case-key">LDH</span><span class="case-val case-critical">687 U/L</span></div>
@@ -3280,7 +3378,7 @@ RECURSOS DISPONÍVEIS: [CC disponível? UTI neonatal? Staff presente?]
 </div></div>
 <div style="border-top:1px solid var(--border-dim);margin-top:16px;padding-top:16px">
 <div class="case-section-title">Avaliação Fetal</div>
-<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px">
+<div class="case-dossier-row cols-3">
 <div class="case-item" style="flex-direction:column;gap:2px;border:none;padding:10px;background:rgba(248,113,113,0.08);border-radius:8px"><span class="case-key">EFW</span><span class="case-val case-critical">1.580g (p18)</span></div>
 <div class="case-item" style="flex-direction:column;gap:2px;border:none;padding:10px;background:rgba(248,113,113,0.08);border-radius:8px"><span class="case-key">ILA</span><span class="case-val case-critical">5.8 cm</span></div>
 <div class="case-item" style="flex-direction:column;gap:2px;border:none;padding:10px;background:var(--navy);border-radius:8px"><span class="case-key">CPR</span><span class="case-val">&gt; 1 (normal)</span></div>
@@ -3302,7 +3400,7 @@ RECURSOS DISPONÍVEIS: [CC disponível? UTI neonatal? Staff presente?]
 <div class="step-item"><div class="step-num">30'</div><div class="step-body"><div class="step-title">Discussão coletiva — com IA como escriba</div><div class="step-desc">A IA documenta em tempo real: argumentos levantados, referências citadas, decisões tomadas. Ao final, gera a síntese clínica do caso para todos.</div></div></div>
 <div class="step-item"><div class="step-num">25'</div><div class="step-body"><div class="step-title">Conexão com a TdC de cada uma</div><div class="step-desc">O caso cruza com os 12 protocolos questionados: MgSO4 sem critérios (Maria Luiza), CTG Categoria II (Ana Júlia), corticóide tardio (Ana Luiza). A TdC encontra o caso real.</div></div></div>
 </div>
-<div class="callout"><div class="callout-label">🎙️ Fluxo de áudio · IA como escriba real</div><p>Durante esta discussão, <strong>uma residente grava o áudio no celular</strong> (com consentimento do grupo, caso anonimizado). Ao final dos 90 minutos, transcreve com Whisper, ChatGPT em modo voz ou ferramenta de transcrição preferida. Cola a transcrição bruta no prompt <strong>"Escriba de Áudio AIMED"</strong> disponível na Biblioteca AIMED GO. A saída entrega — em 2 a 3 minutos — ata estruturada com mapeamento de vozes, divergências preservadas, nota pronta para prontuário, e referências citadas catalogadas. Cada ata arquivada no NotebookLM do serviço vira <em>acervo pedagógico permanente</em>: uma residente do 4º ano pode reler a discussão em que participou no 1º ano e ver exatamente como seu raciocínio clínico evoluiu. Nenhum hospital-escola brasileiro tem isso institucionalizado hoje.</p></div>
+<div class="callout"><div class="callout-label">🎙️ Fluxo de áudio · IA como escriba real</div><p>Durante esta discussão, <strong>uma residente grava o áudio no celular</strong> (com consentimento do grupo, caso anonimizado). Ao final dos 90 minutos, transcreve com Whisper, ChatGPT em modo voz ou ferramenta de transcrição preferida. Cola a transcrição bruta no prompt <strong>"Escriba de Áudio AIMED"</strong> disponível na Biblioteca AIMED GO. A saída entrega — em 2 a 3 minutos — ata estruturada com mapeamento de vozes, divergências preservadas, nota pronta para prontuário, e referências citadas catalogadas. Cada ata arquivada no NotebookLM do serviço vira <em>acervo pedagógico permanente</em>: uma residente do 3º ano pode reler a discussão em que participou no 1º ano e ver exatamente como seu raciocínio clínico evoluiu. Nenhum hospital-escola brasileiro tem isso institucionalizado hoje.</p></div>
 <h3>A dimensão que o caso força</h3>
 <div class="participant-grid">
 <div class="participant-card"><div class="participant-avatar">ML</div><div><div class="participant-name">Maria Luiza</div><div class="participant-role">Este caso tem critérios de gravidade? O TGO 118 é ≥2x ULN? MgSO4 obrigatório aqui? (Sua TdC, ao vivo)</div></div></div>
@@ -3877,7 +3975,7 @@ Em um parágrafo curto, identifique a lição clínica não óbvia que essa disc
 - ESCOPO LEGAL: este prompt produz documento auxiliar para revisão humana. NENHUMA das saídas substitui o registro assinado pela médica responsável. Toda nota gerada exige revisão antes de incorporação ao prontuário oficial
 
 OBSERVAÇÃO ESTRATÉGICA · PARA A INSTITUIÇÃO QUE ADOTAR ESTE FLUXO:
-Cada ata gerada por este prompt, quando arquivada no NotebookLM do serviço com tag temática, transforma-se em material consultável de meta-aprendizado. Uma residente do 4º ano pode reler a discussão em que participou no 1º ano e ver exatamente como seu raciocínio clínico evoluiu. Nenhum hospital-escola brasileiro tem isso institucionalizado hoje — e o custo marginal é zero. Considere arquivar todas as atas em um Notebook único do serviço: "Discussões Clínicas [Especialidade] — Acervo Pedagógico [Ano]". É a forma mais barata e mais poderosa de transformar discussão verbal volátil em capital intelectual institucional permanente.`
+Cada ata gerada por este prompt, quando arquivada no NotebookLM do serviço com tag temática, transforma-se em material consultável de meta-aprendizado. Uma residente do 3º ano pode reler a discussão em que participou no 1º ano e ver exatamente como seu raciocínio clínico evoluiu. Nenhum hospital-escola brasileiro tem isso institucionalizado hoje — e o custo marginal é zero. Considere arquivar todas as atas em um Notebook único do serviço: "Discussões Clínicas [Especialidade] — Acervo Pedagógico [Ano]". É a forma mais barata e mais poderosa de transformar discussão verbal volátil em capital intelectual institucional permanente.`
   },
   // ═══════════════════════════════════════════════════════════════════
   // PLACEHOLDERS · Edição Junho 2026 (Multispecialty)
@@ -5415,6 +5513,64 @@ document.addEventListener('DOMContentLoaded',()=>{
   if(dias>=0&&!jaVisto){
     setTimeout(abrirPreCurso,300);
   }
+});
+
+// ═══════════════════════════════════════════════════════════════
+// FALLBACK · Ctrl+P direto (sem usar botões da Biblioteca)
+// Se o usuário pressionar Ctrl+P fora do fluxo da Biblioteca,
+// o #print-area está vazio → o navegador imprime fundo escuro.
+// Aqui populamos com uma instrução amigável e cancelamos a sujeira.
+// ═══════════════════════════════════════════════════════════════
+let _printAreaPopulatedByJS = false;
+
+window.addEventListener('beforeprint', function(){
+  const area = document.getElementById('print-area');
+  if(!area) return;
+  // Se já foi populado por gerarPDFPrompt / gerarPDFIndice, deixar como está
+  if(area.innerHTML && area.innerHTML.trim().length > 0){
+    _printAreaPopulatedByJS = true;
+    return;
+  }
+  // Caso contrário, injetar instrução de como gerar PDF corretamente
+  _printAreaPopulatedByJS = false;
+  const data = new Date().toLocaleDateString('pt-BR');
+  area.innerHTML = `
+    <div class="pdf-header">
+      <div class="pdf-brand">AIMED</div>
+      <div class="pdf-tagline">Residentes GO · MDV · Joinville · Maio 2026 · Documento gerado em ${data}</div>
+    </div>
+    <div class="pdf-title">Como gerar um PDF do AIMED OS</div>
+    <div class="pdf-subtitle">A impressão direta pelo navegador (Ctrl+P) não é o caminho oficial — use os botões da Biblioteca.</div>
+
+    <div class="pdf-section-label">Para baixar prompts em PDF</div>
+    <div style="font-size:10.5pt;line-height:1.65;color:#333">
+      <ol style="margin-left:18px">
+        <li style="margin-bottom:8px">Abra a <strong>Biblioteca AIMED GO</strong> no menu lateral.</li>
+        <li style="margin-bottom:8px">Para baixar todos os prompts num índice geral, clique em <strong>"📥 Baixar índice geral"</strong> no topo da biblioteca.</li>
+        <li style="margin-bottom:8px">Para baixar um prompt específico, expanda o card do prompt e clique em <strong>"📥 PDF"</strong>.</li>
+        <li>O navegador abrirá a janela de impressão com o PDF formatado — escolha "Salvar como PDF" no destino.</li>
+      </ol>
+    </div>
+
+    <div class="pdf-section-label">Por que esta tela apareceu</div>
+    <div style="font-size:10.5pt;line-height:1.65;color:#333">
+      Você pressionou <strong>Ctrl+P</strong> (ou Cmd+P, ou clicou em "Imprimir") fora do fluxo da Biblioteca. O AIMED OS é um portal interativo — não foi desenhado para ser impresso inteiro. Apenas os prompts da Biblioteca têm versão PDF otimizada para impressão e uso offline no plantão.
+    </div>
+
+    <div class="pdf-footer">
+      <strong>AIMED OS</strong> · Plataforma permanente do curso<br>
+      mbulabarros.github.io/aimed-residentes-go
+    </div>
+  `;
+});
+
+window.addEventListener('afterprint', function(){
+  // Se foi instrução fallback, limpar para não atrapalhar próxima impressão
+  const area = document.getElementById('print-area');
+  if(area && !_printAreaPopulatedByJS){
+    area.innerHTML = '';
+  }
+  _printAreaPopulatedByJS = false;
 });
 
 </script>
