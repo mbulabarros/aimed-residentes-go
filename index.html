@@ -9,13 +9,43 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%23050e1f'/%3E%3Ctext x='32' y='46' font-family='Playfair Display, Georgia, serif' font-size='42' font-weight='900' fill='%23c9a84c' text-anchor='middle' font-style='italic'%3EA%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
+<link rel="shortcut icon" href="icons/favicon.ico">
+
+<!-- PWA · Tela inicial -->
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="167x167" href="icons/apple-touch-icon-167.png">
+<link rel="apple-touch-icon" sizes="152x152" href="icons/apple-touch-icon-152.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="AIMED GO">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="application-name" content="AIMED GO">
+
+<!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="AIMED OS · Residentes GO · Joinville · Maio 2026">
-<meta property="og:description" content="O primeiro curso de IA especificamente para residentes de Ginecologia e Obstetrícia no Brasil. Metodologia AIMED · MDV · InovaMed.">
+<meta property="og:description" content="Primeira aplicação integral da metodologia AIMED em Ginecologia e Obstetrícia no Brasil. Curso presencial para residentes · MDV · InovaMed.">
+<meta name="description" content="AIMED Residentes GO — Curso presencial de IA em Ginecologia e Obstetrícia. Primeira aplicação integral da metodologia AIMED em GO no Brasil. Dr. Mbula Barros · Joinville, 22-23 de maio de 2026.">
 <meta property="og:locale" content="pt_BR">
 <meta property="og:url" content="https://mbulabarros.github.io/aimed-residentes-go/">
-<meta property="og:image" content="https://inovamed.pro/wp-content/uploads/2026/02/Gemini_Generated_Image_pwtbbkpwtbbkpwtb-1-scaled.jpeg">
-<meta name="description" content="AIMED Residentes GO — Curso presencial de IA em Ginecologia e Obstetrícia. Metodologia autoral do Dr. Mbula Barros. Joinville, 22-23 de maio de 2026.">
+<meta property="og:image" content="https://mbulabarros.github.io/aimed-residentes-go/og-image.png">
+<meta property="og:image:secure_url" content="https://mbulabarros.github.io/aimed-residentes-go/og-image.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="AIMED · Residentes de Ginecologia e Obstetrícia · Joinville · 2026">
+<meta property="og:site_name" content="InovaMed · AIMED">
+
+<!-- Twitter / X Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AIMED OS · Residentes GO · Joinville · Maio 2026">
+<meta name="twitter:description" content="Primeira aplicação integral da metodologia AIMED em Ginecologia e Obstetrícia no Brasil.">
+<meta name="twitter:image" content="https://mbulabarros.github.io/aimed-residentes-go/og-image.png">
+<meta name="twitter:image:alt" content="AIMED · Residentes de Ginecologia e Obstetrícia · Joinville · 2026">
+
 <meta name="author" content="Dr. Mbula Luzingu Barros">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -342,6 +372,10 @@ body {
 }
 .alert-box.warning { background: rgba(248,113,113,0.08); border-color: var(--coral); }
 .alert-box.warning .alert-label { color: var(--coral); }
+.alert-box.danger { background: rgba(248,113,113,0.18); border: 2px solid var(--coral); border-left: 6px solid var(--coral); box-shadow: 0 0 24px rgba(248,113,113,0.18); padding: 18px 20px; }
+.alert-box.danger .alert-label { color: var(--coral); font-size: 0.7rem; letter-spacing: 0.18em; }
+.alert-box.danger p { font-size: 0.92rem; }
+.alert-box.danger strong { color: var(--coral); }
 .alert-box.info { background: rgba(79,195,195,0.08); border-color: var(--teal); }
 .alert-box.info .alert-label { color: var(--teal); }
 .alert-box.success { background: rgba(74,222,128,0.08); border-color: var(--green); }
@@ -1455,7 +1489,7 @@ const PROGRAMA = [
       id:'abertura-go', horario:'16:00–16:15', titulo:'Abertura e Quebra-Gelo MDV',
       summary:'O curso começa com uma pergunta, não com um slide. Cada residente identifica o protocolo GO que aplica toda semana sem jamais questionar a fundo.',
       avatar:'kerMhntZl9s',
-      conteudo:`<div class="quote-hero"><div class="quote-mark">"</div><div class="quote-text"><strong>Uma residente com IA bem treinada supera um especialista sem ela.</strong><br>Este é o dia que muda a sua prática clínica na MDV.</div></div>
+      conteudo:`<div class="quote-hero"><div class="quote-mark">"</div><div class="quote-text"><strong>Uma residente com IA bem treinada decide melhor do que decidiria sem ela.</strong><br>Este é o dia que muda a sua prática clínica na MDV.</div></div>
 <h3>Por que esta turma é diferente</h3>
 <p>Vocês são residentes de Ginecologia e Obstetrícia da MDV — uma das maternidades de referência de Santa Catarina. Trabalham juntas, nos mesmos protocolos, nos mesmos plantões, com as mesmas situações-limite. Isso significa que tudo que construirmos aqui tem impacto direto no plantão de segunda-feira.</p>
 <p>Este não é um curso genérico de ChatGPT. É a primeira vez que a metodologia <strong>AIMED</strong> é aplicada integralmente em Ginecologia e Obstetrícia no Brasil. Vocês são a turma inaugural.</p>
@@ -1737,7 +1771,8 @@ USG (data [DD/MM]):
       id:'calculos-mdv', horario:'19:00–19:45', titulo:'Cálculos e Segurança Medicamentosa MDV',
       summary:'MgSO4, ocitocina, misoprostol. Os três medicamentos mais usados e mais perigosos da obstetrícia. A IA como calculadora clínica inteligente — com você como verificador final.',
       avatar:'mg7svZFjml8',
-      conteudo:`<h3>Sulfato de Magnésio — o medicamento que define a maternidade</h3>
+      conteudo:`<div class="alert-box danger"><div class="alert-label">🛡️ Princípio de Segurança — Leia antes de qualquer dose</div><p>Nenhum cálculo de dose feito por IA — Gemini, Claude, ChatGPT ou qualquer outra — substitui a <strong>checagem dupla institucional da MDV</strong> (residente + staff + enfermagem/farmácia conforme o protocolo do setor). A IA é uma <strong>segunda opinião computacional</strong>: ela ajuda a sua mente a não esquecer, não a sua responsabilidade a desaparecer. <strong>A prescrição é sua. Você responde pelo que está escrito na folha.</strong> Este módulo só faz sentido sob essa premissa.</p></div>
+<h3>Sulfato de Magnésio — o medicamento que define a maternidade</h3>
 <p>Nenhum medicamento é mais central e mais debatido na obstetrícia brasileira do que o <span class="gloss" data-def="Sulfato de Magnésio — anticonvulsivante e neuroprotetor fetal; esquemas Zuspan (EV) e Pritchard (EV+IM)">MgSO4</span>. Dois esquemas, duas escolas, e — como veremos na Teoria do Contrário — até a indicação em pré-eclâmpsia sem critérios de gravidade é questão em aberto.</p>
 <div class="platform-grid">
 <div class="platform-card gemini"><div class="platform-name">Zuspan · EV exclusivo</div><ul class="platform-steps"><li><strong>Curativo:</strong> 4g EV em 20 min (diluir em 200mL SF)</li><li><strong>Manutenção:</strong> 1g/h EV contínuo (MgSO4 10g em 500mL = 50mL/h)</li><li>Melhor controle de nível sérico</li><li>Requer bomba de infusão</li></ul></div>
