@@ -3783,10 +3783,26 @@ function renderLogistica(){
 const CURSO_INICIO = new Date('2026-05-22T16:00:00-03:00');
 
 function diasParaCurso(){
-  const agora=new Date();
-  const diff=CURSO_INICIO-agora;
-  if(diff<0)return -1;
-  return Math.floor(diff/(1000*60*60*24));
+  // Conta dias de CALENDÁRIO no fuso de Joinville (UTC-3),
+  // não horas corridas — assim "hoje 16 → curso 22" sempre dá 6,
+  // independentemente da hora atual.
+  const agora = new Date();
+  const TZ_OFFSET_MS = -3 * 60 * 60 * 1000; // UTC-3 (Joinville)
+  const inicioCurso_Joinville = new Date('2026-05-22T00:00:00-03:00');
+  const hojeNoFuso = new Date(agora.getTime() + TZ_OFFSET_MS);
+  const inicioHoje = new Date(Date.UTC(
+    hojeNoFuso.getUTCFullYear(),
+    hojeNoFuso.getUTCMonth(),
+    hojeNoFuso.getUTCDate()
+  ));
+  const inicioCursoUTC = new Date(Date.UTC(
+    inicioCurso_Joinville.getUTCFullYear(),
+    inicioCurso_Joinville.getUTCMonth(),
+    inicioCurso_Joinville.getUTCDate()
+  ));
+  const diff = inicioCursoUTC - inicioHoje;
+  if (diff < 0) return -1;
+  return Math.round(diff / (1000 * 60 * 60 * 24));
 }
 
 function abrirPreCurso(){
