@@ -814,14 +814,14 @@ body {
   .pre-curso-action-num { font-size: 1.2rem; }
 }
 
-#biblioteca-overlay, #logistica-overlay, #sobre-overlay, #avaliacao-overlay {
+#biblioteca-overlay, #logistica-overlay, #sobre-overlay, #avaliacao-overlay, #instrucoes-overlay {
   position: fixed; inset: 0;
   z-index: 200;
   display: none;
   align-items: flex-start;
   justify-content: flex-end;
 }
-#biblioteca-overlay.open, #logistica-overlay.open, #sobre-overlay.open, #avaliacao-overlay.open { display: flex; }
+#biblioteca-overlay.open, #logistica-overlay.open, #sobre-overlay.open, #avaliacao-overlay.open, #instrucoes-overlay.open { display: flex; }
 
 /* ── AVALIAÇÃO · TABS E FORMULÁRIOS ── */
 .eval-tabs { display: flex; gap: 6px; padding: 14px 28px 0; border-bottom: 1px solid var(--border-dim); flex-wrap: wrap; }
@@ -1780,6 +1780,7 @@ body {
   #sidebar, #topbar, #busca-overlay,
   #biblioteca-overlay, #logistica-overlay,
   #avaliacao-overlay, #sobre-overlay, #pre-curso-overlay,
+  #instrucoes-overlay,
   #toast, .lib-actions, .lib-pdf-toolbar, .lib-filters,
   .btn-pdf-card, .btn-pdf-index, .menu-toggle {
     display: none !important;
