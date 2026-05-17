@@ -1218,6 +1218,360 @@ body {
 #main::-webkit-scrollbar { width: 6px; }
 #main::-webkit-scrollbar-track { background: var(--navy); }
 #main::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+/* ═══════════════════════════════════════════════════════════════
+   BUSCA UNIVERSAL · v1.2
+   ═══════════════════════════════════════════════════════════════ */
+#busca-overlay {
+  position: fixed; inset: 0; z-index: 2000;
+  background: rgba(5,14,31,0.85);
+  display: none;
+  align-items: flex-start; justify-content: center;
+  padding-top: 8vh;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+#busca-overlay.open { display: flex; }
+.busca-panel {
+  width: min(720px, 92vw);
+  max-height: 80vh;
+  background: var(--navy-mid);
+  border: 1px solid var(--gold);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 80px rgba(201,168,76,0.12);
+  display: flex; flex-direction: column;
+  overflow: hidden;
+  animation: buscaIn 0.18s ease-out;
+}
+@keyframes buscaIn {
+  from { opacity: 0; transform: translateY(-12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.busca-input-wrap {
+  display: flex; align-items: center; gap: 12px;
+  padding: 18px 22px;
+  border-bottom: 1px solid var(--border-dim);
+}
+.busca-icon { font-size: 1.1rem; color: var(--gold); }
+.busca-input {
+  flex: 1;
+  background: transparent;
+  border: none; outline: none;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 1.05rem;
+  font-weight: 500;
+}
+.busca-input::placeholder { color: var(--text-muted); font-weight: 400; }
+.busca-close-hint {
+  font-size: 0.7rem; color: var(--text-muted);
+  font-family: 'DM Mono', monospace;
+  white-space: nowrap;
+}
+.busca-close-hint kbd {
+  background: var(--navy);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-size: 0.66rem;
+  font-family: inherit;
+  color: var(--text-dim);
+}
+.busca-results {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 0;
+}
+.busca-results::-webkit-scrollbar { width: 4px; }
+.busca-results::-webkit-scrollbar-thumb { background: var(--border); }
+.busca-group-label {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  padding: 14px 22px 8px;
+}
+.busca-result {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 11px 22px;
+  cursor: pointer;
+  border-left: 3px solid transparent;
+  transition: background 0.12s ease, border-color 0.12s ease;
+}
+.busca-result:hover, .busca-result.active {
+  background: rgba(201,168,76,0.08);
+  border-left-color: var(--gold);
+}
+.busca-result-icon {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  margin-top: 1px;
+  width: 24px; text-align: center;
+}
+.busca-result-body { flex: 1; min-width: 0; }
+.busca-result-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.busca-result-desc {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  line-height: 1.4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.busca-result-meta {
+  font-size: 0.66rem;
+  color: var(--text-muted);
+  font-family: 'DM Mono', monospace;
+  margin-top: 4px;
+}
+.busca-result mark {
+  background: rgba(201,168,76,0.28);
+  color: var(--gold-light);
+  padding: 0 2px;
+  border-radius: 2px;
+  font-weight: 600;
+}
+.busca-empty {
+  padding: 40px 22px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.88rem;
+}
+.busca-hint {
+  padding: 18px 22px;
+  border-top: 1px solid var(--border-dim);
+  display: flex; gap: 18px; flex-wrap: wrap;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  font-family: 'DM Mono', monospace;
+}
+.busca-hint span { display: flex; align-items: center; gap: 6px; }
+.busca-hint kbd {
+  background: var(--navy);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 1px 5px;
+  font-size: 0.66rem;
+}
+
+/* Botão de busca na sidebar */
+.sidebar-search-btn {
+  display: flex; align-items: center; gap: 10px;
+  width: 100%;
+  background: var(--navy);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 10px 14px;
+  color: var(--text-dim);
+  font-family: inherit;
+  font-size: 0.82rem;
+  cursor: pointer;
+  margin: 0 0 12px 0;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+.sidebar-search-btn:hover {
+  border-color: var(--gold);
+  color: var(--text);
+}
+.sidebar-search-btn .ssb-icon { font-size: 0.9rem; }
+.sidebar-search-btn .ssb-label { flex: 1; text-align: left; }
+.sidebar-search-btn .ssb-shortcut {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  background: var(--navy-mid);
+  border: 1px solid var(--border-dim);
+  border-radius: 4px;
+  padding: 1px 5px;
+  color: var(--text-muted);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   PDF · BOTÕES DE EXPORTAÇÃO NA BIBLIOTECA
+   ═══════════════════════════════════════════════════════════════ */
+.lib-pdf-toolbar {
+  display: flex; gap: 10px; flex-wrap: wrap;
+  margin: 0 0 18px 0;
+  padding: 12px 14px;
+  background: rgba(201,168,76,0.05);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.lib-pdf-toolbar-text {
+  flex: 1; min-width: 200px;
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  line-height: 1.4;
+  display: flex; align-items: center;
+}
+.btn-pdf-index {
+  background: var(--gold);
+  color: var(--navy);
+  border: none;
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.05s ease;
+  white-space: nowrap;
+}
+.btn-pdf-index:hover { background: var(--gold-light); }
+.btn-pdf-index:active { transform: translateY(1px); }
+.btn-pdf-card {
+  background: var(--navy);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 5px 11px;
+  color: var(--text-dim);
+  font-family: inherit;
+  font-size: 0.74rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+.btn-pdf-card:hover { border-color: var(--gold); color: var(--gold); }
+
+/* ═══════════════════════════════════════════════════════════════
+   IMPRESSÃO · MODO PDF
+   ═══════════════════════════════════════════════════════════════ */
+@media print {
+  /* Esconde tudo da interface */
+  body * { visibility: hidden; }
+  #sidebar, #topbar, #busca-overlay,
+  #biblioteca-overlay, #logistica-overlay,
+  #avaliacao-overlay, #sobre-overlay, #pre-curso-overlay,
+  #toast, .lib-actions, .lib-pdf-toolbar, .lib-filters,
+  .btn-pdf-card, .btn-pdf-index, .menu-toggle {
+    display: none !important;
+  }
+  /* Container de print único */
+  #print-area, #print-area * { visibility: visible !important; }
+  #print-area {
+    position: absolute !important;
+    left: 0 !important; top: 0 !important;
+    width: 100% !important;
+    background: white !important;
+    color: #1a1a1a !important;
+    font-family: 'DM Sans', 'Helvetica Neue', Arial, sans-serif !important;
+    padding: 32px 36px !important;
+    font-size: 11pt !important;
+    line-height: 1.5 !important;
+  }
+  #print-area .pdf-header {
+    border-bottom: 2px solid #c9a84c;
+    padding-bottom: 14px;
+    margin-bottom: 22px;
+  }
+  #print-area .pdf-brand {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 900;
+    font-style: italic;
+    font-size: 24pt;
+    color: #c9a84c;
+    line-height: 1;
+  }
+  #print-area .pdf-tagline {
+    font-size: 8pt;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #5a5a5a;
+    margin-top: 6px;
+  }
+  #print-area .pdf-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 700;
+    font-size: 18pt;
+    color: #050e1f;
+    margin: 18px 0 6px;
+    line-height: 1.2;
+  }
+  #print-area .pdf-subtitle {
+    font-size: 10pt;
+    color: #555;
+    margin-bottom: 18px;
+  }
+  #print-area .pdf-section-label {
+    font-size: 8pt;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #c9a84c;
+    margin: 22px 0 10px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 4px;
+  }
+  #print-area .pdf-prompt-box {
+    background: #faf8f2;
+    border-left: 3px solid #c9a84c;
+    padding: 14px 16px;
+    font-family: 'DM Mono', 'Courier New', monospace;
+    font-size: 9pt;
+    line-height: 1.55;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    color: #1a1a1a;
+    margin: 8px 0 14px;
+    page-break-inside: avoid;
+  }
+  #print-area .pdf-card-meta {
+    font-size: 9pt;
+    color: #444;
+    margin-bottom: 8px;
+  }
+  #print-area .pdf-index-item {
+    display: flex;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+    page-break-inside: avoid;
+  }
+  #print-area .pdf-index-icon {
+    flex-shrink: 0;
+    width: 24px;
+    font-size: 12pt;
+  }
+  #print-area .pdf-index-body { flex: 1; }
+  #print-area .pdf-index-title {
+    font-weight: 700;
+    color: #050e1f;
+    font-size: 10.5pt;
+  }
+  #print-area .pdf-index-desc {
+    color: #555;
+    font-size: 9pt;
+    margin-top: 2px;
+    line-height: 1.4;
+  }
+  #print-area .pdf-footer {
+    margin-top: 26px;
+    padding-top: 14px;
+    border-top: 1px solid #ddd;
+    font-size: 8pt;
+    color: #777;
+    text-align: center;
+    line-height: 1.5;
+  }
+  #print-area .pdf-footer strong { color: #c9a84c; }
+  @page {
+    margin: 14mm 10mm;
+    size: A4;
+  }
+}
+#print-area { display: none; }
+
 </style>
 </head>
 <body>
@@ -1236,6 +1590,11 @@ body {
   <div id="sidebar-nav"><!-- preenchido pelo JS --></div>
 
   <div class="sidebar-actions">
+    <button class="sidebar-search-btn" onclick="abrirBusca()" aria-label="Buscar (atalho Ctrl+K)">
+      <span class="ssb-icon">🔍</span>
+      <span class="ssb-label">Buscar no curso…</span>
+      <span class="ssb-shortcut" id="ssb-shortcut">Ctrl K</span>
+    </button>
     <button class="sidebar-btn" onclick="showLogistica()">
       <span class="sidebar-btn-icon">🏨</span> Logística do Curso
     </button>
@@ -1423,6 +1782,35 @@ body {
     <button class="pre-curso-skip" onclick="fecharPreCurso()">Continuar para o conteúdo do curso</button>
   </div>
 </div>
+
+<!-- BUSCA UNIVERSAL OVERLAY -->
+<div id="busca-overlay" role="dialog" aria-label="Busca no curso" aria-modal="true">
+  <div class="busca-panel" onclick="event.stopPropagation()">
+    <div class="busca-input-wrap">
+      <span class="busca-icon">🔍</span>
+      <input
+        type="search"
+        class="busca-input"
+        id="busca-input"
+        placeholder="Buscar por MgSO4, CTG, PICO, eclâmpsia, NotebookLM, hotel…"
+        autocomplete="off"
+        spellcheck="false"
+        aria-label="Termo de busca"
+      >
+      <span class="busca-close-hint"><kbd>Esc</kbd></span>
+    </div>
+    <div class="busca-results" id="busca-results"></div>
+    <div class="busca-hint">
+      <span><kbd>↑</kbd><kbd>↓</kbd> navegar</span>
+      <span><kbd>Enter</kbd> abrir</span>
+      <span><kbd>Esc</kbd> fechar</span>
+    </div>
+  </div>
+</div>
+<div class="overlay-backdrop" onclick="fecharBusca()" style="display:none" id="busca-backdrop"></div>
+
+<!-- ÁREA DE IMPRESSÃO (PDF) -->
+<div id="print-area"></div>
 
 <!-- TOAST -->
 <div id="toast"></div>
@@ -3520,7 +3908,10 @@ function renderBiblioteca(){
   else if(fltrAtivo==='universal')lista=visiveis2.filter(b=>(b.specs||['universal']).includes('universal'));
   else lista=visiveis2.filter(b=>(b.specs||['universal']).includes(fltrAtivo));
   // Renderizar agrupado: universais primeiro, depois por specialty
-  let html=filtrosHtml;
+  let html=`<div class="lib-pdf-toolbar">
+    <div class="lib-pdf-toolbar-text">📄 <strong style="color:var(--text);margin-left:6px">Salvar em PDF:</strong>&nbsp;baixe o índice geral, ou clique em "PDF" em cada prompt individual.</div>
+    <button class="btn-pdf-index" onclick="gerarPDFIndice()">📥 Baixar índice geral</button>
+  </div>`+filtrosHtml;
   if(lista.length===0){
     html+='<div class="lib-empty">Nenhum prompt para este filtro. Tente outro.</div>';
     return html;
@@ -3565,6 +3956,7 @@ function renderLibCard(item,tagLabels){
 <div class="lib-prompt-box" id="libprompt-${item.id}">${item.prompt}</div>
 <div class="lib-actions">
 <button class="btn-copy" onclick="event.stopPropagation();copyToClipboard(document.getElementById('libprompt-${item.id}').innerText,this)">📋 Copiar</button>
+<button class="btn-pdf-card" onclick="event.stopPropagation();gerarPDFPrompt('${item.id}')">📥 PDF</button>
 <button class="btn-open claude" onclick="event.stopPropagation();openAI('claude',document.getElementById('libprompt-${item.id}').innerText)">Claude</button>
 <button class="btn-open gemini" onclick="event.stopPropagation();openAI('gemini',document.getElementById('libprompt-${item.id}').innerText)">Gemini</button>
 <button class="btn-open gpt" onclick="event.stopPropagation();openAI('chatgpt',document.getElementById('libprompt-${item.id}').innerText)">GPT</button>
@@ -3831,10 +4223,423 @@ function navegarDePreCurso(acao){
   },200);
 }
 
+// ═══════════════════════════════════════════════════════════════
+// BUSCA UNIVERSAL · v1.2
+// ═══════════════════════════════════════════════════════════════
+let BUSCA_INDICE = [];
+let buscaResultadoAtivo = 0;
+let buscaResultadosAtuais = [];
+
+function normalizar(s){
+  return (s||'').toString()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+    .toLowerCase()
+    .replace(/<[^>]+>/g,' ')
+    .replace(/\s+/g,' ')
+    .trim();
+}
+
+function construirIndiceBusca(){
+  const idx = [];
+  // 1) Módulos do PROGRAMA (todos os blocos, todos os módulos, todos os 3 níveis)
+  PROGRAMA.forEach(bloco=>{
+    (bloco.modulos||[]).forEach(mod=>{
+      if(mod.isBreak) return;
+      // texto base do módulo: conteúdo + summary + título
+      const baseTexto = normalizar((mod.titulo||'')+' '+(mod.summary||'')+' '+(mod.conteudo||''));
+      idx.push({
+        tipo:'modulo',
+        grupo:'Módulos do Curso',
+        icone:'📖',
+        titulo: mod.titulo,
+        descricao: mod.summary || `Bloco ${bloco.numero} · ${bloco.role}`,
+        meta: `Bloco ${bloco.numero} · ${bloco.role} · ${mod.horario||''}`,
+        textoBusca: baseTexto + ' bloco ' + bloco.numero + ' ' + normalizar(bloco.role),
+        acao: ()=>{ fecharBusca(); navigateTo(mod.id); }
+      });
+      // 1b) Prompts dentro de módulos (N1/N2/N3)
+      if(mod.prompts){
+        ['nivel1','nivel2','nivel3'].forEach(nv=>{
+          const niv = mod.prompts[nv];
+          if(!niv) return;
+          idx.push({
+            tipo:'prompt-modulo',
+            grupo:'Prompts dos Módulos',
+            icone:'⚙️',
+            titulo: `${mod.prompts.titulo||mod.titulo} · ${niv.label||nv}`,
+            descricao: niv.desc || mod.prompts.subtitulo || '',
+            meta: `Em: ${mod.titulo}`,
+            textoBusca: normalizar((mod.prompts.titulo||'')+' '+(niv.label||'')+' '+(niv.desc||'')+' '+(niv.texto||'')+' '+mod.titulo),
+            acao: ()=>{ fecharBusca(); navigateTo(mod.id); }
+          });
+        });
+      }
+    });
+  });
+  // 2) Biblioteca AIMED GO (18 prompts)
+  BIBLIOTECA.forEach(item=>{
+    idx.push({
+      tipo:'biblioteca',
+      grupo:'Biblioteca AIMED GO',
+      icone: item.icon || '📚',
+      titulo: item.titulo,
+      descricao: item.desc || '',
+      meta: 'Biblioteca · prompt clínico',
+      textoBusca: normalizar(item.titulo+' '+item.desc+' '+item.prompt),
+      acao: ()=>{ fecharBusca(); showBiblioteca(); setTimeout(()=>{
+        const card=document.getElementById('lib-'+item.id);
+        if(card){ card.classList.add('open'); card.scrollIntoView({behavior:'smooth',block:'center'}); }
+      },120); }
+    });
+  });
+  // 3) Glossário
+  Object.entries(GLOSSARIO).forEach(([termo,def])=>{
+    idx.push({
+      tipo:'glossario',
+      grupo:'Glossário Clínico',
+      icone:'📑',
+      titulo: termo,
+      descricao: def,
+      meta: 'Glossário GO',
+      textoBusca: normalizar(termo+' '+def),
+      acao: ()=>{ fecharBusca(); showToast(`${termo}: ${def}`); }
+    });
+  });
+  // 4) Logística — itens-chave hardcoded para busca rápida
+  const logKeys = [
+    {t:'Local do Curso', d:'Hotel Le Canard · Rua XV de Novembro, 2075 · Glória · Joinville/SC'},
+    {t:'Datas', d:'22 e 23 de Maio de 2026 · Sexta e Sábado'},
+    {t:'Carga horária', d:'14 horas presenciais + 4 semanas pós-curso'},
+    {t:'Coffee breaks', d:'3 intervalos nos dois dias · networking entre as residentes'},
+    {t:'Configuração de IAs', d:'Gemini · Claude · ChatGPT · NotebookLM — configurar antes da sexta'},
+    {t:'Material a trazer', d:'Notebook ou tablet · celular carregado · curiosidade'},
+    {t:'Grupo WhatsApp', d:'Grupo permanente para envio de T0/T1/T2 e suporte pós-curso'},
+    {t:'Certificado', d:'Emitido após preenchimento do T1 (domingo 24/05)'}
+  ];
+  logKeys.forEach(l=>{
+    idx.push({
+      tipo:'logistica',
+      grupo:'Logística do Curso',
+      icone:'🏨',
+      titulo: l.t,
+      descricao: l.d,
+      meta: 'Logística · Hotel Le Canard',
+      textoBusca: normalizar(l.t+' '+l.d),
+      acao: ()=>{ fecharBusca(); showLogistica(); }
+    });
+  });
+  // 5) Sobre / Autor
+  idx.push({
+    tipo:'sobre',
+    grupo:'Sobre',
+    icone:'👤',
+    titulo:'Dr. Mbula Luzingu Barros',
+    descricao:'Médico intensivista pediátrico · Arquiteto de IA · Fundador da InovaMed · Autor da metodologia AIMED.',
+    meta:'Autoria',
+    textoBusca: normalizar('mbula luzingu barros inovamed aimed intensivista pediatrico santa catarina 100 pontos ses sc autor'),
+    acao: ()=>{ fecharBusca(); abrirSobre(); }
+  });
+  // 6) Avaliação
+  ['T0 · Antes do Curso','T1 · Logo Após o Curso','T2 · Após 4 Semanas','Diário Clínico AIMED'].forEach((t,i)=>{
+    idx.push({
+      tipo:'avaliacao',
+      grupo:'Avaliação · Pesquisa',
+      icone:'📊',
+      titulo: t,
+      descricao: i===0?'Linha de base · responda antes do dia 22/05'
+                : i===1?'Pós-imediato · responda no domingo 24/05'
+                : i===2?'Follow-up · 4 semanas após o curso'
+                : 'Registro pessoal contínuo do uso de IA no plantão',
+      meta:'Pesquisa AIMED',
+      textoBusca: normalizar(t+' avaliacao pesquisa nps likert apelido'),
+      acao: ()=>{ fecharBusca(); showAvaliacao(); }
+    });
+  });
+  return idx;
+}
+
+function abrirBusca(){
+  if(BUSCA_INDICE.length===0) BUSCA_INDICE = construirIndiceBusca();
+  document.getElementById('busca-overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+  const input = document.getElementById('busca-input');
+  input.value='';
+  buscaResultadoAtivo=0;
+  buscaResultadosAtuais=[];
+  renderResultadosBusca('');
+  setTimeout(()=>input.focus(),50);
+}
+
+function fecharBusca(){
+  document.getElementById('busca-overlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+function executarBusca(q){
+  const qn = normalizar(q);
+  if(qn.length<2) return [];
+  const termos = qn.split(' ').filter(t=>t.length>=2);
+  if(termos.length===0) return [];
+  const scored = [];
+  for(const item of BUSCA_INDICE){
+    let score = 0;
+    let allMatch = true;
+    for(const t of termos){
+      const tituloN = normalizar(item.titulo);
+      const ocorreTitulo = tituloN.includes(t);
+      const ocorreCorpo  = item.textoBusca.includes(t);
+      if(!ocorreTitulo && !ocorreCorpo){ allMatch=false; break; }
+      if(ocorreTitulo) score += 10;
+      if(tituloN.startsWith(t)) score += 6;
+      if(ocorreCorpo)  score += 1;
+    }
+    if(allMatch) scored.push({item,score});
+  }
+  scored.sort((a,b)=>b.score-a.score);
+  return scored.slice(0,30).map(s=>s.item);
+}
+
+function highlightTermos(texto, q){
+  const qn = normalizar(q);
+  if(qn.length<2) return texto;
+  const termos = qn.split(' ').filter(t=>t.length>=2);
+  let out = texto;
+  for(const t of termos){
+    // regex insensível a acento — busca a forma normalizada na string original
+    const re = new RegExp('('+t.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','gi');
+    // primeiro highlight em string normalizada não muda visual; aplicar direto
+    out = out.replace(re,'<mark>$1</mark>');
+    // também tenta com acento (palavras como pré-eclâmpsia)
+  }
+  // Fallback: também marca a versão acentuada via mapeamento simples
+  for(const t of termos){
+    const variantes = gerarVariantesAcentuadas(t);
+    variantes.forEach(v=>{
+      const re=new RegExp('('+v.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','gi');
+      out = out.replace(re,(m)=>m.includes('<mark>')?m:'<mark>'+m+'</mark>');
+    });
+  }
+  return out;
+}
+
+function gerarVariantesAcentuadas(t){
+  // Para cada letra "ascii" gera variantes com acento comum em PT
+  const map={a:'aáàâãä',e:'eéèêë',i:'iíìî',o:'oóòôõ',u:'uúùû',c:'cç'};
+  let res=[t];
+  for(let i=0;i<t.length;i++){
+    const c=t[i];
+    if(map[c]){
+      const novo=[];
+      for(const r of res){
+        for(const ch of map[c]){
+          novo.push(r.substring(0,i)+ch+r.substring(i+1));
+        }
+      }
+      res=novo;
+    }
+  }
+  return res.slice(0,8); // limita combinações
+}
+
+function renderResultadosBusca(q){
+  const box = document.getElementById('busca-results');
+  if(!q || q.length<2){
+    buscaResultadosAtuais = [];
+    box.innerHTML = `<div class="busca-empty">Digite pelo menos 2 letras.<br><span style="font-size:0.78rem;opacity:0.7">Ex: <em>MgSO4</em>, <em>CTG</em>, <em>PICO</em>, <em>hotel</em>, <em>NotebookLM</em>.</span></div>`;
+    return;
+  }
+  const resultados = executarBusca(q);
+  buscaResultadosAtuais = resultados;
+  buscaResultadoAtivo = 0;
+  if(resultados.length===0){
+    box.innerHTML = `<div class="busca-empty">Nenhum resultado para "<strong style="color:var(--text)">${q}</strong>".<br><span style="font-size:0.78rem;opacity:0.7">Tente sinônimo ou termo mais curto.</span></div>`;
+    return;
+  }
+  // Agrupar por grupo, preservando ordem por score
+  const grupos = {};
+  const ordemGrupos = [];
+  resultados.forEach(r=>{
+    if(!grupos[r.grupo]){ grupos[r.grupo]=[]; ordemGrupos.push(r.grupo); }
+    grupos[r.grupo].push(r);
+  });
+  let html = '';
+  let idxGlobal = 0;
+  ordemGrupos.forEach(g=>{
+    html += `<div class="busca-group-label">${g}</div>`;
+    grupos[g].forEach(r=>{
+      const isActive = idxGlobal===buscaResultadoAtivo;
+      html += `<div class="busca-result ${isActive?'active':''}" data-idx="${idxGlobal}" onclick="ativarResultadoBusca(${idxGlobal})">
+        <div class="busca-result-icon">${r.icone}</div>
+        <div class="busca-result-body">
+          <div class="busca-result-title">${highlightTermos(r.titulo, q)}</div>
+          <div class="busca-result-desc">${highlightTermos(r.descricao||'', q)}</div>
+          <div class="busca-result-meta">${r.meta||''}</div>
+        </div>
+      </div>`;
+      idxGlobal++;
+    });
+  });
+  box.innerHTML = html;
+}
+
+function ativarResultadoBusca(idx){
+  const r = buscaResultadosAtuais[idx];
+  if(r && typeof r.acao==='function') r.acao();
+}
+
+function moverResultadoBusca(delta){
+  if(buscaResultadosAtuais.length===0) return;
+  buscaResultadoAtivo = (buscaResultadoAtivo + delta + buscaResultadosAtuais.length) % buscaResultadosAtuais.length;
+  // re-render só a classe active
+  document.querySelectorAll('.busca-result').forEach(el=>{
+    if(parseInt(el.dataset.idx)===buscaResultadoAtivo){
+      el.classList.add('active');
+      el.scrollIntoView({block:'nearest'});
+    } else {
+      el.classList.remove('active');
+    }
+  });
+}
+
+// Atalhos globais de teclado
+document.addEventListener('keydown',(e)=>{
+  // Ctrl+K / Cmd+K → abrir busca
+  if((e.ctrlKey||e.metaKey) && e.key.toLowerCase()==='k'){
+    e.preventDefault();
+    if(document.getElementById('busca-overlay').classList.contains('open')){
+      fecharBusca();
+    } else {
+      abrirBusca();
+    }
+    return;
+  }
+  // "/" para abrir (se não estiver digitando em outro input)
+  if(e.key==='/' && !['INPUT','TEXTAREA','SELECT'].includes(document.activeElement.tagName)){
+    if(!document.getElementById('busca-overlay').classList.contains('open')){
+      e.preventDefault();
+      abrirBusca();
+    }
+  }
+  // Esc para fechar
+  if(e.key==='Escape' && document.getElementById('busca-overlay').classList.contains('open')){
+    fecharBusca();
+  }
+});
+
+// Listeners do input de busca (registrados em init)
+function inicializarBusca(){
+  const input = document.getElementById('busca-input');
+  if(!input) return;
+  input.addEventListener('input',e=>renderResultadosBusca(e.target.value));
+  input.addEventListener('keydown',e=>{
+    if(e.key==='ArrowDown'){ e.preventDefault(); moverResultadoBusca(1); }
+    else if(e.key==='ArrowUp'){ e.preventDefault(); moverResultadoBusca(-1); }
+    else if(e.key==='Enter'){
+      e.preventDefault();
+      if(buscaResultadosAtuais[buscaResultadoAtivo]){
+        ativarResultadoBusca(buscaResultadoAtivo);
+      }
+    }
+  });
+  // Detectar Mac e ajustar o atalho exibido
+  if(navigator.platform.toUpperCase().indexOf('MAC')>=0){
+    const sc=document.getElementById('ssb-shortcut');
+    if(sc) sc.textContent='⌘ K';
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// PDF · GERAÇÃO VIA window.print()
+// ═══════════════════════════════════════════════════════════════
+function escapeHTML(s){
+  return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function montarHeaderPDF(){
+  const hoje = new Date();
+  const data = hoje.toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit',year:'numeric'});
+  return `<div class="pdf-header">
+    <div class="pdf-brand">AIMED</div>
+    <div class="pdf-tagline">Residentes GO · MDV · Joinville · 22-23 Maio 2026 · Gerado em ${data}</div>
+  </div>`;
+}
+
+function montarFooterPDF(){
+  return `<div class="pdf-footer">
+    <strong>AIMED</strong> · Metodologia autoral do Dr. Mbula Luzingu Barros · InovaMed<br>
+    Plataforma permanente do curso: mbulabarros.github.io/aimed-residentes-go
+  </div>`;
+}
+
+function gerarPDFPrompt(itemId){
+  const item = BIBLIOTECA.find(b=>b.id===itemId);
+  if(!item){ showToast('Prompt não encontrado'); return; }
+  const tagLabels={universal:'Universal',go:'GO Especialidade',ultra:'Ultra',habit:'Hábito',unique:'Inédito BR'};
+  const tagsTexto = (item.tags||[]).map(t=>tagLabels[t]||t).join(' · ');
+  const area = document.getElementById('print-area');
+  area.innerHTML = montarHeaderPDF() + `
+    <div class="pdf-title">${item.icon||''} ${escapeHTML(item.titulo)}</div>
+    <div class="pdf-subtitle">${escapeHTML(item.desc||'')}</div>
+    <div class="pdf-card-meta"><strong>Tags:</strong> ${escapeHTML(tagsTexto)}</div>
+    <div class="pdf-section-label">Prompt</div>
+    <div class="pdf-prompt-box">${escapeHTML(item.prompt)}</div>
+    <div class="pdf-section-label">Como usar</div>
+    <div style="font-size:10pt;line-height:1.6;color:#333">
+      1. Copie o bloco acima.<br>
+      2. Cole no Claude (Projeto GO/MDV), Gemini ou ChatGPT.<br>
+      3. Substitua os campos entre <strong>[colchetes]</strong> pelos dados da sua paciente.<br>
+      4. Confira sempre os resultados — IA é segunda opinião, não substitui o juízo clínico.
+    </div>
+  ` + montarFooterPDF();
+  // Pequeno delay para o DOM aplicar antes do print
+  setTimeout(()=>{
+    window.print();
+    setTimeout(()=>{ area.innerHTML=''; },500);
+  },80);
+}
+
+function gerarPDFIndice(){
+  const tagLabels={universal:'Universal',go:'GO Especialidade',ultra:'Ultra',habit:'Hábito',unique:'Inédito BR'};
+  const visiveis = EDITION.specsVisiveis;
+  const lista = BIBLIOTECA.filter(b=>{
+    const sp = b.specs||['universal'];
+    return sp.some(s=>visiveis.includes(s));
+  });
+  let html = montarHeaderPDF() + `
+    <div class="pdf-title">Biblioteca AIMED GO · Índice Geral</div>
+    <div class="pdf-subtitle">${lista.length} prompts clínicos de alta performance · Edição Residentes GO · MDV · Maio 2026</div>
+    <div class="pdf-section-label">Índice de prompts</div>
+  `;
+  lista.forEach(item=>{
+    const tagsTexto = (item.tags||[]).map(t=>tagLabels[t]||t).join(' · ');
+    html += `<div class="pdf-index-item">
+      <div class="pdf-index-icon">${item.icon||'•'}</div>
+      <div class="pdf-index-body">
+        <div class="pdf-index-title">${escapeHTML(item.titulo)}</div>
+        <div class="pdf-index-desc">${escapeHTML(item.desc||'')}<br><span style="color:#888;font-size:8pt">${escapeHTML(tagsTexto)}</span></div>
+      </div>
+    </div>`;
+  });
+  html += `<div class="pdf-section-label" style="margin-top:24px">Como usar este índice</div>
+    <div style="font-size:10pt;line-height:1.6;color:#333">
+      Cada prompt da biblioteca pode ser baixado individualmente como PDF próprio<br>
+      pelo botão <strong>"📥 PDF"</strong> dentro de cada card no portal AIMED OS.<br>
+      Salve no celular para acesso offline durante o plantão.
+    </div>`;
+  html += montarFooterPDF();
+  const area = document.getElementById('print-area');
+  area.innerHTML = html;
+  setTimeout(()=>{
+    window.print();
+    setTimeout(()=>{ area.innerHTML=''; },500);
+  },80);
+}
+
 // ── INIT ──
 document.addEventListener('DOMContentLoaded',()=>{
   buildSidebar();
   navigateTo('abertura-go');
+  inicializarBusca();
   // Decide se mostra tela pré-curso
   const dias=diasParaCurso();
   let jaVisto=false;
@@ -3843,6 +4648,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     setTimeout(abrirPreCurso,300);
   }
 });
+
 </script>
 </body>
 </html>
