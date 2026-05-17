@@ -4108,12 +4108,27 @@ let currentSpecFilter='todos';
 function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);}
 function copiarSincrono(text){try{const ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);return true;}catch(e){return false;}}
 async function copyToClipboard(text,btn){try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(text);}else{copiarSincrono(text);}if(btn){const orig=btn.innerHTML;btn.innerHTML='✓ Copiado!';btn.style.background='var(--green)';btn.style.color='var(--navy)';setTimeout(()=>{btn.innerHTML=orig;btn.style.background='';btn.style.color='';},2000);}showToast('Prompt copiado!');}catch(e){copiarSincrono(text);showToast('Copiado!');}}
+function copiarPromptParaIA(elementId){
+  // Handler usado pelo anchor "Abrir no Gemini" — copia o prompt em paralelo
+  // SEM chamar preventDefault, deixando a navegação default do anchor acontecer.
+  // Isto é crítico em mobile: anchors com target="_blank" abrem nova aba pelo navegador
+  // (gesture preservado), enquanto window.open ou .click() programático são bloqueados
+  // em iOS Safari e Chrome Android moderno.
+  try{
+    const el=document.getElementById(elementId);
+    if(!el)return true;
+    const text=el.innerText;
+    copiarSincrono(text);
+    if(navigator.clipboard&&window.isSecureContext){
+      navigator.clipboard.writeText(text).catch(()=>{});
+    }
+    showToast('Prompt copiado — cole no Gemini (Ctrl+V no PC · toque longo + Colar no celular)');
+  }catch(e){/* mesmo se falhar, deixa o anchor navegar */}
+  return true;
+}
 function abrirNovaAba(url){
-  // Estratégia mais robusta contra popup blockers:
-  // Anchor element <a target="_blank"> + .click() programático é interpretado
-  // pelo navegador como navegação direta (não popup), mesmo dentro de onclick.
-  // window.open com features string ('noopener') é frequentemente bloqueado
-  // por Chrome/Safari quando a URL alvo dispara redirects (caso do gemini.google.com/app → accounts.google.com).
+  // Mantido para uso fora dos botões de IA (ex.: WhatsApp).
+  // Para os botões de IA, anchors <a target="_blank"> diretos no HTML são mais robustos em mobile.
   try{
     const a=document.createElement('a');
     a.href=url;
@@ -4681,9 +4696,9 @@ function renderPromptBox(modulo){
 <div class="prompt-box" id="prompt-text-${modulo.id}">${nivel.texto.replace(/\[A\]/g,'<span class="aimed-a">[A]</span>').replace(/\[I\]/g,'<span class="aimed-i">[I]</span>').replace(/\[M\]/g,'<span class="aimed-m">[M]</span>').replace(/\[E\]/g,'<span class="aimed-e">[E]</span>').replace(/\[D\]/g,'<span class="aimed-d">[D]</span>').replace(/\[([A-ZÁÉÍÓÚÀÂÊÔÃ][^\]]{2,50})\]/g,'<span class="field">[$1]</span>')}</div>
 <div class="prompt-actions">
 <button class="btn-copy" onclick="copyToClipboard(document.getElementById('prompt-text-${modulo.id}').innerText,this)">📋 Copiar prompt</button>
-<button class="btn-open claude" onclick="openAI('claude',document.getElementById('prompt-text-${modulo.id}').innerText)">Abrir no Claude</button>
-<button class="btn-open gemini" title="O Gemini não aceita prompt pela URL. O texto será copiado e o Gemini abrirá — basta colar (Ctrl+V) na caixa de chat." onclick="openAI('gemini',document.getElementById('prompt-text-${modulo.id}').innerText)">Abrir no Gemini</button>
-<button class="btn-open gpt" onclick="openAI('chatgpt',document.getElementById('prompt-text-${modulo.id}').innerText)">Abrir no GPT</button>
+<a class="btn-open claude" href="https://claude.ai/new?q=${encodeURIComponent(nivel.texto)}" target="_blank" rel="noopener noreferrer">Abrir no Claude</a>
+<a class="btn-open gemini" href="https://gemini.google.com/app" target="_blank" rel="noopener noreferrer" title="O Gemini não aceita prompt pela URL. O texto será copiado e o Gemini abrirá — basta colar (Ctrl+V no PC · toque longo + Colar no celular)." onclick="return copiarPromptParaIA('prompt-text-${modulo.id}')">Abrir no Gemini</a>
+<a class="btn-open gpt" href="https://chatgpt.com/?q=${encodeURIComponent(nivel.texto)}" target="_blank" rel="noopener noreferrer">Abrir no GPT</a>
 </div>
 </div></div>`;
 }
@@ -4818,9 +4833,9 @@ function renderLibCard(item,tagLabels){
 <div class="lib-actions">
 <button class="btn-copy" onclick="event.stopPropagation();copyToClipboard(document.getElementById('libprompt-${item.id}').innerText,this)">📋 Copiar</button>
 <button class="btn-pdf-card" onclick="event.stopPropagation();gerarPDFPrompt('${item.id}')">📥 PDF</button>
-<button class="btn-open claude" onclick="event.stopPropagation();openAI('claude',document.getElementById('libprompt-${item.id}').innerText)">Claude</button>
-<button class="btn-open gemini" onclick="event.stopPropagation();openAI('gemini',document.getElementById('libprompt-${item.id}').innerText)">Gemini</button>
-<button class="btn-open gpt" onclick="event.stopPropagation();openAI('chatgpt',document.getElementById('libprompt-${item.id}').innerText)">GPT</button>
+<a class="btn-open claude" href="https://claude.ai/new?q=${encodeURIComponent(item.prompt.replace(/<[^>]+>/g,''))}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">Claude</a>
+<a class="btn-open gemini" href="https://gemini.google.com/app" target="_blank" rel="noopener noreferrer" title="Gemini não aceita prompt pela URL. O texto é copiado — cole com Ctrl+V (PC) ou toque longo + Colar (celular)." onclick="event.stopPropagation();return copiarPromptParaIA('libprompt-${item.id}');">Gemini</a>
+<a class="btn-open gpt" href="https://chatgpt.com/?q=${encodeURIComponent(item.prompt.replace(/<[^>]+>/g,''))}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">GPT</a>
 </div>
 </div>
 </div>`;
