@@ -2473,7 +2473,7 @@ body {
 
 <script>
 // ── SHORTS IDS ──
-const SHORTS_IDS = ["xy7d1plDnBA","Jhum_ui6syA","ju9kROjcuPk","urcWULpcAzw","TGCA2t97JsY","r-Umg_RBxlI","r-FM_SnzgZs","Khr-43dsJSY","2L6N0MnizTI","NnBOC_1qET8","B-PMAOir274","1Ohy5i19nZ0","vyopIFF4NXA","_3XaKL__zCo","7miZzpYnYPc","4p7JmBmK3kg","MxfxSj5K_WU","ZHlodCCHYLY"];
+const SHORTS_IDS = ["xy7d1plDnBA","Jhum_ui6syA","ju9kROjcuPk","urcWULpcAzw","TGCA2t97JsY","r-Umg_RBxlI","r-FM_SnzgZs","Khr-43dsJSY","2L6N0MnizTI","NnBOC_1qET8","B-PMAOir274","1Ohy5i19nZ0","vyopIFF4NXA","_3XaKL__zCo","hQysHMLOJ9c","4p7JmBmK3kg","MxfxSj5K_WU","ZHlodCCHYLY"];
 
 // ── GLOSSÁRIO GO ──
 const GLOSSARIO = {
@@ -3245,9 +3245,9 @@ RECURSOS DISPONÍVEIS: [CC disponível? UTI neonatal? Staff presente?]
   id:'bloco-4', numero:4, role:'Integrador', dia:2,
   modulos:[
     {
-      id:'caso-mdv', horario:'13:30–13:40', titulo:'O Caso MDV — Nenhuma Resolve Sozinha',
+      id:'caso-mdv', horario:'13:30–13:40', titulo:'O Caso MDV — Nenhuma Residente Resolve Sozinha',
       summary:'Um caso composto baseado nos padrões reais da MDV. Dariza traz os dados de Joinville. A decisão mais difícil do plantão — tomada coletivamente, com IA como aliada.',
-      avatar:'7miZzpYnYPc',
+      avatar:'hQysHMLOJ9c',
       conteudo:`<div class="tdc-manifesto"><div class="tdc-manifesto-label">Bloco 4 · O Clímax do Curso</div><div class="tdc-manifesto-text">Este caso não tem resposta única. Tem dados incompletos, pressões contraditórias, e uma paciente que quer ir para casa.<br><em>Exatamente como o plantão real.</em></div></div>
 <div class="case-dossier"><div class="case-header"><div class="case-badge case-critical">Caso MDV · Composto</div><div class="case-id">Baseado em padrões reais da MDV · Anonimizado · Joinville 2026</div></div>
 <div class="case-grid">
@@ -3302,6 +3302,7 @@ RECURSOS DISPONÍVEIS: [CC disponível? UTI neonatal? Staff presente?]
 <div class="step-item"><div class="step-num">30'</div><div class="step-body"><div class="step-title">Discussão coletiva — com IA como escriba</div><div class="step-desc">A IA documenta em tempo real: argumentos levantados, referências citadas, decisões tomadas. Ao final, gera a síntese clínica do caso para todos.</div></div></div>
 <div class="step-item"><div class="step-num">25'</div><div class="step-body"><div class="step-title">Conexão com a TdC de cada uma</div><div class="step-desc">O caso cruza com os 12 protocolos questionados: MgSO4 sem critérios (Maria Luiza), CTG Categoria II (Ana Júlia), corticóide tardio (Ana Luiza). A TdC encontra o caso real.</div></div></div>
 </div>
+<div class="callout"><div class="callout-label">🎙️ Fluxo de áudio · IA como escriba real</div><p>Durante esta discussão, <strong>uma residente grava o áudio no celular</strong> (com consentimento do grupo, caso anonimizado). Ao final dos 90 minutos, transcreve com Whisper, ChatGPT em modo voz ou ferramenta de transcrição preferida. Cola a transcrição bruta no prompt <strong>"Escriba de Áudio AIMED"</strong> disponível na Biblioteca AIMED GO. A saída entrega — em 2 a 3 minutos — ata estruturada com mapeamento de vozes, divergências preservadas, nota pronta para prontuário, e referências citadas catalogadas. Cada ata arquivada no NotebookLM do serviço vira <em>acervo pedagógico permanente</em>: uma residente do 4º ano pode reler a discussão em que participou no 1º ano e ver exatamente como seu raciocínio clínico evoluiu. Nenhum hospital-escola brasileiro tem isso institucionalizado hoje.</p></div>
 <h3>A dimensão que o caso força</h3>
 <div class="participant-grid">
 <div class="participant-card"><div class="participant-avatar">ML</div><div><div class="participant-name">Maria Luiza</div><div class="participant-role">Este caso tem critérios de gravidade? O TGO 118 é ≥2x ULN? MgSO4 obrigatório aqui? (Sua TdC, ao vivo)</div></div></div>
@@ -3824,6 +3825,60 @@ Nota de evolução resumida em formato pronto para colar no sistema.
 - Em pré-eclâmpsia prévia: sempre mencionar rastreio de pré-eclâmpsia precoce (aspirina) se ainda no 1º trimestre
 - Documentar sempre: PA, peso, edema, BCF e queixa da paciente`
   },
+  {
+    id:'escriba-audio', icon:'🎙️', titulo:'Escriba de Áudio AIMED · Discussão Clínica',
+    desc:'Transforma transcrição bruta de áudio (gravado no celular durante discussão clínica em grupo) em ata estruturada + nota de prontuário + mapeamento de vozes e divergências. Para discussão de caso, revisão de óbito materno, M&M, reuniões clínicas multiprofissionais.',
+    tags:['unique','universal'], specs:['universal'],
+    prompt:`[A] Você é especialista em análise de discussões clínicas multivocais com expertise em transcrição médica em português brasileiro. Combina rigor documental de auditoria com sensibilidade clínica para o que importa em cada fala. Sua função é dupla: capturar fielmente o que foi dito E estruturar o resultado em formato pronto para uso institucional (prontuário, ata, arquivo pedagógico).
+
+[I] CONTEXTO DA GRAVAÇÃO (preencha antes de colar a transcrição):
+- Tipo de discussão: [discussão de caso clínico / revisão de óbito materno / M&M / reunião clínica / discussão de protocolo]
+- Caso ou tema em discussão: [resumo em 2-3 linhas, sem identificadores pessoais]
+- Duração total da gravação: [X] minutos
+- Número aproximado de participantes: [X]
+- Perfis dos participantes (sem nomes): [ex: 3 residentes R1, 1 R3, 1 preceptora obstetra, 1 epidemiologista]
+- Modo de gravação: [áudio único contínuo / múltiplas gravações em paralelo / transcrição já feita por Whisper ou outra ferramenta]
+- Dados-chave do caso (se aplicável): [ex: gestante 32 semanas, suspeita PE grave com critérios laboratoriais borderline]
+
+TRANSCRIÇÃO BRUTA DO ÁUDIO:
+[cole aqui a transcrição completa — pode conter disfluências, hesitações, sobreposições, marcações de [inaudível] e qualquer ruído de transcrição automática. Não limpe nada antes — o prompt foi desenhado para trabalhar com o material cru.]
+
+[M] Execute em 7 entregas sequenciais. Não pule etapas. Não combine. Cada uma tem função distinta.
+
+1. MAPEAMENTO DE VOZES
+Identifique quantas vozes distintas falaram. Para cada voz, atribua um identificador [V1], [V2], [V3]... NÃO precisa nomear ninguém. Para cada voz, descreva em uma linha o padrão temático observado (ex: "V1 — concentra-se em farmacologia e segurança de dose"; "V3 — assume papel mediador, faz perguntas que avançam o grupo").
+
+2. CRONOLOGIA DOS PONTOS DE DEBATE
+Liste em ordem temporal de 4 a 6 momentos-chave da discussão. Cada item com: tempo aproximado (se a transcrição tiver timestamp) ou sequência (1º, 2º...), tópico discutido, e a pergunta clínica subjacente que aquele momento tentava resolver.
+
+3. CONSENSOS ATINGIDOS
+Decisões em que houve concordância clara entre as participantes — declaradas explicitamente ou implícitas no fechamento sem objeção. Para cada consenso: a decisão tomada + a justificativa que apareceu na fala + a voz que primeiro propôs ([V1], [V2]...).
+
+4. DIVERGÊNCIAS NÃO RESOLVIDAS
+Pontos onde a discussão terminou sem fechamento, ou onde houve oposição direta entre vozes. Preserve as posições contrárias com fidelidade. Para cada divergência: a tese A, a tese B, as vozes que sustentaram cada lado, e o motivo da não-resolução (faltou dado? faltou tempo? envolve juízo de valor que o grupo não estava preparado para resolver?).
+
+5. REFERÊNCIAS CITADAS
+Toda menção a guideline, estudo, dose, protocolo institucional ou autoridade clínica. Para cada referência: o conteúdo mencionado + marcação [confirmada] (citada com precisão: número da página, ano, RCT específico) ou [inferida] (citada vagamente — ex: "a FEBRASGO diz que..." sem especificação). NÃO buscar a referência fora — apenas catalogar o que foi efetivamente falado.
+
+6. NOTA DE EVOLUÇÃO PARA PRONTUÁRIO
+Formato pronto para colar no prontuário eletrônico — apenas decisões consolidadas, sem o debate. Estrutura: Data/hora | Diagnóstico em discussão | Conduta decidida | Doses pactuadas (em destaque, com observação de verificação manual antes da prescrição) | Próxima reavaliação | Responsável pela revisão da nota.
+
+7. NUGGET PEDAGÓGICO
+Em um parágrafo curto, identifique a lição clínica não óbvia que essa discussão revelou — algo que uma residente que NÃO participou ganharia ao ler essa ata. É o valor educacional residual da discussão depois da decisão clínica tomada.
+
+[E] Cada seção identificada com cabeçalho claro e numerada. Marcadores [V1], [V2], [V3]... preservados em todas as seções para permitir rastreio cruzado das vozes. Citações entre aspas literais quando houver palavra exata da fala. Indicadores [confirmada]/[inferida] obrigatórios em toda referência. Doses em destaque (negrito) com alerta ⚠️ de verificação manual antes de qualquer prescrição derivada. Trechos inaudíveis preservados como [inaudível] — nunca preenchidos por adivinhação.
+
+[D]
+- NUNCA inferir conduta que não foi explicitamente dita. Se a discussão terminou sem decidir, declare "decisão não tomada — pendente próxima reunião"
+- NUNCA recalcular dose. Se a discussão mencionou "MgSO4 4g de ataque", reproduza essa fala — não converta, não corrija, não complete com manutenção se isso não foi falado
+- ANONIMIZAÇÃO ABSOLUTA: mesmo se o áudio mencionar nome de paciente ou número de prontuário, substitua por iniciais ou [PAC1]. Toda nota gerada deve poder ser arquivada em material pedagógico sem violar LGPD ou Resolução CFM 2.454/2026
+- PRESERVAR DIVERGÊNCIA: nunca suavize uma oposição clínica real entre vozes. O valor pedagógico da ata está exatamente na disputa intelectual preservada — não na harmonia artificial
+- LACUNA DECLARADA: se uma das 7 seções não tem substrato na transcrição (ex: nenhuma referência foi citada), escreva "Seção 5 — sem referências citadas na transcrição" e siga. NUNCA fabrique conteúdo para preencher seção vazia
+- ESCOPO LEGAL: este prompt produz documento auxiliar para revisão humana. NENHUMA das saídas substitui o registro assinado pela médica responsável. Toda nota gerada exige revisão antes de incorporação ao prontuário oficial
+
+OBSERVAÇÃO ESTRATÉGICA · PARA A INSTITUIÇÃO QUE ADOTAR ESTE FLUXO:
+Cada ata gerada por este prompt, quando arquivada no NotebookLM do serviço com tag temática, transforma-se em material consultável de meta-aprendizado. Uma residente do 4º ano pode reler a discussão em que participou no 1º ano e ver exatamente como seu raciocínio clínico evoluiu. Nenhum hospital-escola brasileiro tem isso institucionalizado hoje — e o custo marginal é zero. Considere arquivar todas as atas em um Notebook único do serviço: "Discussões Clínicas [Especialidade] — Acervo Pedagógico [Ano]". É a forma mais barata e mais poderosa de transformar discussão verbal volátil em capital intelectual institucional permanente.`
+  },
   // ═══════════════════════════════════════════════════════════════════
   // PLACEHOLDERS · Edição Junho 2026 (Multispecialty)
   // Preencher com prompts AIMED autorais antes do dia da edição.
@@ -3958,12 +4013,16 @@ async function copyToClipboard(text,btn){try{if(navigator.clipboard&&window.isSe
 function openAI(platform,text){
   const enc=encodeURIComponent(text);
   if(platform==='gemini'){
-    // Gemini não suporta ?q= — copia para clipboard e mostra instrução
-    const doOpen=()=>{showToast('Prompt copiado — cole no Gemini com Ctrl+V');setTimeout(()=>window.open('https://gemini.google.com/app','_blank','noopener'),700);};
+    // CRÍTICO · abrir a aba IMEDIATAMENTE (síncrono, no mesmo tick do click)
+    // para preservar o "user gesture" e escapar do popup blocker.
+    // Se o open for adiado por setTimeout ou Promise.then, o navegador mata silenciosamente.
+    window.open('https://gemini.google.com/app','_blank','noopener');
+    // Copiar o prompt em paralelo (assíncrono é OK aqui — a aba já abriu)
+    const onCopy=()=>showToast('Prompt copiado — cole no Gemini com Ctrl+V');
     if(navigator.clipboard&&window.isSecureContext){
-      navigator.clipboard.writeText(text).then(doOpen).catch(()=>{copiarSincrono(text);doOpen();});
+      navigator.clipboard.writeText(text).then(onCopy).catch(()=>{copiarSincrono(text);onCopy();});
     } else {
-      copiarSincrono(text);doOpen();
+      copiarSincrono(text);onCopy();
     }
     return;
   }
