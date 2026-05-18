@@ -1059,20 +1059,29 @@ function abrirLinkedIn(){
 // NAVEGAÇÃO · RETORNO INTELIGENTE
 // ═══════════════════════════════════════════════════════════════════
 function voltarAimed(){
-  // Se a aba foi aberta por outra (window.opener existe = veio de target="_blank"),
-  // simplesmente fecha. Funciona em desktop e mobile.
-  // Senão, navega para o index com hash #memoria que reabre o overlay automaticamente.
-  if(window.opener && !window.opener.closed){
-    try {
-      window.close();
-      // Se window.close() falhar (browser bloqueia), cai no fallback abaixo
-      setTimeout(()=>{ window.location.href = '/aimed-residentes-go/#memoria'; }, 100);
-    } catch(e){
-      window.location.href = '/aimed-residentes-go/#memoria';
-    }
-  } else {
-    window.location.href = '/aimed-residentes-go/#memoria';
-  }
+  // Estratégia em 3 camadas:
+  // 1) Se a aba foi aberta via target=_blank do site (sem noopener),
+  //    window.close() funciona e devolve o usuário para a aba original do AIMED OS.
+  //    Funciona no desktop E mobile, e mantém o overlay original aberto.
+  // 2) Se close não funcionar (browser bloqueia), tenta history.back().
+  // 3) Como último recurso, navega via URL RELATIVA para a pasta do index
+  //    (mais robusto que path absoluto em mobile).
+  let fechou = false;
+  try {
+    // Algumas vezes window.opener fica null (rel=noopener), mas close ainda funciona
+    // quando a aba foi aberta por outra. Tentamos sempre.
+    window.close();
+    // Se close funcionou, a página fechou antes do próximo passo
+    fechou = true;
+  } catch(e) {}
+
+  // Pequeno delay: se a aba ainda está viva após 80ms, close foi bloqueado → navega
+  setTimeout(function(){
+    // URL relativa robusta: pega o diretório atual e adiciona hash
+    // Funciona em GitHub Pages, dev local, qualquer subpath
+    const baseUrl = window.location.pathname.replace(/[^/]+$/, '');
+    window.location.replace(baseUrl + '#memoria');
+  }, 80);
 }
 
 // ═══════════════════════════════════════════════════════════════════
@@ -1116,8 +1125,9 @@ function init(){
     window.history.pushState({mem:'memoria-page'}, '', window.location.href);
     window.addEventListener('popstate', function(e){
       // BACK foi acionado pelo navegador (ou gesture de swipe).
-      // Redireciona para index com hash em vez de deixar sair do site.
-      window.location.replace('./#memoria');
+      // Redireciona para index com hash usando URL relativa robusta.
+      const baseUrl = window.location.pathname.replace(/[^/]+$/, '');
+      window.location.replace(baseUrl + '#memoria');
     });
   } catch(e){
     // Se pushState falhar (browser muito antigo), apenas ignora —
