@@ -307,6 +307,14 @@ body::before {
 }
 .chip.muted { background: rgba(255,255,255,0.04); border-color: var(--border); color: var(--text-dim); }
 
+/* ── SIGLAS T0/T1/T2/NPS · usa monospace para distinguir 0 de O ── */
+.sigla {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.92em;
+  letter-spacing: 0.04em;
+  font-weight: 500;
+}
+
 /* ── NPS Indicator ── */
 .nps-card {
   background: var(--navy-mid);
@@ -992,23 +1000,23 @@ function renderResidente(apelido, data){
       <h2 class="section-title">O que significa cada <em>sigla</em></h2>
       <div class="snap-grid">
         <div class="snap-card">
-          <div class="snap-card-label">T0</div>
+          <div class="snap-card-label"><span class="sigla">T0</span></div>
           <div class="snap-card-value small">Linha de base · respostas dadas <strong style="color:var(--gold)">antes</strong> do curso (até 21/05). Mede seu ponto de partida.</div>
         </div>
         <div class="snap-card">
-          <div class="snap-card-label">T1</div>
+          <div class="snap-card-label"><span class="sigla">T1</span></div>
           <div class="snap-card-value small">Pós-imediato · respostas dadas no <strong style="color:var(--gold)">domingo após o curso</strong>. Mede o impacto inicial.</div>
         </div>
         <div class="snap-card">
-          <div class="snap-card-label">T2</div>
+          <div class="snap-card-label"><span class="sigla">T2</span></div>
           <div class="snap-card-value small">Pós-4-semanas · respostas dadas no <strong style="color:var(--gold)">final do Bloco 5</strong>. Mede o uso real consolidado.</div>
         </div>
         <div class="snap-card">
-          <div class="snap-card-label">NPS</div>
+          <div class="snap-card-label"><span class="sigla">NPS</span></div>
           <div class="snap-card-value small">Net Promoter Score · escala 0-10. <strong style="color:var(--green)">9-10 promotora</strong>, <strong style="color:var(--gold)">7-8 passiva</strong>, <strong style="color:var(--coral)">≤6 detratora</strong>.</div>
         </div>
         <div class="snap-card">
-          <div class="snap-card-label">TdC</div>
+          <div class="snap-card-label"><span class="sigla">TdC</span></div>
           <div class="snap-card-value small">Teoria do Contrário · método AIMED de defender argumento oposto ao protocolo, em três fases temporais ao longo do curso.</div>
         </div>
         <div class="snap-card">
@@ -1096,6 +1104,25 @@ function init(){
   app.innerHTML = renderResidente(id, data);
   document.title = 'Memória AIMED · '+id;
   if(backBtn) backBtn.style.display = 'inline-flex';
+
+  // ─────────────────────────────────────────────────────────────────
+  // CAPTURA BACK DO NAVEGADOR
+  // Quando memoria.html abre em nova aba (target=_blank rel=noopener),
+  // ela não tem histórico anterior — apertar BACK sai do site.
+  // Solução: pushear estado fake → ao apertar BACK, popstate dispara
+  // → redireciona para index.html#memoria (que reabre o overlay).
+  // ─────────────────────────────────────────────────────────────────
+  try {
+    window.history.pushState({mem:'memoria-page'}, '', window.location.href);
+    window.addEventListener('popstate', function(e){
+      // BACK foi acionado pelo navegador (ou gesture de swipe).
+      // Redireciona para index com hash em vez de deixar sair do site.
+      window.location.replace('./#memoria');
+    });
+  } catch(e){
+    // Se pushState falhar (browser muito antigo), apenas ignora —
+    // o botão flutuante voltarAimed() continua funcionando.
+  }
 }
 init();
 </script>
