@@ -251,6 +251,36 @@ body {
 .topbar-breadcrumb .sep { opacity: 0.4; }
 .topbar-breadcrumb .current { color: var(--text-dim); }
 .topbar-right { margin-left: auto; display: flex; align-items: center; gap: 12px; }
+
+/* ── TOPBAR BRAND · só aparece em mobile (≤900px) ── */
+.topbar-brand {
+  display: none; /* escondido em desktop · sidebar já mostra */
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.05;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+.topbar-brand-title {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--gold);
+  letter-spacing: 0.02em;
+}
+.topbar-brand-sub {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.55rem;
+  color: var(--text-muted);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
 .level-switcher {
   display: flex;
   align-items: center;
@@ -1148,6 +1178,12 @@ body {
   .participant-grid { grid-template-columns: 1fr; }
   .menu-toggle { display: block; }
   .module-header h1 { font-size: 1.7rem; }
+  /* Topbar mobile: troca breadcrumb pela identidade AIMED */
+  #topbar { padding: 0 14px; gap: 10px; height: 60px; }
+  .topbar-breadcrumb { display: none; }
+  .topbar-brand { display: flex; }
+  /* Level switcher mais compacto em mobile */
+  .level-btn { padding: 4px 8px; font-size: 0.62rem; }
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -2162,6 +2198,10 @@ body {
 <main id="main">
   <div id="topbar">
     <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+    <div class="topbar-brand">
+      <span class="topbar-brand-title">AIMED</span>
+      <span class="topbar-brand-sub">Residentes GO · MDV</span>
+    </div>
     <div class="topbar-breadcrumb">
       <span id="tb-block">Bloco 1</span>
       <span class="sep">›</span>
