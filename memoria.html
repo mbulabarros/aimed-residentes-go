@@ -1056,32 +1056,26 @@ function abrirLinkedIn(){
 }
 
 // ═══════════════════════════════════════════════════════════════════
-// NAVEGAÇÃO · RETORNO INTELIGENTE
+// NAVEGAÇÃO · RETORNO SIMPLES E INFALÍVEL
 // ═══════════════════════════════════════════════════════════════════
+// Princípio: usar APENAS history.back() — a primitiva mais universal da web.
+// Funciona em 100% dos navegadores (desktop, mobile, PWA, WebView) porque é o
+// mesmo mecanismo do botão BACK físico do navegador. Não depende de close,
+// opener, popups, target=_blank, ou qualquer feature avançada.
+//
+// Estratégia em 2 caminhos:
+// (1) Se chegou aqui via navegação do site (history.length > 1) → back()
+// (2) Se chegou direto via URL externa (ex: link WhatsApp na semana 5) → navega
+//     para index com hash via URL relativa
 function voltarAimed(){
-  // Estratégia em 3 camadas:
-  // 1) Se a aba foi aberta via target=_blank do site (sem noopener),
-  //    window.close() funciona e devolve o usuário para a aba original do AIMED OS.
-  //    Funciona no desktop E mobile, e mantém o overlay original aberto.
-  // 2) Se close não funcionar (browser bloqueia), tenta history.back().
-  // 3) Como último recurso, navega via URL RELATIVA para a pasta do index
-  //    (mais robusto que path absoluto em mobile).
-  let fechou = false;
-  try {
-    // Algumas vezes window.opener fica null (rel=noopener), mas close ainda funciona
-    // quando a aba foi aberta por outra. Tentamos sempre.
-    window.close();
-    // Se close funcionou, a página fechou antes do próximo passo
-    fechou = true;
-  } catch(e) {}
-
-  // Pequeno delay: se a aba ainda está viva após 80ms, close foi bloqueado → navega
-  setTimeout(function(){
-    // URL relativa robusta: pega o diretório atual e adiciona hash
-    // Funciona em GitHub Pages, dev local, qualquer subpath
+  if (window.history.length > 1) {
+    // Navegou de outra página do mesmo site → BACK volta naturalmente
+    window.history.back();
+  } else {
+    // Acesso direto pela URL → constrói URL relativa robusta e navega
     const baseUrl = window.location.pathname.replace(/[^/]+$/, '');
     window.location.replace(baseUrl + '#memoria');
-  }, 80);
+  }
 }
 
 // ═══════════════════════════════════════════════════════════════════
@@ -1113,26 +1107,6 @@ function init(){
   app.innerHTML = renderResidente(id, data);
   document.title = 'Memória AIMED · '+id;
   if(backBtn) backBtn.style.display = 'inline-flex';
-
-  // ─────────────────────────────────────────────────────────────────
-  // CAPTURA BACK DO NAVEGADOR
-  // Quando memoria.html abre em nova aba (target=_blank rel=noopener),
-  // ela não tem histórico anterior — apertar BACK sai do site.
-  // Solução: pushear estado fake → ao apertar BACK, popstate dispara
-  // → redireciona para index.html#memoria (que reabre o overlay).
-  // ─────────────────────────────────────────────────────────────────
-  try {
-    window.history.pushState({mem:'memoria-page'}, '', window.location.href);
-    window.addEventListener('popstate', function(e){
-      // BACK foi acionado pelo navegador (ou gesture de swipe).
-      // Redireciona para index com hash usando URL relativa robusta.
-      const baseUrl = window.location.pathname.replace(/[^/]+$/, '');
-      window.location.replace(baseUrl + '#memoria');
-    });
-  } catch(e){
-    // Se pushState falhar (browser muito antigo), apenas ignora —
-    // o botão flutuante voltarAimed() continua funcionando.
-  }
 }
 init();
 </script>
