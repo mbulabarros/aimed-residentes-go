@@ -2349,6 +2349,34 @@ input[type="date"].calc-input { color-scheme: dark; }
   background: var(--navy);
   transform: translateY(-1px);
 }
+
+/* Variante "interno" — item especial que abre overlay/feature interna em vez de URL externa */
+.link-card.link-card-internal {
+  background: linear-gradient(135deg, rgba(79,195,195,0.10) 0%, rgba(106,184,122,0.06) 100%);
+  border-color: var(--teal);
+  cursor: pointer;
+}
+.link-card.link-card-internal:hover {
+  background: linear-gradient(135deg, rgba(79,195,195,0.18) 0%, rgba(106,184,122,0.10) 100%);
+  border-color: var(--teal);
+  transform: translateY(-1px);
+}
+.link-card.link-card-internal .link-card-arrow { color: var(--teal); }
+
+.link-badge-internal {
+  display: inline-block;
+  background: var(--teal);
+  color: var(--navy);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  padding: 1px 6px;
+  border-radius: 4px;
+  margin-left: 6px;
+  vertical-align: middle;
+  text-transform: uppercase;
+}
 .link-card-icon {
   font-size: 1rem;
   flex-shrink: 0;
@@ -5136,6 +5164,7 @@ const LINKS_ESSENCIAIS = [
     icon: '🧮',
     sub: 'Para uso direto no plantão',
     items: [
+      { nome:'Calculadoras AIMED · embutidas', desc:'5 calculadoras com interpretação clínica · abre internamente, sem clique externo', icon:'⭐', internal:'abrirCalc' },
       { nome:'Manuais MSD · Recursos', desc:'Calculadoras e ferramentas clínicas em português', url:'https://www.msdmanuals.com/pt-br/profissional/recursos', icon:'⏱️' },
       { nome:'FMF · Fetal Medicine Foundation', desc:'Calculadoras fetais · pré-eclâmpsia · biometria · Doppler', url:'https://fetalmedicine.org/', icon:'⚠️' },
       { nome:'Whitebook', desc:'App médico brasileiro · diretrizes · doses', url:'https://whitebook.com.br/', icon:'💊' },
@@ -5769,20 +5798,28 @@ function renderLinks(){
     html+='<div class="links-grid">';
     sec.items.forEach(it=>{
       const isPlaceholder=it.url==='#';
+      const isInternal=!!it.internal;
       // Em Android Chrome (não-WebView), preferir Intent URL quando disponível
       // — abre direto no app nativo com fallback gracioso para navegador se app não instalado.
       // Em iOS/Desktop/WebView, usar URL https normal.
       const hrefFinal=(IS_ANDROID && it.intent) ? it.intent : it.url;
-      const attrs=isPlaceholder
-        ? 'href="#" onclick="event.preventDefault();return false;" style="opacity:0.55;cursor:not-allowed"'
-        : 'href="'+hrefFinal+'" target="_blank" rel="noopener noreferrer"';
-      html+='<a class="link-card" '+attrs+'>';
+      let attrs;
+      if(isInternal){
+        // Item interno: fecha overlay Links e dispara a função especificada
+        attrs='href="#" onclick="event.preventDefault();fecharLinks();setTimeout(function(){'+it.internal+'()},250);return false;"';
+      } else if(isPlaceholder){
+        attrs='href="#" onclick="event.preventDefault();return false;" style="opacity:0.55;cursor:not-allowed"';
+      } else {
+        attrs='href="'+hrefFinal+'" target="_blank" rel="noopener noreferrer"';
+      }
+      html+='<a class="link-card'+(isInternal?' link-card-internal':'')+'" '+attrs+'>';
       html+='<div class="link-card-icon">'+(it.icon||'🔗')+'</div>';
       html+='<div class="link-card-body">';
-      html+='<div class="link-card-name">'+it.nome+'</div>';
+      html+='<div class="link-card-name">'+it.nome+(isInternal?' <span class="link-badge-internal">embutido</span>':'')+'</div>';
       html+='<div class="link-card-desc">'+it.desc+'</div>';
       html+='</div>';
-      html+='<div class="link-card-arrow">'+(isPlaceholder?'·':'↗')+'</div>';
+      const arrow = isInternal ? '→' : (isPlaceholder?'·':'↗');
+      html+='<div class="link-card-arrow">'+arrow+'</div>';
       html+='</a>';
     });
     html+='</div></div>';
