@@ -844,14 +844,14 @@ body {
   .pre-curso-action-num { font-size: 1.2rem; }
 }
 
-#biblioteca-overlay, #logistica-overlay, #sobre-overlay, #avaliacao-overlay, #instrucoes-overlay, #links-overlay, #memoria-overlay {
+#biblioteca-overlay, #logistica-overlay, #sobre-overlay, #avaliacao-overlay, #instrucoes-overlay, #links-overlay, #memoria-overlay, #calc-overlay {
   position: fixed; inset: 0;
   z-index: 200;
   display: none;
   align-items: flex-start;
   justify-content: flex-end;
 }
-#biblioteca-overlay.open, #logistica-overlay.open, #sobre-overlay.open, #avaliacao-overlay.open, #instrucoes-overlay.open, #links-overlay.open, #memoria-overlay.open { display: flex; }
+#biblioteca-overlay.open, #logistica-overlay.open, #sobre-overlay.open, #avaliacao-overlay.open, #instrucoes-overlay.open, #links-overlay.open, #memoria-overlay.open, #calc-overlay.open { display: flex; }
 
 /* ── AVALIAÇÃO · TABS E FORMULÁRIOS ── */
 .eval-tabs { display: flex; gap: 6px; padding: 14px 28px 0; border-bottom: 1px solid var(--border-dim); flex-wrap: wrap; }
@@ -1735,6 +1735,247 @@ body {
 .sidebar-btn.btn-memoria:hover { border-color: var(--gold); background: linear-gradient(135deg, rgba(201,168,76,0.18) 0%, rgba(79,195,195,0.12) 100%); }
 .sidebar-btn.btn-memoria .sidebar-btn-icon { color: var(--gold); }
 
+.sidebar-btn.btn-calc { background: linear-gradient(135deg, rgba(79,195,195,0.10) 0%, rgba(106,184,122,0.08) 100%); border: 1px solid rgba(79,195,195,0.3); }
+.sidebar-btn.btn-calc:hover { border-color: var(--teal); background: linear-gradient(135deg, rgba(79,195,195,0.18) 0%, rgba(106,184,122,0.12) 100%); }
+.sidebar-btn.btn-calc .sidebar-btn-icon { color: var(--teal); }
+
+/* ── CALCULADORAS OBSTÉTRICAS · overlay ── */
+.calc-hero {
+  text-align: center;
+  padding: 18px 0 22px;
+  border-bottom: 1px solid var(--border-dim);
+  margin-bottom: 22px;
+}
+.calc-hero-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  color: var(--teal);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.calc-hero-title {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  color: var(--gold);
+  line-height: 1.15;
+  margin-bottom: 8px;
+}
+.calc-hero-sub {
+  font-size: 0.88rem;
+  color: var(--text-dim);
+  max-width: 540px;
+  margin: 0 auto;
+}
+.calc-tabs {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border-dim);
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
+}
+.calc-tabs::-webkit-scrollbar { height: 4px; }
+.calc-tabs::-webkit-scrollbar-thumb { background: var(--border-dim); border-radius: 4px; }
+.calc-tab {
+  flex-shrink: 0;
+  background: var(--navy-mid);
+  border: 1px solid var(--border-dim);
+  color: var(--text-dim);
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  -webkit-appearance: none;
+}
+.calc-tab:hover { border-color: var(--teal); color: var(--text); }
+.calc-tab.active { background: var(--teal); color: var(--navy); border-color: var(--teal); font-weight: 600; }
+.calc-tab-icon { font-size: 1rem; }
+
+.calc-panel { display: none; }
+.calc-panel.active { display: block; animation: fadeIn 0.25s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+.calc-card {
+  background: var(--navy-mid);
+  border: 1px solid var(--border-dim);
+  border-radius: 14px;
+  padding: 22px;
+  margin-bottom: 16px;
+}
+.calc-card-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--teal);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.calc-card-title {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 1.25rem;
+  color: var(--gold);
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+.calc-card-sub {
+  font-size: 0.82rem;
+  color: var(--text-dim);
+  margin-bottom: 18px;
+}
+.calc-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px;
+  margin-bottom: 16px;
+}
+.calc-field { display: flex; flex-direction: column; gap: 4px; }
+.calc-field-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--gold);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.calc-field-help {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+.calc-input {
+  background: var(--navy);
+  border: 1px solid var(--border-dim);
+  border-radius: 8px;
+  padding: 12px 14px;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.95rem;
+  transition: border-color 0.2s;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.calc-input:focus { outline: none; border-color: var(--teal); }
+.calc-input.invalid { border-color: var(--coral); }
+.calc-input::placeholder { color: var(--text-muted); }
+input[type="date"].calc-input { color-scheme: dark; }
+
+.calc-actions {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.calc-btn {
+  background: var(--teal);
+  color: var(--navy);
+  border: none;
+  border-radius: 8px;
+  padding: 11px 18px;
+  font-family: inherit;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  -webkit-appearance: none;
+}
+.calc-btn:hover { background: var(--gold-light); }
+.calc-btn.secondary { background: transparent; border: 1px solid var(--border-dim); color: var(--text-dim); }
+.calc-btn.secondary:hover { border-color: var(--text-dim); color: var(--text); }
+
+.calc-result {
+  background: linear-gradient(135deg, rgba(201,168,76,0.10) 0%, rgba(79,195,195,0.06) 100%);
+  border: 2px solid var(--gold);
+  border-radius: 12px;
+  padding: 22px;
+  margin-top: 14px;
+  text-align: center;
+}
+.calc-result.empty {
+  background: transparent;
+  border: 1px dashed var(--border-dim);
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  padding: 30px 22px;
+  font-style: italic;
+}
+.calc-result-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--gold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.calc-result-main {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(2rem, 5vw, 3rem);
+  color: var(--gold);
+  line-height: 1.1;
+  margin-bottom: 6px;
+}
+.calc-result-secondary {
+  font-size: 0.95rem;
+  color: var(--text);
+  margin-top: 8px;
+}
+.calc-result-secondary strong { color: var(--gold); }
+.calc-result-interpret {
+  margin-top: 14px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  text-align: left;
+}
+.calc-result-interpret.normal { background: rgba(106,184,122,0.10); border-left: 3px solid var(--green); }
+.calc-result-interpret.alert  { background: rgba(240,180,76,0.10); border-left: 3px solid var(--gold); }
+.calc-result-interpret.danger { background: rgba(229,115,115,0.10); border-left: 3px solid var(--coral); }
+.calc-result-interpret strong { display: block; margin-bottom: 4px; }
+
+.calc-ref {
+  margin-top: 14px;
+  padding: 10px 14px;
+  background: var(--navy);
+  border: 1px solid var(--border-dim);
+  border-radius: 8px;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+.calc-ref strong { color: var(--text-dim); }
+
+.calc-disclaimer {
+  text-align: center;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  padding: 14px;
+  background: rgba(229,115,115,0.06);
+  border: 1px dashed rgba(229,115,115,0.3);
+  border-radius: 10px;
+  margin-bottom: 20px;
+  line-height: 1.55;
+}
+.calc-disclaimer strong { color: var(--coral); }
+
+@media (max-width: 600px) {
+  .calc-form { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .calc-card { padding: 18px 16px; }
+  .calc-tab { padding: 9px 12px; font-size: 0.78rem; }
+}
+
 /* ── MEMÓRIA AIMED · overlay informativo ── */
 .mem-hero {
   text-align: center;
@@ -2546,6 +2787,9 @@ body {
     <button class="sidebar-btn btn-memoria" onclick="abrirMemoriaInfo()">
       <span class="sidebar-btn-icon">✨</span> Memória AIMED
     </button>
+    <button class="sidebar-btn btn-calc" onclick="abrirCalc()">
+      <span class="sidebar-btn-icon">🧮</span> Calculadoras Obstétricas
+    </button>
     <button class="sidebar-btn" onclick="showAvaliacao()">
       <span class="sidebar-btn-icon">📊</span> Avaliação · Pesquisa
     </button>
@@ -2770,6 +3014,37 @@ body {
         <div class="mem-cta-attr">— Encerramento do curso · 23 de Maio de 2026</div>
         <a class="mem-preview-btn" href="memoria.html?id=DEMO" onclick="try{window.history.replaceState(null,'','#memoria')}catch(e){}">👁 Ver pré-visualização (exemplo)</a>
       </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- CALCULADORAS OBSTÉTRICAS · overlay -->
+<div id="calc-overlay">
+  <div class="overlay-backdrop" onclick="fecharCalc()"></div>
+  <div class="overlay-panel">
+    <div class="overlay-header">
+      <div>
+        <div class="overlay-title">Calculadoras Obstétricas</div>
+        <div class="overlay-sub">5 ferramentas embutidas · cálculo offline · zero clique externo</div>
+      </div>
+      <button class="overlay-close" onclick="fecharCalc()">✕</button>
+    </div>
+    <div class="overlay-body">
+
+      <div class="calc-hero">
+        <div class="calc-hero-eyebrow">Ferramentas clínicas · uso no plantão</div>
+        <h1 class="calc-hero-title">Cálculo direto, <em style="font-style:italic">sem sair do AIMED OS</em></h1>
+        <p class="calc-hero-sub">5 calculadoras essenciais com fórmulas validadas, interpretação clínica automática e referência bibliográfica.</p>
+      </div>
+
+      <div class="calc-disclaimer">
+        <strong>Apoio à decisão · não substitui julgamento clínico.</strong>
+        Valide sempre com protocolo institucional e contexto da paciente.
+      </div>
+
+      <div class="calc-tabs" id="calc-tabs"><!-- gerado por JS --></div>
+      <div id="calc-panels"><!-- gerado por JS --></div>
 
     </div>
   </div>
@@ -5097,6 +5372,389 @@ if(document.readyState === 'loading'){
 } else {
   checkMemoriaHash();
 }
+
+// ═══════════════════════════════════════════════════════════════════
+// CALCULADORAS OBSTÉTRICAS · ferramentas embutidas
+// 5 cálculos · fórmulas validadas · interpretação clínica automática
+// Princípio P1: trabalha 100% offline, sem dependência externa
+// ═══════════════════════════════════════════════════════════════════
+
+const CALCULADORAS = [
+  { id:'dum', icon:'📅', nome:'IG · DUM',     full:'Idade gestacional pela DUM',          sub:'+ Data Provável do Parto (Naegele)' },
+  { id:'usg', icon:'🔍', nome:'IG · USG',     full:'Idade gestacional pelo USG',          sub:'Extrapolação a partir do USG anterior' },
+  { id:'ccn', icon:'👶', nome:'IG · CCN',     full:'Datação pelo CCN',                    sub:'1º trimestre · Robinson-Fleming 1975' },
+  { id:'efw', icon:'⚖️',  nome:'EFW Hadlock',  full:'Peso fetal estimado · Hadlock-4',    sub:'BPD + HC + AC + FL · 1985' },
+  { id:'psv', icon:'🩸', nome:'Doppler ACM',  full:'Doppler da artéria cerebral média', sub:'PSV → MoM · Mari 2000 (anemia fetal)' }
+];
+
+// ── Utilitários de formatação ───────────────────────────────────
+function fmtIG(diasTotal){
+  if(diasTotal == null || isNaN(diasTotal) || diasTotal < 0) return '—';
+  const sem = Math.floor(diasTotal / 7);
+  const d   = Math.round(diasTotal % 7);
+  return sem + 'sem ' + d + 'd';
+}
+function fmtDPP(date){
+  if(!date || isNaN(date.getTime())) return '—';
+  const dd = String(date.getDate()).padStart(2,'0');
+  const mm = String(date.getMonth()+1).padStart(2,'0');
+  const yy = date.getFullYear();
+  return dd + '/' + mm + '/' + yy;
+}
+function diffDias(d1, d2){
+  return Math.round((d1 - d2) / 86400000);
+}
+function lerNum(id){
+  const el = document.getElementById(id);
+  if(!el) return null;
+  const v = el.value.trim().replace(',', '.');
+  if(v === '') return null;
+  const n = parseFloat(v);
+  return isNaN(n) ? null : n;
+}
+function lerData(id){
+  const el = document.getElementById(id);
+  if(!el || !el.value) return null;
+  const d = new Date(el.value + 'T00:00:00');
+  return isNaN(d.getTime()) ? null : d;
+}
+function lerInt(id){
+  const v = lerNum(id);
+  return v == null ? null : Math.round(v);
+}
+function setInvalido(id, invalido){
+  const el = document.getElementById(id);
+  if(el) el.classList.toggle('invalid', !!invalido);
+}
+
+// ── Cálculo 1: IG pela DUM ──────────────────────────────────────
+function calcIG_DUM(){
+  const dum = lerData('calc-dum-data');
+  setInvalido('calc-dum-data', false);
+  const out = document.getElementById('calc-dum-result');
+  if(!dum){ out.className='calc-result empty'; out.innerHTML='Preencha a data da última menstruação para ver o resultado.'; return; }
+  const hoje = new Date(); hoje.setHours(0,0,0,0);
+  const diasIG = diffDias(hoje, dum);
+  if(diasIG < 0 || diasIG > 320){
+    setInvalido('calc-dum-data', true);
+    out.className='calc-result empty';
+    out.innerHTML='Data fora do intervalo esperado (0–320 dias atrás).';
+    return;
+  }
+  const dpp = new Date(dum.getTime() + 280 * 86400000);
+  const ig = fmtIG(diasIG);
+  let interpret = '';
+  const sem = Math.floor(diasIG/7);
+  if(sem < 12)        interpret = '<div class="calc-result-interpret normal"><strong>1º trimestre</strong>Considerar datação por USG (CCN) — geralmente mais acurada que DUM nesta fase.</div>';
+  else if(sem < 28)   interpret = '<div class="calc-result-interpret normal"><strong>2º trimestre</strong>Período de morfológico, rastreios bioquímicos e seguimento ambulatorial.</div>';
+  else if(sem < 37)   interpret = '<div class="calc-result-interpret alert"><strong>3º trimestre · pré-termo</strong>Considerar corticoide para maturação pulmonar se trabalho de parto.</div>';
+  else if(sem < 42)   interpret = '<div class="calc-result-interpret normal"><strong>Termo</strong>Conduta conforme protocolo institucional.</div>';
+  else                interpret = '<div class="calc-result-interpret danger"><strong>Pós-termo</strong>Reavaliar datação e considerar indução conforme protocolo.</div>';
+
+  out.className='calc-result';
+  out.innerHTML =
+    '<div class="calc-result-label">Idade gestacional</div>'+
+    '<div class="calc-result-main">'+ig+'</div>'+
+    '<div class="calc-result-secondary"><strong>DPP:</strong> '+fmtDPP(dpp)+' · <strong>40 sem</strong></div>'+
+    interpret;
+}
+
+// ── Cálculo 2: IG pelo USG ──────────────────────────────────────
+function calcIG_USG(){
+  const dataUSG = lerData('calc-usg-data');
+  const semUSG  = lerInt('calc-usg-sem');
+  const dUSG    = lerNum('calc-usg-dias');
+  const out = document.getElementById('calc-usg-result');
+  setInvalido('calc-usg-data', false);
+  setInvalido('calc-usg-sem', false);
+  setInvalido('calc-usg-dias', false);
+
+  if(!dataUSG || semUSG == null || dUSG == null){
+    out.className='calc-result empty';
+    out.innerHTML='Preencha a data do USG, semanas e dias para ver o resultado.';
+    return;
+  }
+  let invalido = false;
+  if(semUSG < 5 || semUSG > 42){ setInvalido('calc-usg-sem', true); invalido = true; }
+  if(dUSG < 0 || dUSG > 6){ setInvalido('calc-usg-dias', true); invalido = true; }
+  const hoje = new Date(); hoje.setHours(0,0,0,0);
+  const diasDesde = diffDias(hoje, dataUSG);
+  if(diasDesde < 0 || diasDesde > 280){ setInvalido('calc-usg-data', true); invalido = true; }
+  if(invalido){ out.className='calc-result empty'; out.innerHTML='Verifique os campos destacados.'; return; }
+
+  const diasIGTotal = semUSG * 7 + dUSG + diasDesde;
+  const dpp = new Date(hoje.getTime() + (280 - diasIGTotal) * 86400000);
+  out.className='calc-result';
+  out.innerHTML =
+    '<div class="calc-result-label">IG atual</div>'+
+    '<div class="calc-result-main">'+fmtIG(diasIGTotal)+'</div>'+
+    '<div class="calc-result-secondary"><strong>DPP estimada:</strong> '+fmtDPP(dpp)+'</div>'+
+    '<div class="calc-result-interpret normal"><strong>Datação por USG</strong>É a referência quando há divergência maior que 7 dias com a DUM no 1º trimestre, ou 10 dias no 2º trimestre.</div>';
+}
+
+// ── Cálculo 3: IG pelo CCN (Robinson-Fleming 1975) ──────────────
+function calcCCN(){
+  const ccn = lerNum('calc-ccn-valor');
+  const out = document.getElementById('calc-ccn-result');
+  setInvalido('calc-ccn-valor', false);
+  if(ccn == null){ out.className='calc-result empty'; out.innerHTML='Insira o CCN em milímetros (range: 5–84 mm).'; return; }
+  if(ccn < 5 || ccn > 84){
+    setInvalido('calc-ccn-valor', true);
+    out.className='calc-result empty';
+    out.innerHTML='CCN fora do intervalo válido da fórmula (5–84 mm = ~5sem 4d a 13sem 6d).';
+    return;
+  }
+  const diasIG = 8.052 * Math.sqrt(ccn) + 23.73;
+  const dpp = new Date(); dpp.setHours(0,0,0,0);
+  dpp.setTime(dpp.getTime() + (280 - diasIG) * 86400000);
+  out.className='calc-result';
+  out.innerHTML =
+    '<div class="calc-result-label">Idade gestacional (Robinson-Fleming)</div>'+
+    '<div class="calc-result-main">'+fmtIG(diasIG)+'</div>'+
+    '<div class="calc-result-secondary"><strong>DPP estimada:</strong> '+fmtDPP(dpp)+'</div>'+
+    '<div class="calc-result-interpret normal"><strong>Acurácia máxima no 1º trimestre</strong>CCN é o método mais acurado de datação entre 7 e 13 semanas (erro ±5 dias).</div>';
+}
+
+// ── Cálculo 4: EFW Hadlock-4 (BPD + HC + AC + FL, 1985) ─────────
+function calcEFW(){
+  // Aceitar entrada em mm (mais comum no USG) — converter para cm internamente
+  let bpd = lerNum('calc-efw-bpd');
+  let hc  = lerNum('calc-efw-hc');
+  let ac  = lerNum('calc-efw-ac');
+  let fl  = lerNum('calc-efw-fl');
+  const out = document.getElementById('calc-efw-result');
+  setInvalido('calc-efw-bpd', false);
+  setInvalido('calc-efw-hc',  false);
+  setInvalido('calc-efw-ac',  false);
+  setInvalido('calc-efw-fl',  false);
+
+  if(bpd == null || hc == null || ac == null || fl == null){
+    out.className='calc-result empty';
+    out.innerHTML='Preencha BPD, HC, AC e FL (em mm) para ver o peso fetal estimado.';
+    return;
+  }
+  // Validação de ranges plausíveis em mm (faixa ampla de 16 a 40 semanas)
+  let inv = false;
+  if(bpd < 30 || bpd > 110){ setInvalido('calc-efw-bpd', true); inv = true; }
+  if(hc  < 120 || hc > 380){ setInvalido('calc-efw-hc',  true); inv = true; }
+  if(ac  < 100 || ac > 400){ setInvalido('calc-efw-ac',  true); inv = true; }
+  if(fl  < 20  || fl > 90){  setInvalido('calc-efw-fl',  true); inv = true; }
+  if(inv){ out.className='calc-result empty'; out.innerHTML='Verifique medidas — fora do range plausível (em mm).'; return; }
+
+  // Converter mm → cm (Hadlock-4 usa cm)
+  bpd /= 10; hc /= 10; ac /= 10; fl /= 10;
+  // log10(EFW) = 1.3596 - 0.00386(AC×FL) + 0.0064(HC) + 0.00061(BPD×AC) + 0.0424(AC) + 0.174(FL)
+  const logEFW = 1.3596
+               - 0.00386 * ac * fl
+               + 0.0064  * hc
+               + 0.00061 * bpd * ac
+               + 0.0424  * ac
+               + 0.174   * fl;
+  const efw = Math.pow(10, logEFW); // gramas
+  const efwKg = (efw/1000).toFixed(3);
+  // SD ~14% (Hadlock 1985)
+  const dp = efw * 0.14;
+  const min = Math.round(efw - 2*dp);
+  const max = Math.round(efw + 2*dp);
+
+  let interpret = '';
+  if(efw < 1000)       interpret = '<div class="calc-result-interpret alert"><strong>Peso muito baixo</strong>Considerar restrição de crescimento — correlacionar com Doppler e biometria seriada.</div>';
+  else if(efw < 2500)  interpret = '<div class="calc-result-interpret normal"><strong>Pré-termo / abaixo do termo</strong>Avaliar percentil para a idade gestacional.</div>';
+  else if(efw < 4000)  interpret = '<div class="calc-result-interpret normal"><strong>Peso adequado para termo</strong>Compatível com gestação a termo de evolução normal.</div>';
+  else                 interpret = '<div class="calc-result-interpret alert"><strong>Macrossomia</strong>≥ 4000 g — avaliar via de parto e risco materno-fetal (DMG, distocia de ombros).</div>';
+
+  out.className='calc-result';
+  out.innerHTML =
+    '<div class="calc-result-label">Peso fetal estimado (Hadlock-4)</div>'+
+    '<div class="calc-result-main">'+Math.round(efw)+' g</div>'+
+    '<div class="calc-result-secondary">'+efwKg+' kg · IC 95%: <strong>'+min+'–'+max+' g</strong></div>'+
+    interpret;
+}
+
+// ── Cálculo 5: Doppler ACM · PSV → MoM (Mari 2000) ─────────────
+function calcPSV(){
+  const ig  = lerNum('calc-psv-ig');
+  const psv = lerNum('calc-psv-valor');
+  const out = document.getElementById('calc-psv-result');
+  setInvalido('calc-psv-ig', false);
+  setInvalido('calc-psv-valor', false);
+
+  if(ig == null || psv == null){
+    out.className='calc-result empty';
+    out.innerHTML='Preencha a idade gestacional (semanas) e a PSV medida (cm/s).';
+    return;
+  }
+  let inv = false;
+  if(ig < 18 || ig > 40){ setInvalido('calc-psv-ig', true); inv = true; }
+  if(psv < 10 || psv > 200){ setInvalido('calc-psv-valor', true); inv = true; }
+  if(inv){ out.className='calc-result empty'; out.innerHTML='IG válida: 18–40 sem · PSV plausível: 10–200 cm/s.'; return; }
+
+  // Mediana Mari 2000 aproximada: PSV (cm/s) = exp(0.046 × IG + 2.31)
+  const psvMediana = Math.exp(0.046 * ig + 2.31);
+  const mom = psv / psvMediana;
+
+  let cls, label, interp;
+  if(mom < 1.0)        { cls='normal'; label='Normal';    interp='Sem evidência de circulação cerebral hiperdinâmica.'; }
+  else if(mom < 1.30)  { cls='normal'; label='Normal alto';interp='Dentro do limite superior. Manter seguimento conforme protocolo.'; }
+  else if(mom < 1.50)  { cls='alert';  label='Limítrofe';  interp='Repetir em 24–48h. Correlacionar com clínica e demais parâmetros.'; }
+  else                 { cls='danger'; label='Suspeita de anemia fetal moderada/grave'; interp='≥ 1.5 MoM → considerar cordocentese e/ou transfusão intrauterina conforme contexto. Discutir com medicina fetal.'; }
+
+  out.className='calc-result';
+  out.innerHTML =
+    '<div class="calc-result-label">Múltiplos da mediana · MoM</div>'+
+    '<div class="calc-result-main">'+mom.toFixed(2)+' MoM</div>'+
+    '<div class="calc-result-secondary"><strong>PSV mediana ('+ig+'sem):</strong> '+psvMediana.toFixed(1)+' cm/s</div>'+
+    '<div class="calc-result-interpret '+cls+'"><strong>'+label+'</strong>'+interp+'</div>';
+}
+
+// ── Render dos painéis ──────────────────────────────────────────
+const CALC_RENDER = {
+  dum: function(){
+    return ''+
+      '<div class="calc-card">'+
+        '<div class="calc-card-eyebrow">Calculadora 1 de 5</div>'+
+        '<div class="calc-card-title">Idade gestacional pela DUM</div>'+
+        '<div class="calc-card-sub">Cálculo direto a partir da data da última menstruação. Inclui DPP pela regra de Naegele (DUM + 280 dias).</div>'+
+        '<div class="calc-form">'+
+          '<div class="calc-field">'+
+            '<label class="calc-field-label">Data da DUM</label>'+
+            '<input type="date" class="calc-input" id="calc-dum-data" oninput="calcIG_DUM()">'+
+            '<span class="calc-field-help">Primeiro dia do último período menstrual</span>'+
+          '</div>'+
+        '</div>'+
+        '<div class="calc-result empty" id="calc-dum-result">Preencha a data da última menstruação para ver o resultado.</div>'+
+        '<div class="calc-ref"><strong>Referência:</strong> Naegele F. Erfahrungen und Abhandlungen aus dem Gebiete der Krankheiten des weiblichen Geschlechts. Mannheim, 1812. · Acurácia ±2 semanas em ciclos regulares de 28 dias.</div>'+
+      '</div>';
+  },
+  usg: function(){
+    return ''+
+      '<div class="calc-card">'+
+        '<div class="calc-card-eyebrow">Calculadora 2 de 5</div>'+
+        '<div class="calc-card-title">Idade gestacional pelo USG</div>'+
+        '<div class="calc-card-sub">Extrapola a IG atual a partir da IG aferida em USG anterior. Mais acurada que DUM quando há divergência significativa.</div>'+
+        '<div class="calc-form">'+
+          '<div class="calc-field">'+
+            '<label class="calc-field-label">Data do USG</label>'+
+            '<input type="date" class="calc-input" id="calc-usg-data" oninput="calcIG_USG()">'+
+          '</div>'+
+          '<div class="calc-field">'+
+            '<label class="calc-field-label">IG no USG · semanas</label>'+
+            '<input type="number" class="calc-input" id="calc-usg-sem" placeholder="ex: 20" min="5" max="42" oninput="calcIG_USG()">'+
+          '</div>'+
+          '<div class="calc-field">'+
+            '<label class="calc-field-label">IG no USG · dias</label>'+
+            '<input type="number" class="calc-input" id="calc-usg-dias" placeholder="0 a 6" min="0" max="6" oninput="calcIG_USG()">'+
+          '</div>'+
+        '</div>'+
+        '<div class="calc-result empty" id="calc-usg-result">Preencha a data do USG, semanas e dias para ver o resultado.</div>'+
+        '<div class="calc-ref"><strong>Regra prática:</strong> usar datação por USG se diferença em relação à DUM > 7 dias no 1º trimestre, > 10 dias no 2º. ACOG Committee Opinion 700, 2017.</div>'+
+      '</div>';
+  },
+  ccn: function(){
+    return ''+
+      '<div class="calc-card">'+
+        '<div class="calc-card-eyebrow">Calculadora 3 de 5</div>'+
+        '<div class="calc-card-title">Datação pelo CCN · Robinson-Fleming</div>'+
+        '<div class="calc-card-sub">Método de eleição para datação no 1º trimestre (entre 5 e 14 semanas). Fórmula: IG(dias) = 8.052 × √CCN(mm) + 23.73</div>'+
+        '<div class="calc-form">'+
+          '<div class="calc-field">'+
+            '<label class="calc-field-label">CCN (mm)</label>'+
+            '<input type="number" class="calc-input" id="calc-ccn-valor" placeholder="ex: 45" min="5" max="84" step="0.1" oninput="calcCCN()">'+
+            '<span class="calc-field-help">Comprimento cabeça-nádega · 5 a 84 mm</span>'+
+          '</div>'+
+        '</div>'+
+        '<div class="calc-result empty" id="calc-ccn-result">Insira o CCN em milímetros (range: 5–84 mm).</div>'+
+        '<div class="calc-ref"><strong>Referência:</strong> Robinson HP, Fleming JE. A critical evaluation of sonar crown-rump length measurements. Br J Obstet Gynaecol. 1975;82(9):702-10. · Erro padrão ±5 dias.</div>'+
+      '</div>';
+  },
+  efw: function(){
+    return ''+
+      '<div class="calc-card">'+
+        '<div class="calc-card-eyebrow">Calculadora 4 de 5</div>'+
+        '<div class="calc-card-title">Peso fetal estimado · Hadlock-4</div>'+
+        '<div class="calc-card-sub">Fórmula de 4 parâmetros (mais acurada): BPD + HC + AC + FL. Aceitar medidas em milímetros — conversão automática.</div>'+
+        '<div class="calc-form">'+
+          '<div class="calc-field">'+
+            '<label class="calc-field-label">BPD (mm)</label>'+
+            '<input type="number" class="calc-input" id="calc-efw-bpd" placeholder="ex: 85" min="30" max="110" step="0.1" oninput="calcEFW()">'+
+            '<span class="calc-field-help">Diâmetro biparietal</span>'+
+          '</div>'+
+          '<div class="calc-field">'+
+            '<label class="calc-field-label">HC (mm)</label>'+
+            '<input type="number" class="calc-input" id="calc-efw-hc" placeholder="ex: 310" min="120" max="380" step="0.1" oninput="calcEFW()">'+
+            '<span class="calc-field-help">Circunferência cefálica</span>'+
+          '</div>'+
+          '<div class="calc-field">'+
+            '<label class="calc-field-label">AC (mm)</label>'+
+            '<input type="number" class="calc-input" id="calc-efw-ac" placeholder="ex: 290" min="100" max="400" step="0.1" oninput="calcEFW()">'+
+            '<span class="calc-field-help">Circunferência abdominal</span>'+
+          '</div>'+
+          '<div class="calc-field">'+
+            '<label class="calc-field-label">FL (mm)</label>'+
+            '<input type="number" class="calc-input" id="calc-efw-fl" placeholder="ex: 65" min="20" max="90" step="0.1" oninput="calcEFW()">'+
+            '<span class="calc-field-help">Comprimento do fêmur</span>'+
+          '</div>'+
+        '</div>'+
+        '<div class="calc-result empty" id="calc-efw-result">Preencha BPD, HC, AC e FL (em mm) para ver o peso fetal estimado.</div>'+
+        '<div class="calc-ref"><strong>Referência:</strong> Hadlock FP, Harrist RB, Sharman RS, Deter RL, Park SK. Estimation of fetal weight with the use of head, body, and femur measurements. Am J Obstet Gynecol. 1985;151(3):333-7. · DP ±14%.</div>'+
+      '</div>';
+  },
+  psv: function(){
+    return ''+
+      '<div class="calc-card">'+
+        '<div class="calc-card-eyebrow">Calculadora 5 de 5</div>'+
+        '<div class="calc-card-title">Doppler ACM · Mari 2000</div>'+
+        '<div class="calc-card-sub">Avaliação de anemia fetal pela velocidade sistólica máxima (PSV) da artéria cerebral média. Calcula múltiplos da mediana (MoM) com interpretação automática.</div>'+
+        '<div class="calc-form">'+
+          '<div class="calc-field">'+
+            '<label class="calc-field-label">IG (semanas)</label>'+
+            '<input type="number" class="calc-input" id="calc-psv-ig" placeholder="ex: 28" min="18" max="40" oninput="calcPSV()">'+
+            '<span class="calc-field-help">Range válido: 18 a 40 sem</span>'+
+          '</div>'+
+          '<div class="calc-field">'+
+            '<label class="calc-field-label">PSV ACM (cm/s)</label>'+
+            '<input type="number" class="calc-input" id="calc-psv-valor" placeholder="ex: 65" min="10" max="200" step="0.1" oninput="calcPSV()">'+
+            '<span class="calc-field-help">Pico sistólico medido no Doppler</span>'+
+          '</div>'+
+        '</div>'+
+        '<div class="calc-result empty" id="calc-psv-result">Preencha a idade gestacional (semanas) e a PSV medida (cm/s).</div>'+
+        '<div class="calc-ref"><strong>Referência:</strong> Mari G, Deter RL, Carpenter RL, et al. Noninvasive diagnosis by Doppler ultrasonography of fetal anemia due to maternal red-cell alloimmunization. N Engl J Med. 2000;342(1):9-14. · Threshold ≥1.5 MoM: sensibilidade 100%, especificidade 88%.</div>'+
+      '</div>';
+  }
+};
+
+// ── Controle do overlay ─────────────────────────────────────────
+let calcTabAtual = 'dum';
+
+function abrirCalc(){
+  document.getElementById('calc-overlay').classList.add('open');
+  renderCalcTabs();
+  switchCalcTab(calcTabAtual);
+}
+function fecharCalc(){
+  document.getElementById('calc-overlay').classList.remove('open');
+}
+function renderCalcTabs(){
+  const tabs = document.getElementById('calc-tabs');
+  let html = '';
+  CALCULADORAS.forEach(c=>{
+    html += '<button class="calc-tab'+(c.id===calcTabAtual?' active':'')+'" onclick="switchCalcTab(\''+c.id+'\')">'+
+            '<span class="calc-tab-icon">'+c.icon+'</span> '+c.nome+'</button>';
+  });
+  tabs.innerHTML = html;
+}
+function switchCalcTab(id){
+  calcTabAtual = id;
+  // Atualiza tabs
+  document.querySelectorAll('#calc-tabs .calc-tab').forEach((t,i)=>{
+    t.classList.toggle('active', CALCULADORAS[i].id === id);
+  });
+  // Renderiza o painel
+  const panels = document.getElementById('calc-panels');
+  const renderer = CALC_RENDER[id];
+  if(renderer) panels.innerHTML = '<div class="calc-panel active">'+renderer()+'</div>';
+}
+
 function renderLinks(){
   let html='<div style="font-size:0.78rem;color:var(--text-dim);line-height:1.55;margin-bottom:24px;padding:14px 16px;background:rgba(201,168,76,0.06);border-left:3px solid var(--gold);border-radius:6px">'+
     '<strong style="color:var(--gold)">💡 Hub clínico permanente.</strong> Esses links abrem em aba nova — use no plantão, no estudo, na construção dos casos. Cada recurso aqui foi escolhido por relevância para a residência GO brasileira.'+
