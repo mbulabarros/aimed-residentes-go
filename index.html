@@ -1887,38 +1887,24 @@ body {
   margin-bottom: 14px;
 }
 .mem-video-wrap {
-  position: relative;
+  margin: 0 auto;
   width: 100%;
-  padding-bottom: 56.25%; /* 16:9 */
-  height: 0;
+  max-width: 320px;
+  aspect-ratio: 9/16;
+  border-radius: var(--radius-lg);
   overflow: hidden;
-  border-radius: 10px;
-  background: var(--navy);
-  border: 1px solid var(--border);
+  background: var(--navy-light);
+  border: 1px solid var(--border-dim);
+  position: relative;
 }
 .mem-video-wrap iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: var(--radius-lg);
   position: absolute;
   top: 0; left: 0;
-  width: 100%; height: 100%;
-  border: 0;
 }
-.mem-video-placeholder {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  background: var(--navy-mid);
-  color: var(--text-dim);
-  text-align: center;
-  padding: 20px;
-}
-.mem-video-placeholder-icon { font-size: 3rem; opacity: 0.6; }
-.mem-video-placeholder-text { font-size: 0.85rem; max-width: 320px; line-height: 1.5; }
-.mem-video-placeholder-text code { font-family: 'DM Mono', monospace; color: var(--gold); background: rgba(201,168,76,0.1); padding: 2px 6px; border-radius: 4px; font-size: 0.78rem; }
 .mem-cta {
   text-align: center;
   padding: 24px;
@@ -2651,19 +2637,7 @@ body {
         <div class="mem-video-title">Ouça do <em style="font-style:italic">avatar digital do Dr. Mbula</em></div>
         <div class="mem-video-sub">Tudo o que você precisa saber sobre a Memória AIMED, contado de forma simples.</div>
         <div class="mem-video-wrap">
-          <!-- Substitua VIDEO_ID_AQUI pelo ID do vídeo do YouTube após gerar no HeyGen.
-               Exemplo: se o link for https://youtu.be/abc123XYZ, o ID é abc123XYZ.
-               Para Vimeo, troque o src para https://player.vimeo.com/video/ID -->
-          <div class="mem-video-placeholder" id="mem-video-placeholder">
-            <div class="mem-video-placeholder-icon">🎬</div>
-            <div class="mem-video-placeholder-text">
-              Vídeo será inserido aqui após gravação no HeyGen.<br><br>
-              Edite no <code>index.html</code> a linha do <code>iframe</code> trocando <code>VIDEO_ID_AQUI</code> pelo ID real do YouTube.
-            </div>
-          </div>
-          <!-- Descomente a linha abaixo e remova o placeholder acima quando o vídeo estiver pronto:
-          <iframe src="https://www.youtube.com/embed/VIDEO_ID_AQUI?rel=0" title="Memória AIMED · Avatar Digital Dr. Mbula" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          -->
+          <iframe style="width:100%;height:100%;border:none;border-radius:var(--radius-lg)" src="https://www.youtube.com/embed/pK8EPQPB8VE?rel=0&modestbranding=1" title="Memória AIMED · Avatar Digital Dr. Mbula" allowfullscreen loading="lazy"></iframe>
         </div>
       </div>
 
@@ -3326,7 +3300,7 @@ body {
 
 <script>
 // ── SHORTS IDS ──
-const SHORTS_IDS = ["xy7d1plDnBA","Jhum_ui6syA","ju9kROjcuPk","urcWULpcAzw","TGCA2t97JsY","r-Umg_RBxlI","r-FM_SnzgZs","Khr-43dsJSY","2L6N0MnizTI","NnBOC_1qET8","B-PMAOir274","1Ohy5i19nZ0","vyopIFF4NXA","_3XaKL__zCo","hQysHMLOJ9c","4p7JmBmK3kg","MxfxSj5K_WU","ZHlodCCHYLY"];
+const SHORTS_IDS = ["xy7d1plDnBA","Jhum_ui6syA","ju9kROjcuPk","urcWULpcAzw","TGCA2t97JsY","r-Umg_RBxlI","r-FM_SnzgZs","Khr-43dsJSY","2L6N0MnizTI","NnBOC_1qET8","B-PMAOir274","1Ohy5i19nZ0","vyopIFF4NXA","_3XaKL__zCo","hQysHMLOJ9c","4p7JmBmK3kg","MxfxSj5K_WU","ZHlodCCHYLY","pK8EPQPB8VE"];
 
 // ── GLOSSÁRIO GO ──
 const GLOSSARIO = {
