@@ -1856,6 +1856,69 @@ body {
   letter-spacing: 0.04em;
   font-weight: 500;
 }
+
+/* ── PLAYER DE VÍDEO (Memória AIMED) ── */
+.mem-video-section {
+  background: linear-gradient(135deg, rgba(201,168,76,0.06) 0%, rgba(79,195,195,0.04) 100%);
+  border: 1px solid var(--gold);
+  border-radius: 14px;
+  padding: 22px;
+  margin-bottom: 32px;
+}
+.mem-video-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--teal);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.mem-video-title {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  color: var(--gold);
+  font-size: 1.2rem;
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+.mem-video-sub {
+  font-size: 0.84rem;
+  color: var(--text-dim);
+  margin-bottom: 14px;
+}
+.mem-video-wrap {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 */
+  height: 0;
+  overflow: hidden;
+  border-radius: 10px;
+  background: var(--navy);
+  border: 1px solid var(--border);
+}
+.mem-video-wrap iframe {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  border: 0;
+}
+.mem-video-placeholder {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: var(--navy-mid);
+  color: var(--text-dim);
+  text-align: center;
+  padding: 20px;
+}
+.mem-video-placeholder-icon { font-size: 3rem; opacity: 0.6; }
+.mem-video-placeholder-text { font-size: 0.85rem; max-width: 320px; line-height: 1.5; }
+.mem-video-placeholder-text code { font-family: 'DM Mono', monospace; color: var(--gold); background: rgba(201,168,76,0.1); padding: 2px 6px; border-radius: 4px; font-size: 0.78rem; }
 .mem-cta {
   text-align: center;
   padding: 24px;
@@ -2582,6 +2645,28 @@ body {
         <p class="mem-hero-sub">Cinco semanas depois do curso, cada uma de vocês recebe uma página personalizada com a sua evolução individual. Documento próprio, compartilhável, baseado nas suas respostas reais.</p>
       </div>
 
+      <!-- VÍDEO EXPLICATIVO · Avatar Digital Dr. Mbula -->
+      <div class="mem-video-section">
+        <div class="mem-video-eyebrow">▶ Vídeo explicativo · 2min 30s</div>
+        <div class="mem-video-title">Ouça do <em style="font-style:italic">avatar digital do Dr. Mbula</em></div>
+        <div class="mem-video-sub">Tudo o que você precisa saber sobre a Memória AIMED, contado de forma simples.</div>
+        <div class="mem-video-wrap">
+          <!-- Substitua VIDEO_ID_AQUI pelo ID do vídeo do YouTube após gerar no HeyGen.
+               Exemplo: se o link for https://youtu.be/abc123XYZ, o ID é abc123XYZ.
+               Para Vimeo, troque o src para https://player.vimeo.com/video/ID -->
+          <div class="mem-video-placeholder" id="mem-video-placeholder">
+            <div class="mem-video-placeholder-icon">🎬</div>
+            <div class="mem-video-placeholder-text">
+              Vídeo será inserido aqui após gravação no HeyGen.<br><br>
+              Edite no <code>index.html</code> a linha do <code>iframe</code> trocando <code>VIDEO_ID_AQUI</code> pelo ID real do YouTube.
+            </div>
+          </div>
+          <!-- Descomente a linha abaixo e remova o placeholder acima quando o vídeo estiver pronto:
+          <iframe src="https://www.youtube.com/embed/VIDEO_ID_AQUI?rel=0" title="Memória AIMED · Avatar Digital Dr. Mbula" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          -->
+        </div>
+      </div>
+
       <div class="mem-why">
         <div class="mem-why-title">O que isso é</div>
         <div class="mem-why-text">
@@ -2709,7 +2794,7 @@ body {
           "Vocês não estão saindo daqui com um certificado de papel. Vão sair daqui com cinco semanas de coleta de dados — e na semana 5, cada uma de vocês recebe uma <strong>Memória AIMED personalizada</strong> com sua jornada inteira. É a primeira vez no Brasil que um curso de IA aplicada à medicina faz isso. E não vai ser a última."
         </div>
         <div class="mem-cta-attr">— Encerramento do curso · 23 de Maio de 2026</div>
-        <a class="mem-preview-btn" href="memoria.html?id=DEMO" target="_blank" rel="noopener noreferrer">👁 Ver pré-visualização (exemplo)</a>
+        <a class="mem-preview-btn" href="memoria.html?id=DEMO" target="_blank">👁 Ver pré-visualização (exemplo)</a>
       </div>
 
     </div>
