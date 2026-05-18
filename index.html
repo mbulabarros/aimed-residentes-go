@@ -4819,8 +4819,8 @@ const LINKS_ESSENCIAIS = [
     icon: '📋',
     sub: 'Documentos oficiais para consulta semanal',
     items: [
-      { nome:'FEBRASGO · Posicionamentos', desc:'Documentos oficiais GO · referência primária', url:'https://www.febrasgo.org.br/pt/noticias/category/posicionamentos', icon:'📘' },
-      { nome:'FEBRASGO · Publicações', desc:'Tratado de Obstetrícia, Manuais e documentos oficiais', url:'https://www.febrasgo.org.br/pt/publicacoes', icon:'📗' },
+      { nome:'FEBRASGO · Posicionamentos', desc:'Site oficial · navegar pelo menu Notícias › Posicionamentos', url:'https://www.febrasgo.org.br/pt/noticias/category/posicionamentos', icon:'📘' },
+      { nome:'FEBRASGO · Publicações', desc:'Site oficial · Tratado, Manuais e documentos no menu Publicações', url:'https://www.febrasgo.org.br/pt/publicacoes', icon:'📗' },
       { nome:'Gestação de Alto Risco · MS', desc:'Manual oficial do Ministério da Saúde', url:'https://bvsms.saude.gov.br/bvs/publicacoes/manual_tecnico_gestacao_alto_risco.pdf', icon:'🏥' },
       { nome:'CFM · Resoluções', desc:'Inclui Res. 2.454/2026 sobre IA na medicina', url:'https://portal.cfm.org.br/resolucoes', icon:'⚖️' },
       { nome:'SBP · Documentos Científicos', desc:'Para casos perinatais e neonatais', url:'https://www.sbp.com.br/imprensa/documentos-cientificos/', icon:'📕' }
@@ -4837,6 +4837,8 @@ const LINKS_ESSENCIAIS = [
         intent:'intent://claude.ai#Intent;scheme=https;package=com.anthropic.claude;S.browser_fallback_url=https%3A%2F%2Fclaude.ai;end' },
       { nome:'ChatGPT', desc:'Síntese · estruturação de raciocínio', url:'https://chatgpt.com', icon:'🟢',
         intent:'intent://chatgpt.com#Intent;scheme=https;package=com.openai.chatgpt;S.browser_fallback_url=https%3A%2F%2Fchatgpt.com;end' },
+      { nome:'GPTs Customizados', desc:'Scholar GPT · Consensus · GPTs médicos especializados', url:'https://chatgpt.com/gpts', icon:'🧩',
+        intent:'intent://chatgpt.com/gpts#Intent;scheme=https;package=com.openai.chatgpt;S.browser_fallback_url=https%3A%2F%2Fchatgpt.com%2Fgpts;end' },
       { nome:'NotebookLM', desc:'Memória clínica · acervo pedagógico', url:'https://notebooklm.google.com', icon:'📓' },
       { nome:'Perplexity', desc:'Busca científica com citações inline', url:'https://www.perplexity.ai', icon:'🔍',
         intent:'intent://www.perplexity.ai#Intent;scheme=https;package=ai.perplexity.app.android;S.browser_fallback_url=https%3A%2F%2Fwww.perplexity.ai;end' },
@@ -4860,9 +4862,9 @@ const LINKS_ESSENCIAIS = [
     icon: '🧮',
     sub: 'Para uso direto no plantão',
     items: [
-      { nome:'Perinatology · Calculadoras', desc:'EFW Hadlock · IG · percentis fetais · Doppler', url:'https://perinatology.com/calculators.htm', icon:'⏱️' },
-      { nome:'FMF · Pré-Eclâmpsia', desc:'Rastreio do 1º trimestre · calc oficial', url:'https://fetalmedicine.org/research/assess/preeclampsia', icon:'⚠️' },
-      { nome:'Whitebook · PEBMED', desc:'App de bolso · doses e diretrizes', url:'https://www.pebmed.com.br/whitebook/', icon:'💊' },
+      { nome:'Manuais MSD · Recursos', desc:'Calculadoras e ferramentas clínicas em português', url:'https://www.msdmanuals.com/pt-br/profissional/recursos', icon:'⏱️' },
+      { nome:'FMF · Fetal Medicine Foundation', desc:'Calculadoras fetais · pré-eclâmpsia · biometria · Doppler', url:'https://fetalmedicine.org/', icon:'⚠️' },
+      { nome:'Whitebook', desc:'App médico brasileiro · diretrizes · doses', url:'https://whitebook.com.br/', icon:'💊' },
       { nome:'Sanar Medicina', desc:'Consulta rápida · resumos clínicos', url:'https://www.sanarmedicina.com/', icon:'📱' },
       { nome:'MDCalc', desc:'Scores clínicos internacionais', url:'https://www.mdcalc.com/', icon:'🌐' }
     ]
