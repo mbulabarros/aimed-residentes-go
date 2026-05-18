@@ -81,7 +81,7 @@ body::before {
 .hero-title {
   font-family: 'Playfair Display', serif;
   font-style: italic;
-  font-weight: 600;
+  font-weight: 400;
   font-size: clamp(2.4rem, 8vw, 4.5rem);
   color: var(--gold);
   line-height: 1.1;
@@ -102,7 +102,7 @@ body::before {
   margin: 0 auto 24px;
   display: flex; align-items: center; justify-content: center;
   font-family: 'Playfair Display', serif;
-  font-weight: 600;
+  font-weight: 400;
   font-size: 2.4rem;
   color: var(--navy);
   border: 3px solid var(--gold);
@@ -133,7 +133,7 @@ body::before {
 .section-title {
   font-family: 'Playfair Display', serif;
   font-size: clamp(1.5rem, 4vw, 2rem);
-  font-weight: 600;
+  font-weight: 500;
   color: var(--text);
   margin-bottom: 8px;
 }
@@ -163,7 +163,7 @@ body::before {
 .stat-card:hover { transform: translateY(-2px); border-color: var(--gold); }
 .stat-number {
   font-family: 'Playfair Display', serif;
-  font-weight: 600;
+  font-weight: 400;
   font-size: 3rem;
   color: var(--gold);
   line-height: 1;
@@ -229,7 +229,7 @@ body::before {
 .evo-bar.t2 { background: linear-gradient(180deg, var(--gold) 0%, rgba(201,168,76,0.3) 100%); border: 1px solid var(--gold-light); box-shadow: 0 0 20px rgba(201,168,76,0.2); }
 .evo-bar-value {
   font-family: 'Playfair Display', serif;
-  font-weight: 600;
+  font-weight: 400;
   font-size: 1.05rem;
   color: var(--text);
 }
@@ -318,7 +318,7 @@ body::before {
 }
 .nps-number {
   font-family: 'Playfair Display', serif;
-  font-weight: 600;
+  font-weight: 400;
   font-size: 4.5rem;
   line-height: 1;
 }
@@ -576,6 +576,35 @@ body::before {
 }
 .toast.show { transform: translateX(-50%) translateY(0); }
 
+/* ── BOTÃO VOLTAR FLUTUANTE ── */
+.back-btn {
+  position: fixed;
+  top: 16px; left: 16px;
+  z-index: 100;
+  background: rgba(10,26,53,0.92);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  padding: 9px 14px;
+  border-radius: 8px;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.74rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  letter-spacing: 0.04em;
+  transition: all 0.2s;
+  -webkit-appearance: none;
+}
+.back-btn:hover, .back-btn:active { background: var(--gold); color: var(--navy); }
+@media (max-width: 700px) {
+  .back-btn { top: 10px; left: 10px; padding: 7px 11px; font-size: 0.7rem; }
+}
+@media print { .back-btn { display: none; } }
+
 /* ── MOBILE ── */
 @media (max-width: 700px) {
   .container { padding: 20px 14px 60px; }
@@ -608,6 +637,7 @@ body::before {
 <body>
 
 <div id="app"></div>
+<button class="back-btn" onclick="voltarAimed()" id="backBtn" style="display:none">← Voltar ao AIMED OS</button>
 <div id="toast" class="toast"></div>
 
 <script>
@@ -924,18 +954,21 @@ function renderResidente(apelido, data){
     <!-- CERTIFICATE -->
     <div class="section">
       <div class="section-eyebrow">Reconhecimento</div>
-      <h2 class="section-title">Certificado de <em>conclusão</em></h2>
+      <h2 class="section-title">Registro de <em>participação</em></h2>
       <div class="cert">
         <div class="cert-eyebrow">InovaMed · Educação Médica Continuada</div>
-        <div class="cert-title">Conferimos a</div>
+        <div class="cert-title">Registramos a participação de</div>
         <div class="cert-name">${escapeHtml(data.nome || 'Residente AIMED · '+apelido)}</div>
         <div class="cert-body">
-          a conclusão integral do curso <strong style="color:var(--gold)">AIMED Residentes GO · Maio 2026</strong>, 14 horas de carga horária presencial mais 4 semanas de aplicação clínica supervisionada, com participação ativa no estudo quasi-experimental pré-pós que sustenta a publicação científica em curso.
+          no curso <strong style="color:var(--gold)">AIMED Residentes GO · Maio 2026</strong> — 14 horas de carga horária presencial e 4 semanas de aplicação clínica supervisionada, com participação no estudo quasi-experimental pré-pós que sustenta a publicação científica em curso.
         </div>
         <div class="cert-sig">
-          <div class="cert-sig-block"><strong>Dr. Mbula Luzingu Barros</strong>Coordenador AIMED · InovaMed</div>
           <div class="cert-sig-block"><strong>22-23 Maio 2026</strong>Joinville · SC</div>
           <div class="cert-sig-block"><strong>14 horas</strong>+ 4 semanas pós-curso</div>
+          <div class="cert-sig-block"><strong>AIMED Residentes GO</strong>Edição inaugural</div>
+        </div>
+        <div style="margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--border-dim); font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--text-muted); letter-spacing: 0.06em; text-align: center;">
+          Registro digital · gerado automaticamente a partir das respostas da participante · este documento não substitui o certificado oficial entregue pela InovaMed
         </div>
       </div>
     </div>
@@ -953,9 +986,41 @@ function renderResidente(apelido, data){
       </div>
     </div>
 
+    <!-- GLOSSÁRIO -->
+    <div class="section" style="margin-top: 50px;">
+      <div class="section-eyebrow">Glossário rápido</div>
+      <h2 class="section-title">O que significa cada <em>sigla</em></h2>
+      <div class="snap-grid">
+        <div class="snap-card">
+          <div class="snap-card-label">T0</div>
+          <div class="snap-card-value small">Linha de base · respostas dadas <strong style="color:var(--gold)">antes</strong> do curso (até 21/05). Mede seu ponto de partida.</div>
+        </div>
+        <div class="snap-card">
+          <div class="snap-card-label">T1</div>
+          <div class="snap-card-value small">Pós-imediato · respostas dadas no <strong style="color:var(--gold)">domingo após o curso</strong>. Mede o impacto inicial.</div>
+        </div>
+        <div class="snap-card">
+          <div class="snap-card-label">T2</div>
+          <div class="snap-card-value small">Pós-4-semanas · respostas dadas no <strong style="color:var(--gold)">final do Bloco 5</strong>. Mede o uso real consolidado.</div>
+        </div>
+        <div class="snap-card">
+          <div class="snap-card-label">NPS</div>
+          <div class="snap-card-value small">Net Promoter Score · escala 0-10. <strong style="color:var(--green)">9-10 promotora</strong>, <strong style="color:var(--gold)">7-8 passiva</strong>, <strong style="color:var(--coral)">≤6 detratora</strong>.</div>
+        </div>
+        <div class="snap-card">
+          <div class="snap-card-label">TdC</div>
+          <div class="snap-card-value small">Teoria do Contrário · método AIMED de defender argumento oposto ao protocolo, em três fases temporais ao longo do curso.</div>
+        </div>
+        <div class="snap-card">
+          <div class="snap-card-label">Autoeficácia</div>
+          <div class="snap-card-value small">Sua percepção de "sou capaz de escrever um prompt clínico eficaz". Escala Likert 1-5.</div>
+        </div>
+      </div>
+    </div>
+
     <div class="footer">
       Memória AIMED · gerada automaticamente a partir de suas respostas T0/T1/T2 e do Diário Semanal · LGPD-compliant (pareamento por apelido, sem dados identificáveis estruturados).<br>
-      <a href="https://mbulabarros.github.io/aimed-residentes-go/">↩ voltar ao AIMED OS</a> · <a href="https://inovamed.pro">InovaMed</a>
+      <a href="javascript:voltarAimed()">↩ voltar ao AIMED OS</a> · <a href="https://inovamed.pro" target="_blank" rel="noopener noreferrer">InovaMed</a>
     </div>
 
   </div>`;
@@ -983,11 +1048,33 @@ function abrirLinkedIn(){
 }
 
 // ═══════════════════════════════════════════════════════════════════
+// NAVEGAÇÃO · RETORNO INTELIGENTE
+// ═══════════════════════════════════════════════════════════════════
+function voltarAimed(){
+  // Se a aba foi aberta por outra (window.opener existe = veio de target="_blank"),
+  // simplesmente fecha. Funciona em desktop e mobile.
+  // Senão, navega para o index com hash #memoria que reabre o overlay automaticamente.
+  if(window.opener && !window.opener.closed){
+    try {
+      window.close();
+      // Se window.close() falhar (browser bloqueia), cai no fallback abaixo
+      setTimeout(()=>{ window.location.href = '/aimed-residentes-go/#memoria'; }, 100);
+    } catch(e){
+      window.location.href = '/aimed-residentes-go/#memoria';
+    }
+  } else {
+    window.location.href = '/aimed-residentes-go/#memoria';
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════════
 // INIT
 // ═══════════════════════════════════════════════════════════════════
 function init(){
   const id = (getParam('id')||'').toUpperCase();
   const app = document.getElementById('app');
+  const backBtn = document.getElementById('backBtn');
+  // Mostrar botão "voltar" SEMPRE que estiver vendo uma memória válida (não na tela vazia/erro)
   if(!id){ app.innerHTML = renderEmpty(); return; }
   const data = RESIDENTES[id];
   if(!data){
@@ -1003,10 +1090,12 @@ function init(){
         <button class="share-btn" onclick="window.location.search=''" style="margin-top:20px;display:inline-flex">↩ Voltar</button>
       </div>
     </div>`;
+    if(backBtn) backBtn.style.display = 'inline-flex';
     return;
   }
   app.innerHTML = renderResidente(id, data);
   document.title = 'Memória AIMED · '+id;
+  if(backBtn) backBtn.style.display = 'inline-flex';
 }
 init();
 </script>
