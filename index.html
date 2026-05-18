@@ -2907,7 +2907,7 @@ body {
       <div class="gemini-step-num">2</div>
       <div class="gemini-step-body">
         <div class="gemini-step-title">Abrir o Gemini e colar</div>
-        <a class="gemini-open-link gemini-open-app" id="gemini-open-app" href="intent://gemini.google.com/app#Intent;scheme=https;package=com.google.android.apps.bard;S.browser_fallback_url=https%3A%2F%2Fgemini.google.com;end" style="display:none;margin-bottom:8px">📱 Abrir no app Gemini</a>
+        <a class="gemini-open-link gemini-open-app" id="gemini-open-app" href="intent://gemini.google.com#Intent;scheme=https;package=com.google.android.apps.bard;S.browser_fallback_url=https%3A%2F%2Fgemini.google.com;end" style="display:none;margin-bottom:8px">📱 Abrir no app Gemini</a>
         <a class="gemini-open-link" href="https://gemini.google.com" target="_blank" rel="noopener noreferrer">🔗 Abrir no navegador</a>
         <div class="gemini-fallback">
           Se nenhum link abrir, digite <strong>gemini.google.com</strong> na barra de endereços. Já no Gemini, toque longo na caixa de chat → <strong>Colar</strong> (celular) ou <strong>Ctrl+V</strong> (PC).
@@ -4450,11 +4450,15 @@ const LINKS_ESSENCIAIS = [
     icon: '🤖',
     sub: 'Suas aliadas diárias · uso no plantão e no estudo',
     items: [
-      { nome:'Gemini', desc:'Busca · Google Scholar · imagens', url:'https://gemini.google.com/app', icon:'💎' },
-      { nome:'Claude', desc:'Análise crítica de PDFs · Projeto GO/MDV', url:'https://claude.ai', icon:'🟣' },
-      { nome:'ChatGPT', desc:'Síntese · estruturação de raciocínio', url:'https://chatgpt.com', icon:'🟢' },
+      { nome:'Gemini', desc:'Busca · Google Scholar · imagens', url:'https://gemini.google.com', icon:'💎',
+        intent:'intent://gemini.google.com#Intent;scheme=https;package=com.google.android.apps.bard;S.browser_fallback_url=https%3A%2F%2Fgemini.google.com;end' },
+      { nome:'Claude', desc:'Análise crítica de PDFs · Projeto GO/MDV', url:'https://claude.ai', icon:'🟣',
+        intent:'intent://claude.ai#Intent;scheme=https;package=com.anthropic.claude;S.browser_fallback_url=https%3A%2F%2Fclaude.ai;end' },
+      { nome:'ChatGPT', desc:'Síntese · estruturação de raciocínio', url:'https://chatgpt.com', icon:'🟢',
+        intent:'intent://chatgpt.com#Intent;scheme=https;package=com.openai.chatgpt;S.browser_fallback_url=https%3A%2F%2Fchatgpt.com;end' },
       { nome:'NotebookLM', desc:'Memória clínica · acervo pedagógico', url:'https://notebooklm.google.com', icon:'📓' },
-      { nome:'Perplexity', desc:'Busca científica com citações inline', url:'https://www.perplexity.ai', icon:'🔍' },
+      { nome:'Perplexity', desc:'Busca científica com citações inline', url:'https://www.perplexity.ai', icon:'🔍',
+        intent:'intent://www.perplexity.ai#Intent;scheme=https;package=ai.perplexity.app.android;S.browser_fallback_url=https%3A%2F%2Fwww.perplexity.ai;end' },
       { nome:'OpenEvidence', desc:'IA especializada em evidência médica', url:'https://www.openevidence.com', icon:'🩺' }
     ]
   },
@@ -4654,7 +4658,7 @@ function openAI(platform,text){
       // Reforço — em desktop async é mais confiável; em iOS, se falhar, o sync já garantiu
       navigator.clipboard.writeText(text).catch(()=>{});
     }
-    const aberto=abrirNovaAba('https://gemini.google.com/app');
+    const aberto=abrirNovaAba('https://gemini.google.com');
     if(aberto){
       showToast(okSync?'Prompt copiado — cole no Gemini com Ctrl+V (ou toque longo · Colar)':'Abra o Gemini e cole o prompt manualmente');
     } else {
@@ -4698,9 +4702,13 @@ function renderLinks(){
     html+='<div class="links-grid">';
     sec.items.forEach(it=>{
       const isPlaceholder=it.url==='#';
+      // Em Android Chrome (não-WebView), preferir Intent URL quando disponível
+      // — abre direto no app nativo com fallback gracioso para navegador se app não instalado.
+      // Em iOS/Desktop/WebView, usar URL https normal.
+      const hrefFinal=(IS_ANDROID && it.intent) ? it.intent : it.url;
       const attrs=isPlaceholder
         ? 'href="#" onclick="event.preventDefault();return false;" style="opacity:0.55;cursor:not-allowed"'
-        : 'href="'+it.url+'" target="_blank" rel="noopener noreferrer"';
+        : 'href="'+hrefFinal+'" target="_blank" rel="noopener noreferrer"';
       html+='<a class="link-card" '+attrs+'>';
       html+='<div class="link-card-icon">'+(it.icon||'🔗')+'</div>';
       html+='<div class="link-card-body">';
