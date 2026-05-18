@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#050e1f">
+<title>Memória AIMED · Sua Jornada</title>
+
+<!-- Open Graph para compartilhamento social -->
+<meta property="og:title" content="Memória AIMED · Sua jornada de 5 semanas">
+<meta property="og:description" content="Documento personalizado de evolução em IA aplicada à medicina · Curso AIMED Residentes GO · Maio 2026">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://mbulabarros.github.io/aimed-residentes-go/og-image.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --navy: #050e1f;
+  --navy-mid: #0a1a35;
+  --navy-light: #112244;
+  --gold: #c9a84c;
+  --gold-light: #e8c96a;
+  --gold-pale: rgba(201,168,76,0.12);
+  --teal: #4fc3c3;
+  --green: #6ab87a;
+  --coral: #e57373;
+  --purple: #9575cd;
+  --text: #e8eef5;
+  --text-dim: #9aaac0;
+  --text-muted: #6a7a90;
+  --border: rgba(255,255,255,0.08);
+  --border-dim: rgba(255,255,255,0.05);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+body {
+  background: var(--navy);
+  color: var(--text);
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Background gradiente sutil */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background:
+    radial-gradient(circle at 20% 0%, rgba(201,168,76,0.05) 0%, transparent 50%),
+    radial-gradient(circle at 80% 100%, rgba(79,195,195,0.04) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+}
+
+/* ── HERO ── */
+.hero {
+  text-align: center;
+  padding: 40px 0 60px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 50px;
+}
+.hero-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 600;
+  font-size: clamp(2.4rem, 8vw, 4.5rem);
+  color: var(--gold);
+  line-height: 1.1;
+  margin-bottom: 14px;
+}
+.hero-subtitle {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: clamp(1.05rem, 2.5vw, 1.35rem);
+  color: var(--text-dim);
+  margin-bottom: 32px;
+  max-width: 580px;
+  margin-left: auto; margin-right: auto;
+}
+.hero-avatar {
+  width: 100px; height: 100px;
+  border-radius: 50%;
+  margin: 0 auto 24px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  font-size: 2.4rem;
+  color: var(--navy);
+  border: 3px solid var(--gold);
+  box-shadow: 0 0 0 6px rgba(201,168,76,0.15);
+  position: relative;
+}
+.hero-meta {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.76rem;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+  margin-top: 12px;
+}
+.hero-meta span { color: var(--gold); }
+
+/* ── SECTION HEADERS ── */
+.section {
+  margin-bottom: 60px;
+}
+.section-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  color: var(--teal);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+.section-title em { color: var(--gold); font-style: italic; }
+.section-sub {
+  font-size: 0.92rem;
+  color: var(--text-dim);
+  margin-bottom: 28px;
+  max-width: 580px;
+}
+
+/* ── STATS GRID ── */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin-bottom: 40px;
+}
+.stat-card {
+  background: var(--navy-mid);
+  border: 1px solid var(--border-dim);
+  border-radius: 14px;
+  padding: 24px 20px;
+  text-align: center;
+  transition: transform 0.3s, border-color 0.3s;
+}
+.stat-card:hover { transform: translateY(-2px); border-color: var(--gold); }
+.stat-number {
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  font-size: 3rem;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.stat-label {
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 500;
+}
+
+/* ── EVOLUTION CHARTS T0→T1→T2 ── */
+.evo-chart {
+  background: var(--navy-mid);
+  border: 1px solid var(--border-dim);
+  border-radius: 14px;
+  padding: 26px;
+  margin-bottom: 16px;
+}
+.evo-title {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 1.25rem;
+  color: var(--gold);
+  margin-bottom: 4px;
+}
+.evo-question {
+  font-size: 0.82rem;
+  color: var(--text-dim);
+  margin-bottom: 22px;
+  font-style: italic;
+}
+.evo-bars {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  align-items: end;
+  height: 160px;
+  margin-bottom: 16px;
+}
+.evo-bar-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  justify-content: flex-end;
+  gap: 8px;
+}
+.evo-bar {
+  width: 100%;
+  max-width: 80px;
+  border-radius: 8px 8px 0 0;
+  background: var(--navy-light);
+  position: relative;
+  transition: height 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: flex; align-items: flex-start; justify-content: center;
+  padding-top: 8px;
+}
+.evo-bar.t0 { background: linear-gradient(180deg, rgba(154,170,192,0.3) 0%, rgba(154,170,192,0.1) 100%); border: 1px solid rgba(154,170,192,0.4); }
+.evo-bar.t1 { background: linear-gradient(180deg, rgba(232,201,106,0.5) 0%, rgba(232,201,106,0.2) 100%); border: 1px solid var(--gold); }
+.evo-bar.t2 { background: linear-gradient(180deg, var(--gold) 0%, rgba(201,168,76,0.3) 100%); border: 1px solid var(--gold-light); box-shadow: 0 0 20px rgba(201,168,76,0.2); }
+.evo-bar-value {
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--text);
+}
+.evo-bar.t0 .evo-bar-value { color: var(--text-dim); }
+.evo-bar.t2 .evo-bar-value { color: var(--navy); }
+.evo-bar-labels {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  text-align: center;
+}
+.evo-bar-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.evo-delta {
+  margin-top: 14px;
+  padding: 10px 14px;
+  background: rgba(106,184,122,0.08);
+  border-left: 3px solid var(--green);
+  border-radius: 6px;
+  font-size: 0.82rem;
+  color: var(--text);
+}
+.evo-delta.neutral { background: rgba(154,170,192,0.08); border-left-color: var(--text-dim); }
+.evo-delta.negative { background: rgba(229,115,115,0.08); border-left-color: var(--coral); }
+.evo-delta strong { color: var(--green); }
+.evo-delta.neutral strong { color: var(--text-dim); }
+.evo-delta.negative strong { color: var(--coral); }
+
+/* ── SNAPSHOT GRID (T0/T1/T2 standalone items) ── */
+.snap-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 14px;
+  margin-bottom: 28px;
+}
+.snap-card {
+  background: var(--navy-mid);
+  border: 1px solid var(--border-dim);
+  border-radius: 12px;
+  padding: 18px 20px;
+}
+.snap-card-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 8px;
+}
+.snap-card-value {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  color: var(--text);
+  line-height: 1.3;
+}
+.snap-card-value.small { font-size: 1rem; line-height: 1.4; }
+
+/* Chips */
+.chips {
+  display: flex; flex-wrap: wrap; gap: 6px;
+}
+.chip {
+  background: var(--gold-pale);
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 500;
+}
+.chip.muted { background: rgba(255,255,255,0.04); border-color: var(--border); color: var(--text-dim); }
+
+/* ── NPS Indicator ── */
+.nps-card {
+  background: var(--navy-mid);
+  border: 1px solid var(--border-dim);
+  border-radius: 14px;
+  padding: 24px;
+  text-align: center;
+  margin-bottom: 16px;
+}
+.nps-number {
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  font-size: 4.5rem;
+  line-height: 1;
+}
+.nps-number.promoter { color: var(--green); }
+.nps-number.passive { color: var(--gold); }
+.nps-number.detractor { color: var(--coral); }
+.nps-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-top: 8px;
+}
+.nps-label.promoter { color: var(--green); }
+.nps-label.passive { color: var(--gold); }
+.nps-label.detractor { color: var(--coral); }
+
+/* ── TIMELINE (Diário) ── */
+.timeline {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+.timeline-week {
+  background: var(--navy-mid);
+  border: 1px solid var(--border-dim);
+  border-top: 3px solid var(--gold);
+  border-radius: 12px;
+  padding: 18px;
+}
+.timeline-week:nth-child(1) { border-top-color: var(--teal); }
+.timeline-week:nth-child(2) { border-top-color: var(--gold); }
+.timeline-week:nth-child(3) { border-top-color: var(--green); }
+.timeline-week:nth-child(4) { border-top-color: var(--purple); }
+.tl-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.tl-title {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  color: var(--gold);
+  font-size: 1rem;
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+.tl-row {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 0.78rem;
+  margin-bottom: 6px;
+  color: var(--text-dim);
+}
+.tl-row strong { color: var(--text); font-weight: 600; }
+.tl-obs {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border-dim);
+  font-size: 0.82rem;
+  color: var(--text);
+  line-height: 1.55;
+  font-style: italic;
+}
+.tl-obs:before { content: '"'; color: var(--gold); font-size: 1.4rem; font-family: serif; }
+.tl-obs:after { content: '"'; color: var(--gold); font-size: 1.4rem; font-family: serif; }
+
+/* ── PULL QUOTE ── */
+.pullquote {
+  margin: 70px 0;
+  padding: 40px 20px;
+  text-align: center;
+  position: relative;
+}
+.pullquote-mark {
+  font-family: 'Playfair Display', serif;
+  font-size: 6rem;
+  color: var(--gold);
+  line-height: 0.4;
+  opacity: 0.5;
+  margin-bottom: 20px;
+}
+.pullquote-text {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: clamp(1.4rem, 3.5vw, 2rem);
+  color: var(--text);
+  line-height: 1.4;
+  max-width: 720px;
+  margin: 0 auto 24px;
+}
+.pullquote-attr {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.78rem;
+  color: var(--gold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* ── CERTIFICATE ── */
+.cert {
+  background: linear-gradient(135deg, var(--navy-mid) 0%, var(--navy-light) 100%);
+  border: 2px solid var(--gold);
+  border-radius: 16px;
+  padding: 40px 30px;
+  text-align: center;
+  margin-bottom: 32px;
+  position: relative;
+  overflow: hidden;
+}
+.cert::before, .cert::after {
+  content: ''; position: absolute;
+  width: 60px; height: 60px;
+  border: 2px solid var(--gold);
+}
+.cert::before { top: 12px; left: 12px; border-right: none; border-bottom: none; }
+.cert::after { bottom: 12px; right: 12px; border-left: none; border-top: none; }
+.cert-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--gold);
+  letter-spacing: 0.2em;
+  margin-bottom: 10px;
+}
+.cert-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  font-style: italic;
+  color: var(--text);
+  margin-bottom: 20px;
+}
+.cert-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  color: var(--gold);
+  margin-bottom: 14px;
+}
+.cert-body {
+  font-size: 0.95rem;
+  color: var(--text-dim);
+  line-height: 1.7;
+  max-width: 540px;
+  margin: 0 auto 24px;
+}
+.cert-sig {
+  display: flex;
+  justify-content: space-around;
+  gap: 30px;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+.cert-sig-block {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--text-dim);
+}
+.cert-sig-block strong { color: var(--gold); display: block; font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.95rem; margin-bottom: 2px; }
+
+/* ── SHARE ── */
+.share-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+  margin-top: 14px;
+}
+.share-btn {
+  background: var(--navy-mid);
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  padding: 14px 16px;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  -webkit-appearance: none;
+}
+.share-btn:hover, .share-btn:active { background: var(--gold); color: var(--navy); }
+.share-btn.primary { background: var(--gold); color: var(--navy); }
+.share-btn.primary:hover { background: var(--gold-light); }
+
+/* ── FOOTER ── */
+.footer {
+  margin-top: 60px;
+  padding-top: 30px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+.footer a { color: var(--gold); text-decoration: none; }
+
+/* ── EMPTY STATE (sem apelido na URL) ── */
+.empty {
+  text-align: center;
+  padding: 100px 20px;
+  max-width: 480px;
+  margin: 0 auto;
+}
+.empty-icon {
+  font-size: 4rem;
+  margin-bottom: 20px;
+  opacity: 0.5;
+}
+.empty-title {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 1.8rem;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+.empty-text {
+  color: var(--text-dim);
+  line-height: 1.7;
+}
+.empty input {
+  margin-top: 20px;
+  background: var(--navy-mid);
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  padding: 14px 18px;
+  border-radius: 10px;
+  font-family: 'DM Mono', monospace;
+  font-size: 1rem;
+  width: 200px;
+  text-align: center;
+  letter-spacing: 0.1em;
+}
+
+/* ── TOAST ── */
+.toast {
+  position: fixed;
+  bottom: 24px; left: 50%;
+  transform: translateX(-50%) translateY(120%);
+  background: var(--gold);
+  color: var(--navy);
+  padding: 14px 22px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  z-index: 1000;
+  transition: transform 0.3s;
+  max-width: 90vw;
+}
+.toast.show { transform: translateX(-50%) translateY(0); }
+
+/* ── MOBILE ── */
+@media (max-width: 700px) {
+  .container { padding: 20px 14px 60px; }
+  .hero { padding: 20px 0 40px; margin-bottom: 32px; }
+  .section { margin-bottom: 40px; }
+  .timeline { grid-template-columns: 1fr; }
+  .evo-bars { height: 140px; }
+  .stat-number { font-size: 2.4rem; }
+  .pullquote { margin: 40px 0; padding: 20px 10px; }
+  .pullquote-mark { font-size: 4rem; }
+  .cert { padding: 28px 18px; }
+}
+
+/* ── PRINT ── */
+@media print {
+  body { background: white; color: black; }
+  body::before { display: none; }
+  .container { max-width: none; padding: 0; }
+  .stat-card, .evo-chart, .snap-card, .timeline-week, .nps-card, .cert { background: white; border-color: #ccc; color: black; box-shadow: none; }
+  .hero-title, .section-title em, .evo-title, .tl-title, .cert-name, .cert-eyebrow, .stat-number, .snap-card-label, .pullquote-mark, .pullquote-attr { color: #8a7820 !important; }
+  .text, .stat-label, .section-sub, .hero-subtitle, .snap-card-value, .tl-row, .tl-obs, .pullquote-text, .cert-body, .cert-sig-block, .footer { color: #333 !important; }
+  .share-grid, .toast, .empty input { display: none; }
+  .cert { border-color: #8a7820 !important; }
+  .evo-bar.t0 { background: #ddd !important; }
+  .evo-bar.t1 { background: #f0d878 !important; }
+  .evo-bar.t2 { background: #8a7820 !important; }
+}
+</style>
+</head>
+<body>
+
+<div id="app"></div>
+<div id="toast" class="toast"></div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════════
+// MEMÓRIA AIMED · DADOS DAS RESIDENTES
+// Padrão A2: JSON embutido + apelido na URL.
+// Para popular: depois de coletar T0/T1/T2/Diário no WhatsApp,
+// adicione um objeto aqui com o apelido como chave.
+// Apelidos LGPD-compliant: iniciais + 2 dígitos do telefone.
+// ═══════════════════════════════════════════════════════════════════
+const RESIDENTES = {
+  // EXEMPLO COMPLETO · use como template para os dados reais
+  'DEMO': {
+    nome: 'Maria Luiza',                    // Primeiro nome para humanizar (NÃO sobrenome completo)
+    inicio: '2026-05-22',
+    t0: {
+      apelido: 'DEMO',
+      freq: '1–2x por semana',             // Nunca · 1–2x · 3–5x · Quase diário
+      ias: ['Gemini','ChatGPT'],
+      autoeficacia: '3',                    // Likert 1-5
+      confianca: '3',
+      checa: 'Às vezes',                    // Nunca · Raramente · Às vezes · Sempre
+      alucinacao: 'Talvez, mas não tenho certeza',
+      cfm: 'Superficialmente',
+      medo: 'Confiar em algo que possa estar errado e prejudicar uma paciente.',
+      expectativa: 'Sair daqui sabendo escrever prompts que realmente funcionem na clínica.'
+    },
+    t1: {
+      apelido: 'DEMO',
+      freq: '3–5x por semana',
+      autoeficacia: '4',
+      confianca: '3',
+      checa: 'Sempre',
+      expectativa_atendida: '4',           // Likert 1-5 (Muito abaixo → Muito acima)
+      nps: '9',                             // 0-10
+      aplicar_primeiro: 'Configurar o Gem GO/MDV com o protocolo MgSO4 da nossa maternidade.',
+      comentario: 'A Teoria do Contrário mudou completamente como leio protocolos.'
+    },
+    t2: {
+      apelido: 'DEMO',
+      freq: 'Quase diário',
+      autoeficacia: '5',
+      confianca: '4',
+      prompts_uso: ['🔬 Pesquisa Orquestrada GO','💊 Farmacologia Blindada GO','⏱️ Consulta Pré-Plantão GO'],
+      config: ['Gem GO/MDV (Gemini)','Projeto Claude GO/MDV','NotebookLM próprio'],
+      casos_reais: '4–10',
+      mudanca: 'Hoje, antes de qualquer prescrição de dose, eu valido com o prompt da Farmacologia Blindada. Já flagrei duas situações onde minha primeira intuição estava errada — e eu teria errado se não tivesse essa segunda checagem. Não é a IA decidindo por mim. É a IA me dando uma chance a mais de pensar antes de assinar.',
+      falta: 'Um prompt específico para emergência neonatal — ainda fico insegura quando o caso vira pediátrico.'
+    },
+    diario: {
+      sem1: { dias: '3–4', desafio: 'Sim, integralmente', obs: 'Configurei o Gem GO/MDV com os protocolos da MDV. Usei pela primeira vez num caso de pré-eclâmpsia grave de madrugada e a resposta veio mais completa do que minha consulta original ao protocolo impresso.' },
+      sem2: { dias: '5–6', desafio: 'Sim, integralmente', obs: 'Primeira revisão de óbito com Claude. Demorei 40 min onde antes demorava 2 horas. E a análise final ficou MAIS estruturada — não menos.' },
+      sem3: { dias: '5–6', desafio: 'Parcialmente', obs: 'Levei a TdC para o grupo no WhatsApp mas senti resistência de uma colega. Aprendi que o frame importa: começar com a pergunta, não com a contraproposta.' },
+      sem4: { dias: 'Todos', desafio: 'Sim, integralmente', obs: 'Nossa Ferramenta MDV v2.0 incorporou as 3 sugestões que o grupo trouxe. Sinto que estou contribuindo para algo que vai me sobreviver na MDV.' }
+    }
+  }
+  // Adicione mais residentes aqui depois de coletar T0/T1/T2/Diário.
+};
+
+// ═══════════════════════════════════════════════════════════════════
+// MAPAS DE VALORES (para gráficos)
+// ═══════════════════════════════════════════════════════════════════
+const FREQ_MAP = { 'Nunca': 1, '1–2x por semana': 2, '3–5x por semana': 3, 'Quase diário': 4 };
+const FREQ_LABEL = { 1:'Nunca', 2:'1–2x/sem', 3:'3–5x/sem', 4:'Diário' };
+const CHECA_MAP = { 'Nunca': 1, 'Raramente': 2, 'Às vezes': 3, 'Sempre': 4 };
+const DIAS_MAP = { '0': 0, '1–2': 2, '3–4': 4, '5–6': 6, 'Todos': 7 };
+
+// ═══════════════════════════════════════════════════════════════════
+// UTILS
+// ═══════════════════════════════════════════════════════════════════
+function getParam(name){
+  const u = new URLSearchParams(window.location.search);
+  return u.get(name);
+}
+function avatarColor(apelido){
+  const colors = ['#c9a84c', '#4fc3c3', '#6ab87a', '#9575cd', '#e8c96a', '#f0a878'];
+  const idx = apelido.split('').reduce((a,c)=>a+c.charCodeAt(0), 0) % colors.length;
+  return colors[idx];
+}
+function avatarInitials(apelido){
+  return apelido.replace(/[0-9]/g,'').substring(0,2).toUpperCase() || apelido.substring(0,2).toUpperCase();
+}
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 2800);
+}
+function escapeHtml(s){ return (s||'').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+// ═══════════════════════════════════════════════════════════════════
+// RENDER
+// ═══════════════════════════════════════════════════════════════════
+function renderEmpty(){
+  return `
+  <div class="container">
+    <div class="empty">
+      <div class="empty-icon">✨</div>
+      <div class="empty-title">Memória AIMED</div>
+      <div class="empty-text">
+        Esta página gera um documento personalizado de jornada para cada residente do curso AIMED Residentes GO.<br><br>
+        Para abrir a sua, use o link único que você recebeu pelo WhatsApp na semana 5 pós-curso.<br><br>
+        Formato do link: <code style="color:var(--gold)">?id=SEU-APELIDO</code>
+      </div>
+      <input type="text" id="apelidoInput" placeholder="ML47" oninput="this.value=this.value.toUpperCase()" onkeydown="if(event.key==='Enter')irPara()">
+      <br>
+      <button class="share-btn" onclick="irPara()" style="margin-top:14px;display:inline-flex">Abrir minha memória →</button>
+    </div>
+  </div>`;
+}
+function irPara(){
+  const v = document.getElementById('apelidoInput').value.trim().toUpperCase();
+  if(v) window.location.search = '?id='+encodeURIComponent(v);
+}
+
+function renderEvoChart(titulo, pergunta, t0, t1, t2, maxVal){
+  const vals = [t0, t1, t2];
+  const labels = ['T0 · Antes', 'T1 · Imediato', 'T2 · 4 semanas'];
+  const classes = ['t0', 't1', 't2'];
+  const heights = vals.map(v => Math.max(8, (v/maxVal)*100));
+  const delta = t2 - t0;
+  let deltaClass = 'neutral', deltaText = 'Sem mudança significativa';
+  if(delta > 0){ deltaClass = ''; deltaText = `<strong>+${delta} ponto${delta>1?'s':''}</strong> em 5 semanas — evolução clara`; }
+  else if(delta < 0){ deltaClass = 'negative'; deltaText = `<strong>${delta} ponto${Math.abs(delta)>1?'s':''}</strong> — vale conversar sobre o que mudou`; }
+
+  return `
+  <div class="evo-chart">
+    <div class="evo-title">${titulo}</div>
+    <div class="evo-question">"${pergunta}"</div>
+    <div class="evo-bars">
+      ${vals.map((v,i)=>`
+        <div class="evo-bar-col">
+          <div class="evo-bar ${classes[i]}" style="height:${heights[i]}%"><span class="evo-bar-value">${v}</span></div>
+        </div>
+      `).join('')}
+    </div>
+    <div class="evo-bar-labels">
+      ${labels.map(l=>`<div class="evo-bar-label">${l}</div>`).join('')}
+    </div>
+    <div class="evo-delta ${deltaClass}">${deltaText}</div>
+  </div>`;
+}
+
+function npsClass(nps){
+  const n = parseInt(nps);
+  if(n >= 9) return { cls: 'promoter', label: 'Promotora' };
+  if(n >= 7) return { cls: 'passive', label: 'Passiva' };
+  return { cls: 'detractor', label: 'Detratora' };
+}
+
+function renderResidente(apelido, data){
+  const t0 = data.t0 || {};
+  const t1 = data.t1 || {};
+  const t2 = data.t2 || {};
+  const diario = data.diario || {};
+
+  // Stats agregados
+  const diasTotal = (DIAS_MAP[diario.sem1?.dias]||0) + (DIAS_MAP[diario.sem2?.dias]||0) + (DIAS_MAP[diario.sem3?.dias]||0) + (DIAS_MAP[diario.sem4?.dias]||0);
+  const promptsCount = (t2.prompts_uso||[]).length;
+  const configCount = (t2.config||[]).filter(c=>c!=='Nenhuma ainda').length;
+  const casosReais = t2.casos_reais || '—';
+
+  // Evolução T0→T1→T2
+  const freqT0 = FREQ_MAP[t0.freq]||0, freqT1 = FREQ_MAP[t1.freq]||0, freqT2 = FREQ_MAP[t2.freq]||0;
+  const aeT0 = parseInt(t0.autoeficacia)||0, aeT1 = parseInt(t1.autoeficacia)||0, aeT2 = parseInt(t2.autoeficacia)||0;
+  const cfT0 = parseInt(t0.confianca)||0, cfT1 = parseInt(t1.confianca)||0, cfT2 = parseInt(t2.confianca)||0;
+
+  // NPS
+  const nps = t1.nps;
+  const npsInfo = nps ? npsClass(nps) : null;
+
+  // Avatar
+  const avColor = avatarColor(apelido);
+  const avInitials = avatarInitials(apelido);
+
+  // Data formatada
+  const dataGer = new Date().toLocaleDateString('pt-BR', { day:'2-digit', month:'long', year:'numeric' });
+
+  return `
+  <div class="container">
+
+    <!-- HERO -->
+    <div class="hero">
+      <div class="hero-eyebrow">Memória AIMED · Residentes GO · MDV</div>
+      <div class="hero-avatar" style="background:${avColor}">${avInitials}</div>
+      <h1 class="hero-title">Sua jornada</h1>
+      <p class="hero-subtitle">Cinco semanas que mudaram seu jeito de cuidar de gestantes. Documento gerado a partir das suas próprias respostas.</p>
+      <div class="hero-meta">Apelido <span>${escapeHtml(apelido)}</span> · Curso de <span>22-23 Maio 2026</span> · Gerado em <span>${dataGer}</span></div>
+    </div>
+
+    <!-- STATS -->
+    <div class="section">
+      <div class="section-eyebrow">Números da sua jornada</div>
+      <h2 class="section-title">Os <em>marcadores</em> dessas 5 semanas</h2>
+      <div class="stats-grid">
+        <div class="stat-card"><div class="stat-number">${diasTotal}</div><div class="stat-label">Dias usando IA</div></div>
+        <div class="stat-card"><div class="stat-number">${promptsCount}</div><div class="stat-label">Prompts customizados</div></div>
+        <div class="stat-card"><div class="stat-number">${configCount}</div><div class="stat-label">Configurações criadas</div></div>
+        <div class="stat-card"><div class="stat-number">${casosReais}</div><div class="stat-label">Casos reais com IA</div></div>
+      </div>
+    </div>
+
+    <!-- EVOLUTION -->
+    <div class="section">
+      <div class="section-eyebrow">Evolução em 3 dimensões</div>
+      <h2 class="section-title">Antes, logo depois, e <em>quatro semanas depois</em></h2>
+      <p class="section-sub">Três variáveis foram medidas nos três momentos do estudo. As barras mostram suas respostas. As setas, sua trajetória.</p>
+      ${renderEvoChart('Frequência de uso', 'Com que frequência você usa IA na sua prática clínica?', freqT0, freqT1, freqT2, 4)}
+      ${renderEvoChart('Autoeficácia', 'Sinto-me capaz de escrever um prompt eficaz para uma dúvida clínica.', aeT0, aeT1, aeT2, 5)}
+      ${renderEvoChart('Confiança', 'Confio no resultado de uma IA para apoiar minha decisão clínica.', cfT0, cfT1, cfT2, 5)}
+    </div>
+
+    <!-- T0 SNAPSHOT -->
+    <div class="section">
+      <div class="section-eyebrow">Sua linha de base · T0</div>
+      <h2 class="section-title">De onde <em>você partiu</em></h2>
+      <div class="snap-grid">
+        <div class="snap-card">
+          <div class="snap-card-label">IAs que já usava</div>
+          <div class="chips">${(t0.ias||['—']).map(ia=>`<span class="chip">${escapeHtml(ia)}</span>`).join('')}</div>
+        </div>
+        <div class="snap-card">
+          <div class="snap-card-label">Já percebeu alucinação?</div>
+          <div class="snap-card-value small">${escapeHtml(t0.alucinacao||'—')}</div>
+        </div>
+        <div class="snap-card">
+          <div class="snap-card-label">CFM 2.454/2026</div>
+          <div class="snap-card-value small">${escapeHtml(t0.cfm||'—')}</div>
+        </div>
+        <div class="snap-card">
+          <div class="snap-card-label">Seu maior medo</div>
+          <div class="snap-card-value small" style="font-style:italic">"${escapeHtml(t0.medo||'—')}"</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- T1 IMMEDIATE IMPACT -->
+    <div class="section">
+      <div class="section-eyebrow">Impacto imediato · T1</div>
+      <h2 class="section-title">O <em>fim do curso</em></h2>
+      ${nps ? `
+      <div class="nps-card">
+        <div class="snap-card-label" style="margin-bottom:6px">Seu NPS · Probabilidade de recomendar a uma colega</div>
+        <div class="nps-number ${npsInfo.cls}">${nps}</div>
+        <div class="nps-label ${npsInfo.cls}">${npsInfo.label}</div>
+      </div>` : ''}
+      <div class="snap-grid">
+        <div class="snap-card">
+          <div class="snap-card-label">Curso atendeu sua expectativa?</div>
+          <div class="snap-card-value small">${['','Muito abaixo','Abaixo','Atendeu','Acima','Muito acima'][parseInt(t1.expectativa_atendida)] || '—'}</div>
+        </div>
+        <div class="snap-card">
+          <div class="snap-card-label">Primeira aplicação</div>
+          <div class="snap-card-value small" style="font-style:italic">"${escapeHtml(t1.aplicar_primeiro||'—')}"</div>
+        </div>
+        ${t1.comentario ? `
+        <div class="snap-card" style="grid-column:1/-1">
+          <div class="snap-card-label">Comentário livre</div>
+          <div class="snap-card-value small" style="font-style:italic">"${escapeHtml(t1.comentario)}"</div>
+        </div>` : ''}
+      </div>
+    </div>
+
+    <!-- T2 REAL USE -->
+    <div class="section">
+      <div class="section-eyebrow">Uso real nas 4 semanas · T2</div>
+      <h2 class="section-title">Os <em>frutos concretos</em></h2>
+      <div class="snap-grid">
+        <div class="snap-card">
+          <div class="snap-card-label">Prompts que você customizou</div>
+          <div class="chips">${(t2.prompts_uso||[]).length ? t2.prompts_uso.map(p=>`<span class="chip">${escapeHtml(p)}</span>`).join('') : '<span class="chip muted">Nenhum ainda</span>'}</div>
+        </div>
+        <div class="snap-card">
+          <div class="snap-card-label">Configurações ativas</div>
+          <div class="chips">${(t2.config||[]).filter(c=>c!=='Nenhuma ainda').length ? t2.config.filter(c=>c!=='Nenhuma ainda').map(c=>`<span class="chip">${escapeHtml(c)}</span>`).join('') : '<span class="chip muted">Nenhuma ainda</span>'}</div>
+        </div>
+        ${t2.falta ? `
+        <div class="snap-card" style="grid-column:1/-1">
+          <div class="snap-card-label">O que ainda faltou</div>
+          <div class="snap-card-value small" style="font-style:italic">"${escapeHtml(t2.falta)}"</div>
+        </div>` : ''}
+      </div>
+    </div>
+
+    <!-- TIMELINE DIÁRIO -->
+    <div class="section">
+      <div class="section-eyebrow">Diário das 4 semanas</div>
+      <h2 class="section-title">As <em>descobertas no caminho</em></h2>
+      <p class="section-sub">Suas observações registradas semana a semana, durante o Bloco 5.</p>
+      <div class="timeline">
+        ${[1,2,3,4].map(w=>{
+          const sw = diario['sem'+w] || {};
+          const desafios = {1:'Refinou o Gem GO/MDV', 2:'1ª revisão de óbito com IA', 3:'TdC no grupo WhatsApp', 4:'Nossa Ferramenta MDV v2.0'};
+          return `
+          <div class="timeline-week">
+            <div class="tl-num">Semana ${w}</div>
+            <div class="tl-title">${desafios[w]}</div>
+            <div class="tl-row">📅 <strong>${escapeHtml(sw.dias||'—')}</strong> dias com IA</div>
+            <div class="tl-row">${sw.desafio==='Sim, integralmente'?'✅':sw.desafio==='Parcialmente'?'🟡':'⚪'} Desafio: <strong>${escapeHtml(sw.desafio||'—')}</strong></div>
+            ${sw.obs ? `<div class="tl-obs">${escapeHtml(sw.obs)}</div>` : ''}
+          </div>`;
+        }).join('')}
+      </div>
+    </div>
+
+    <!-- PULL QUOTE -->
+    ${t2.mudanca ? `
+    <div class="pullquote">
+      <div class="pullquote-mark">"</div>
+      <div class="pullquote-text">${escapeHtml(t2.mudanca)}</div>
+      <div class="pullquote-attr">— Sua resposta no T2 · pergunta 8</div>
+    </div>` : ''}
+
+    <!-- CERTIFICATE -->
+    <div class="section">
+      <div class="section-eyebrow">Reconhecimento</div>
+      <h2 class="section-title">Certificado de <em>conclusão</em></h2>
+      <div class="cert">
+        <div class="cert-eyebrow">InovaMed · Educação Médica Continuada</div>
+        <div class="cert-title">Conferimos a</div>
+        <div class="cert-name">${escapeHtml(data.nome || 'Residente AIMED · '+apelido)}</div>
+        <div class="cert-body">
+          a conclusão integral do curso <strong style="color:var(--gold)">AIMED Residentes GO · Maio 2026</strong>, 14 horas de carga horária presencial mais 4 semanas de aplicação clínica supervisionada, com participação ativa no estudo quasi-experimental pré-pós que sustenta a publicação científica em curso.
+        </div>
+        <div class="cert-sig">
+          <div class="cert-sig-block"><strong>Dr. Mbula Luzingu Barros</strong>Coordenador AIMED · InovaMed</div>
+          <div class="cert-sig-block"><strong>22-23 Maio 2026</strong>Joinville · SC</div>
+          <div class="cert-sig-block"><strong>14 horas</strong>+ 4 semanas pós-curso</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SHARE -->
+    <div class="section">
+      <div class="section-eyebrow">Compartilhar</div>
+      <h2 class="section-title">Sua memória, sua <em>voz</em></h2>
+      <p class="section-sub">Esta página é pública apenas para quem tem o link. Compartilhe à vontade — é seu registro.</p>
+      <div class="share-grid">
+        <button class="share-btn primary" onclick="window.print()">📥 Salvar como PDF</button>
+        <a class="share-btn" href="#" onclick="copiarLink();return false;">🔗 Copiar link</a>
+        <a class="share-btn" href="#" onclick="abrirWhatsApp();return false;">💬 WhatsApp</a>
+        <a class="share-btn" href="#" onclick="abrirLinkedIn();return false;">📱 LinkedIn</a>
+      </div>
+    </div>
+
+    <div class="footer">
+      Memória AIMED · gerada automaticamente a partir de suas respostas T0/T1/T2 e do Diário Semanal · LGPD-compliant (pareamento por apelido, sem dados identificáveis estruturados).<br>
+      <a href="https://mbulabarros.github.io/aimed-residentes-go/">↩ voltar ao AIMED OS</a> · <a href="https://inovamed.pro">InovaMed</a>
+    </div>
+
+  </div>`;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// COMPARTILHAMENTO
+// ═══════════════════════════════════════════════════════════════════
+function copiarLink(){
+  const url = window.location.href;
+  try{ navigator.clipboard.writeText(url).then(()=>showToast('Link copiado · cole onde quiser')); }
+  catch(e){
+    const ta = document.createElement('textarea'); ta.value = url; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
+    showToast('Link copiado');
+  }
+}
+function abrirWhatsApp(){
+  const url = window.location.href;
+  const msg = 'Olha minha jornada de 5 semanas no curso AIMED Residentes GO · IA aplicada à Ginecologia e Obstetrícia · '+url;
+  window.open('https://wa.me/?text='+encodeURIComponent(msg), '_blank');
+}
+function abrirLinkedIn(){
+  const url = window.location.href;
+  window.open('https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(url), '_blank');
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════════════════════
+function init(){
+  const id = (getParam('id')||'').toUpperCase();
+  const app = document.getElementById('app');
+  if(!id){ app.innerHTML = renderEmpty(); return; }
+  const data = RESIDENTES[id];
+  if(!data){
+    app.innerHTML = `
+    <div class="container">
+      <div class="empty">
+        <div class="empty-icon">🤔</div>
+        <div class="empty-title">Apelido não encontrado</div>
+        <div class="empty-text">
+          Não encontrei o apelido <code style="color:var(--gold)">${escapeHtml(id)}</code> na base.<br><br>
+          Verifique se digitou exatamente igual ao que você usou nos questionários T0/T1/T2, ou volte ao link recebido pelo WhatsApp.
+        </div>
+        <button class="share-btn" onclick="window.location.search=''" style="margin-top:20px;display:inline-flex">↩ Voltar</button>
+      </div>
+    </div>`;
+    return;
+  }
+  app.innerHTML = renderResidente(id, data);
+  document.title = 'Memória AIMED · '+id;
+}
+init();
+</script>
+
+</body>
+</html>
