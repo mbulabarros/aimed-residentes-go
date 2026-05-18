@@ -844,14 +844,14 @@ body {
   .pre-curso-action-num { font-size: 1.2rem; }
 }
 
-#biblioteca-overlay, #logistica-overlay, #sobre-overlay, #avaliacao-overlay, #instrucoes-overlay {
+#biblioteca-overlay, #logistica-overlay, #sobre-overlay, #avaliacao-overlay, #instrucoes-overlay, #links-overlay {
   position: fixed; inset: 0;
   z-index: 200;
   display: none;
   align-items: flex-start;
   justify-content: flex-end;
 }
-#biblioteca-overlay.open, #logistica-overlay.open, #sobre-overlay.open, #avaliacao-overlay.open, #instrucoes-overlay.open { display: flex; }
+#biblioteca-overlay.open, #logistica-overlay.open, #sobre-overlay.open, #avaliacao-overlay.open, #instrucoes-overlay.open, #links-overlay.open { display: flex; }
 
 /* ── AVALIAÇÃO · TABS E FORMULÁRIOS ── */
 .eval-tabs { display: flex; gap: 6px; padding: 14px 28px 0; border-bottom: 1px solid var(--border-dim); flex-wrap: wrap; }
@@ -1835,6 +1835,146 @@ body {
 }
 
 /* ═══════════════════════════════════════════════════════════════
+   HUB DE LINKS ESSENCIAIS
+   Cards de links externos agrupados por categoria.
+   ═══════════════════════════════════════════════════════════════ */
+.links-section { margin-bottom: 32px; }
+.links-section:last-child { margin-bottom: 0; }
+.links-section-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-dim);
+}
+.links-section-icon {
+  font-size: 1.1rem;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: rgba(201,168,76,0.10);
+  border: 1px solid rgba(201,168,76,0.3);
+}
+.links-section-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 0.01em;
+}
+.links-section-sub {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  margin-top: 1px;
+}
+.links-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+.link-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 14px;
+  background: var(--navy-light);
+  border: 1px solid var(--border-dim);
+  border-radius: var(--radius);
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.18s;
+  min-width: 0;
+}
+.link-card:hover {
+  border-color: var(--gold);
+  background: var(--navy);
+  transform: translateY(-1px);
+}
+.link-card-icon {
+  font-size: 1rem;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.link-card-body {
+  flex: 1;
+  min-width: 0;
+}
+.link-card-name {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.3;
+  margin-bottom: 3px;
+}
+.link-card-desc {
+  font-size: 0.68rem;
+  color: var(--text-dim);
+  line-height: 1.4;
+}
+.link-card-arrow {
+  color: var(--text-muted);
+  font-size: 0.7rem;
+  flex-shrink: 0;
+  margin-top: 4px;
+  transition: transform 0.15s, color 0.15s;
+}
+.link-card:hover .link-card-arrow { color: var(--gold); transform: translateX(2px); }
+
+@media (max-width: 700px) {
+  .links-grid { grid-template-columns: 1fr; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   FAVORITOS · estrela em cada card de prompt
+   ═══════════════════════════════════════════════════════════════ */
+.lib-fav-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--text-muted);
+  font-size: 1.15rem;
+  padding: 2px 6px;
+  margin-left: auto;
+  flex-shrink: 0;
+  transition: color 0.18s, transform 0.12s;
+  line-height: 1;
+}
+.lib-fav-btn:hover { transform: scale(1.18); color: var(--gold); }
+.lib-fav-btn.active { color: var(--gold); }
+
+/* ═══════════════════════════════════════════════════════════════
+   FILTROS TEMÁTICOS · linha de tags clínicas
+   ═══════════════════════════════════════════════════════════════ */
+.lib-theme-filters {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+.lib-theme-btn {
+  background: transparent;
+  color: var(--text-dim);
+  border: 1px solid var(--border-dim);
+  padding: 5px 11px;
+  border-radius: 14px;
+  cursor: pointer;
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  transition: all 0.16s;
+  font-family: inherit;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.lib-theme-btn:hover { color: var(--text); border-color: var(--border); }
+.lib-theme-btn.active { background: var(--gold-pale); color: var(--gold); border-color: var(--gold); }
+.lib-theme-btn.fav.active { background: rgba(201,168,76,0.20); }
+
+/* ═══════════════════════════════════════════════════════════════
    PRÉ-CURSO · QUARTA AÇÃO (TOUR)
    ═══════════════════════════════════════════════════════════════ */
 .pre-curso-action.tour-action {
@@ -1914,7 +2054,7 @@ body {
   #sidebar, #topbar, #busca-overlay,
   #biblioteca-overlay, #logistica-overlay,
   #avaliacao-overlay, #sobre-overlay, #pre-curso-overlay,
-  #instrucoes-overlay,
+  #instrucoes-overlay, #links-overlay,
   #toast, .lib-actions, .lib-pdf-toolbar, .lib-filters,
   .btn-pdf-card, .btn-pdf-index, .menu-toggle {
     display: none !important;
@@ -2185,6 +2325,9 @@ body {
     <button class="sidebar-btn" onclick="showBiblioteca()">
       <span class="sidebar-btn-icon">📚</span> Biblioteca AIMED GO
     </button>
+    <button class="sidebar-btn" onclick="showLinks()">
+      <span class="sidebar-btn-icon">🔗</span> Links Essenciais
+    </button>
     <button class="sidebar-btn" onclick="showAvaliacao()">
       <span class="sidebar-btn-icon">📊</span> Avaliação · Pesquisa
     </button>
@@ -2233,6 +2376,21 @@ body {
       <button class="overlay-close" onclick="fecharBiblioteca()">✕</button>
     </div>
     <div class="overlay-body" id="biblioteca-body"><!-- JS --></div>
+  </div>
+</div>
+
+<!-- LINKS ESSENCIAIS OVERLAY -->
+<div id="links-overlay">
+  <div class="overlay-backdrop" onclick="fecharLinks()"></div>
+  <div class="overlay-panel">
+    <div class="overlay-header">
+      <div>
+        <div class="overlay-title">Links Essenciais</div>
+        <div class="overlay-sub">Diretrizes · IAs · cálculos clínicos · bases de evidência · recursos institucionais</div>
+      </div>
+      <button class="overlay-close" onclick="fecharLinks()">✕</button>
+    </div>
+    <div class="overlay-body" id="links-body"><!-- JS --></div>
   </div>
 </div>
 
@@ -4271,6 +4429,111 @@ Cada ata gerada por este prompt, quando arquivada no NotebookLM do serviço com 
 ];
 
 // ═══════════════════════════════════════════════════════════════════
+// LINKS ESSENCIAIS · Hub de recursos clínicos externos
+// Edite livremente este array — cada categoria vira uma seção visual.
+// ═══════════════════════════════════════════════════════════════════
+const LINKS_ESSENCIAIS = [
+  {
+    categoria: 'Diretrizes & Protocolos',
+    icon: '📋',
+    sub: 'Documentos oficiais para consulta semanal',
+    items: [
+      { nome:'FEBRASGO · Posicionamentos', desc:'Documentos oficiais GO · referência primária', url:'https://www.febrasgo.org.br/pt/noticias/category/posicionamentos', icon:'📘' },
+      { nome:'FEBRASGO · Tratado de Obstetrícia', desc:'Referência rápida online', url:'https://tratado.febrasgo.org.br/', icon:'📗' },
+      { nome:'Gestação de Alto Risco · MS', desc:'Manual oficial do Ministério da Saúde', url:'https://bvsms.saude.gov.br/bvs/publicacoes/manual_tecnico_gestacao_alto_risco.pdf', icon:'🏥' },
+      { nome:'CFM · Resoluções', desc:'Inclui Res. 2.454/2026 sobre IA na medicina', url:'https://portal.cfm.org.br/resolucoes', icon:'⚖️' },
+      { nome:'SBP · Documentos Científicos', desc:'Para casos perinatais e neonatais', url:'https://www.sbp.com.br/imprensa/documentos-cientificos/', icon:'📕' }
+    ]
+  },
+  {
+    categoria: 'IAs Clínicas',
+    icon: '🤖',
+    sub: 'Suas aliadas diárias · uso no plantão e no estudo',
+    items: [
+      { nome:'Gemini', desc:'Busca · Google Scholar · imagens', url:'https://gemini.google.com/app', icon:'💎' },
+      { nome:'Claude', desc:'Análise crítica de PDFs · Projeto GO/MDV', url:'https://claude.ai', icon:'🟣' },
+      { nome:'ChatGPT', desc:'Síntese · estruturação de raciocínio', url:'https://chatgpt.com', icon:'🟢' },
+      { nome:'NotebookLM', desc:'Memória clínica · acervo pedagógico', url:'https://notebooklm.google.com', icon:'📓' },
+      { nome:'Perplexity', desc:'Busca científica com citações inline', url:'https://www.perplexity.ai', icon:'🔍' },
+      { nome:'OpenEvidence', desc:'IA especializada em evidência médica', url:'https://www.openevidence.com', icon:'🩺' }
+    ]
+  },
+  {
+    categoria: 'Bases de Evidência',
+    icon: '🔬',
+    sub: 'Para revisões PICO e estudo dirigido',
+    items: [
+      { nome:'PubMed', desc:'Busca rápida em plantão', url:'https://pubmed.ncbi.nlm.nih.gov/', icon:'🧬' },
+      { nome:'Cochrane Library', desc:'Revisões sistemáticas · gold standard', url:'https://www.cochranelibrary.com/', icon:'📊' },
+      { nome:'SciELO Brasil', desc:'Estudos brasileiros em PT-BR', url:'https://www.scielo.br/', icon:'🇧🇷' },
+      { nome:'BVS Saúde', desc:'Meta-busca em português · LILACS', url:'https://bvsalud.org/', icon:'🔎' },
+      { nome:'Google Scholar', desc:'Citações cruzadas e citação reversa', url:'https://scholar.google.com.br/', icon:'🎓' }
+    ]
+  },
+  {
+    categoria: 'Cálculos Clínicos & Bedside',
+    icon: '🧮',
+    sub: 'Para uso direto no plantão',
+    items: [
+      { nome:'MedCalc · OB/GYN', desc:'IG, EFW, percentis fetais', url:'https://www.medcalc.com/obgyn.html', icon:'⏱️' },
+      { nome:'FMF · Pré-Eclâmpsia', desc:'Rastreio do 1º trimestre · calc oficial', url:'https://fetalmedicine.org/research/assess/preeclampsia', icon:'⚠️' },
+      { nome:'Whitebook · PEBMED', desc:'App de bolso · doses e diretrizes', url:'https://www.pebmed.com.br/whitebook/', icon:'💊' },
+      { nome:'Sanar Medicina', desc:'Consulta rápida · resumos clínicos', url:'https://www.sanarmedicina.com/', icon:'📱' },
+      { nome:'MDCalc', desc:'Scores clínicos internacionais', url:'https://www.mdcalc.com/', icon:'🌐' }
+    ]
+  },
+  {
+    categoria: 'Recursos AIMED & Institucionais',
+    icon: '🎯',
+    sub: 'Pesquisa, comunicação e hub principal',
+    items: [
+      { nome:'InovaMed Pro', desc:'Hub principal · Dr. Mbula', url:'https://inovamed.pro', icon:'🌟' },
+      { nome:'GitHub · Releases', desc:'Versões e PDFs da plataforma', url:'https://github.com/mbulabarros/aimed-residentes-go/releases', icon:'🏷️' },
+      { nome:'Questionário T1 · WhatsApp', desc:'Envie suas respostas no grupo · 1 semana pós-curso', url:'https://wa.me/?text='+encodeURIComponent('📊 AIMED · Questionário T1 · 1 semana pós-curso\n\nMinhas respostas:\n\n1. Frequência de uso das IAs nesta semana: ____\n2. Prompt da Biblioteca que mais usei: ____\n3. Caso onde a IA mudou minha conduta: ____\n4. Maior dificuldade encontrada: ____\n5. Pergunta que quero levar para o grupo: ____'), icon:'📋' },
+      { nome:'Diário Semanal · WhatsApp', desc:'Compartilhe o aprendizado da semana com o grupo', url:'https://wa.me/?text='+encodeURIComponent('📅 AIMED · Diário Semanal · Semana ___\n\n🔹 Caso onde usei IA esta semana:\n____\n\n🔹 Prompt que funcionou bem:\n____\n\n🔹 Achado que me surpreendeu:\n____\n\n🔹 O que vou ajustar na próxima semana:\n____'), icon:'📅' }
+    ]
+  }
+];
+
+// ═══════════════════════════════════════════════════════════════════
+// TEMAS CLÍNICOS · classificação dos prompts da Biblioteca
+// ═══════════════════════════════════════════════════════════════════
+const THEME_LABELS = {
+  diagnostico:'Diagnóstico',
+  farmacologia:'Farmacologia',
+  emergencia:'Emergência',
+  raciocinio:'Raciocínio Crítico',
+  pesquisa:'Pesquisa',
+  documentacao:'Documentação',
+  planejamento:'Planejamento Clínico',
+  auditoria:'Auditoria & Óbito'
+};
+const THEME_ICONS = {
+  diagnostico:'🔬', farmacologia:'💊', emergencia:'⚡',
+  raciocinio:'🧠', pesquisa:'🔍', documentacao:'📝',
+  planejamento:'🏥', auditoria:'📊'
+};
+// Mapeamento id → tema (mantém estrutura BIBLIOTECA intocada)
+const PROMPT_THEMES = {
+  'pesquisa':'pesquisa',
+  'tc-ultra':'raciocinio',
+  'medicamentos-go':'farmacologia',
+  'emergencia-go':'emergencia',
+  'ctg-usg':'diagnostico',
+  'obito-materno':'auditoria',
+  'anti-alucinacao-go':'raciocinio',
+  'pre-plantao-go':'planejamento',
+  'prenatal-ar':'diagnostico',
+  'escriba-audio':'documentacao',
+  'gastro-colica-rge':'diagnostico',
+  'gastro-diarreia-aguda':'emergencia',
+  'pneumo-bronquiolite':'emergencia',
+  'pneumo-asma-stepup':'farmacologia',
+  'mfc-multimorbidade':'planejamento',
+  'mfc-saude-mental':'planejamento'
+};
+
+// ═══════════════════════════════════════════════════════════════════
 // CONFIG DE EDIÇÃO · Troca aqui para Junho 2026
 // ═══════════════════════════════════════════════════════════════════
 const EDITION = {
@@ -4293,6 +4556,7 @@ const EDITION = {
 // };
 const SPEC_LABELS={universal:'Universal',go:'Ginecologia & Obstetrícia',gastro:'Gastropediatria',pneumo:'Pneumopediatria',mfc:'Medicina da Família'};
 let currentSpecFilter='todos';
+let currentThemeFilter='todos';
 
 // ── UTILITY FUNCTIONS ──
 function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);}
@@ -4402,8 +4666,93 @@ function openAI(platform,text){
   abrirNovaAba(urls[platform]||urls.claude);
 }
 function toggleSidebar(){const s=document.getElementById('sidebar');const o=document.getElementById('sidebarOverlay');s.classList.toggle('open');o.classList.toggle('show');}
-function showBiblioteca(){const ov=document.getElementById('biblioteca-overlay');ov.classList.add('open');const body=document.getElementById('biblioteca-body');body.innerHTML=renderBiblioteca();body.querySelectorAll('.lib-card').forEach(card=>{card.addEventListener('click',e=>{if(e.target.closest('.lib-actions'))return;card.classList.toggle('open');});});}
+function showBiblioteca(){
+  const ov=document.getElementById('biblioteca-overlay');
+  ov.classList.add('open');
+  const body=document.getElementById('biblioteca-body');
+  body.innerHTML=renderBiblioteca();
+  bindLibCardClicks();
+}
 function fecharBiblioteca(){document.getElementById('biblioteca-overlay').classList.remove('open');}
+
+// ═══════════════════════════════════════════════════════════════════
+// LINKS ESSENCIAIS · Hub de recursos externos
+// ═══════════════════════════════════════════════════════════════════
+function showLinks(){
+  const ov=document.getElementById('links-overlay');
+  ov.classList.add('open');
+  document.getElementById('links-body').innerHTML=renderLinks();
+}
+function fecharLinks(){document.getElementById('links-overlay').classList.remove('open');}
+function renderLinks(){
+  let html='<div style="font-size:0.78rem;color:var(--text-dim);line-height:1.55;margin-bottom:24px;padding:14px 16px;background:rgba(201,168,76,0.06);border-left:3px solid var(--gold);border-radius:6px">'+
+    '<strong style="color:var(--gold)">💡 Hub clínico permanente.</strong> Esses links abrem em aba nova — use no plantão, no estudo, na construção dos casos. Cada recurso aqui foi escolhido por relevância para a residência GO brasileira.'+
+    '</div>';
+  LINKS_ESSENCIAIS.forEach(sec=>{
+    html+='<div class="links-section">';
+    html+='<div class="links-section-header">';
+    html+='<div class="links-section-icon">'+sec.icon+'</div>';
+    html+='<div><div class="links-section-title">'+sec.categoria+'</div>';
+    if(sec.sub) html+='<div class="links-section-sub">'+sec.sub+'</div>';
+    html+='</div></div>';
+    html+='<div class="links-grid">';
+    sec.items.forEach(it=>{
+      const isPlaceholder=it.url==='#';
+      const attrs=isPlaceholder
+        ? 'href="#" onclick="event.preventDefault();return false;" style="opacity:0.55;cursor:not-allowed"'
+        : 'href="'+it.url+'" target="_blank" rel="noopener noreferrer"';
+      html+='<a class="link-card" '+attrs+'>';
+      html+='<div class="link-card-icon">'+(it.icon||'🔗')+'</div>';
+      html+='<div class="link-card-body">';
+      html+='<div class="link-card-name">'+it.nome+'</div>';
+      html+='<div class="link-card-desc">'+it.desc+'</div>';
+      html+='</div>';
+      html+='<div class="link-card-arrow">'+(isPlaceholder?'·':'↗')+'</div>';
+      html+='</a>';
+    });
+    html+='</div></div>';
+  });
+  return html;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// FAVORITOS · estrela em cada card + filtro Favoritos
+// localStorage key: aimed-favorites-v1
+// ═══════════════════════════════════════════════════════════════════
+function getFavorites(){
+  try{ return JSON.parse(localStorage.getItem('aimed-favorites-v1')||'[]'); }
+  catch(e){ return []; }
+}
+function isFavorite(id){ return getFavorites().includes(id); }
+function toggleFavorite(id, event){
+  if(event){ event.stopPropagation(); event.preventDefault(); }
+  let favs=getFavorites();
+  if(favs.includes(id)){ favs=favs.filter(x=>x!==id); }
+  else { favs.push(id); }
+  try{ localStorage.setItem('aimed-favorites-v1', JSON.stringify(favs)); }catch(e){}
+  // Atualizar a estrela visualmente sem re-renderizar tudo
+  const btn=document.querySelector('.lib-fav-btn[data-fav-id="'+id+'"]');
+  if(btn){
+    btn.classList.toggle('active', favs.includes(id));
+    btn.textContent = favs.includes(id) ? '★' : '☆';
+    btn.setAttribute('aria-label', favs.includes(id)?'Remover dos favoritos':'Marcar como favorito');
+  }
+  // Se o filtro corrente é Favoritos, re-renderizar Biblioteca para refletir
+  if(currentSpecFilter==='favoritos'){
+    const body=document.getElementById('biblioteca-body');
+    if(body) body.innerHTML=renderBiblioteca();
+    bindLibCardClicks();
+  }
+}
+function bindLibCardClicks(){
+  document.querySelectorAll('.lib-card').forEach(card=>{
+    card.addEventListener('click',e=>{
+      if(e.target.closest('.lib-actions'))return;
+      if(e.target.closest('.lib-fav-btn'))return;
+      card.classList.toggle('open');
+    });
+  });
+}
 function showLogistica(){document.getElementById('logistica-overlay').classList.add('open');document.getElementById('logistica-body').innerHTML=renderLogistica();}
 function fecharLogistica(){document.getElementById('logistica-overlay').classList.remove('open');}
 function abrirSobre(){document.getElementById('sobre-overlay').classList.add('open');}
@@ -4996,35 +5345,66 @@ function renderBiblioteca(){
   const especPrincipais=visiveis.filter(s=>s!=='universal');
   // Filtro corrente
   const fltrAtivo=currentSpecFilter||'todos';
-  // Botões de filtro (só aparecem se houver mais de uma spec não-universal)
+  // Filtro especialidade (mantém comportamento original)
   let filtrosHtml='';
   if(especPrincipais.length>=1){
+    const favs=getFavorites();
     const allBtns=[{id:'todos',label:'Todos'},{id:'universal',label:'Universais'}];
     especPrincipais.forEach(s=>allBtns.push({id:s,label:SPEC_LABELS[s]||s}));
+    allBtns.push({id:'favoritos',label:'⭐ Favoritos'+(favs.length?` (${favs.length})`:''), fav:true});
     filtrosHtml='<div class="lib-filters">'+allBtns.map(b=>{
       const active=b.id===fltrAtivo?' active':'';
-      return `<button class="lib-filter-btn${active}" onclick="setSpecFilter('${b.id}')">${b.label}</button>`;
+      const favCls=b.fav?' fav':'';
+      return `<button class="lib-filter-btn${favCls}${active}" onclick="setSpecFilter('${b.id}')">${b.label}</button>`;
     }).join('')+'</div>';
   }
-  // Filtrar BIBLIOTECA pela edição (só specs visíveis) e pelo filtro corrente
-  const visiveis2=BIBLIOTECA.filter(b=>{
+  // Filtros temáticos · derivados do PROMPT_THEMES
+  const tFltr=currentThemeFilter||'todos';
+  const temasUsados=new Set();
+  BIBLIOTECA.forEach(b=>{ const t=PROMPT_THEMES[b.id]; if(t) temasUsados.add(t); });
+  let temasHtml='';
+  if(temasUsados.size>0){
+    temasHtml='<div class="lib-theme-filters">';
+    temasHtml+=`<button class="lib-theme-btn${tFltr==='todos'?' active':''}" onclick="setThemeFilter('todos')">Todos os temas</button>`;
+    Array.from(temasUsados).sort().forEach(t=>{
+      const active=tFltr===t?' active':'';
+      temasHtml+=`<button class="lib-theme-btn${active}" onclick="setThemeFilter('${t}')">${THEME_ICONS[t]||''} ${THEME_LABELS[t]||t}</button>`;
+    });
+    temasHtml+='</div>';
+  }
+  // Filtrar BIBLIOTECA pela edição (só specs visíveis)
+  let visiveis2=BIBLIOTECA.filter(b=>{
     const sp=b.specs||['universal'];
     return sp.some(s=>visiveis.includes(s));
   });
+  // Aplicar filtro de spec/favoritos
   let lista;
-  if(fltrAtivo==='todos')lista=visiveis2;
+  if(fltrAtivo==='favoritos'){
+    const favs=getFavorites();
+    lista=visiveis2.filter(b=>favs.includes(b.id));
+  }
+  else if(fltrAtivo==='todos')lista=visiveis2;
   else if(fltrAtivo==='universal')lista=visiveis2.filter(b=>(b.specs||['universal']).includes('universal'));
   else lista=visiveis2.filter(b=>(b.specs||['universal']).includes(fltrAtivo));
-  // Renderizar agrupado: universais primeiro, depois por specialty
+  // Aplicar filtro temático (intersect)
+  if(tFltr!=='todos'){
+    lista=lista.filter(b=>PROMPT_THEMES[b.id]===tFltr);
+  }
+  // Toolbar PDF + filtros
   let html=`<div class="lib-pdf-toolbar">
     <div class="lib-pdf-toolbar-text">📄 <strong style="color:var(--text);margin-left:6px">Salvar em PDF:</strong>&nbsp;baixe o índice geral, ou clique em "PDF" em cada prompt individual.</div>
     <button class="btn-pdf-index" onclick="gerarPDFIndice()">📥 Baixar índice geral</button>
-  </div>`+filtrosHtml;
+  </div>`+filtrosHtml+temasHtml;
   if(lista.length===0){
-    html+='<div class="lib-empty">Nenhum prompt para este filtro. Tente outro.</div>';
+    if(fltrAtivo==='favoritos'){
+      html+='<div class="lib-empty">⭐ Você ainda não tem prompts favoritos. Toque na estrela ☆ de qualquer card para favoritar.</div>';
+    } else {
+      html+='<div class="lib-empty">Nenhum prompt para este filtro. Tente outro.</div>';
+    }
     return html;
   }
-  if(fltrAtivo==='todos'){
+  // Renderização
+  if(fltrAtivo==='todos' && tFltr==='todos'){
     const universais=lista.filter(b=>(b.specs||['universal']).includes('universal'));
     if(universais.length){
       html+='<div class="lib-section-label">Universal · Qualquer Especialidade</div>';
@@ -5037,6 +5417,12 @@ function renderBiblioteca(){
         da.forEach(item=>{html+=renderLibCard(item,tagLabels);});
       }
     });
+  } else if(fltrAtivo==='favoritos'){
+    html+='<div class="lib-section-label">⭐ Seus Favoritos</div>';
+    lista.forEach(item=>{html+=renderLibCard(item,tagLabels);});
+  } else if(tFltr!=='todos'){
+    html+=`<div class="lib-section-label">${THEME_ICONS[tFltr]||''} ${THEME_LABELS[tFltr]||tFltr}</div>`;
+    lista.forEach(item=>{html+=renderLibCard(item,tagLabels);});
   } else {
     const label=fltrAtivo==='universal'?'Universal · Qualquer Especialidade':(SPEC_LABELS[fltrAtivo]||fltrAtivo);
     html+=`<div class="lib-section-label">${label}</div>`;
@@ -5049,15 +5435,28 @@ function setSpecFilter(spec){
   const body=document.getElementById('biblioteca-body');
   if(body){
     body.innerHTML=renderBiblioteca();
-    body.querySelectorAll('.lib-card').forEach(card=>{card.addEventListener('click',e=>{if(e.target.closest('.lib-actions'))return;card.classList.toggle('open');});});
+    bindLibCardClicks();
+  }
+}
+function setThemeFilter(theme){
+  currentThemeFilter=theme;
+  const body=document.getElementById('biblioteca-body');
+  if(body){
+    body.innerHTML=renderBiblioteca();
+    bindLibCardClicks();
   }
 }
 function renderLibCard(item,tagLabels){
   const tags=item.tags.map(t=>`<span class="lib-tag ${t}">${tagLabels[t]||t}</span>`).join('');
+  const isFav=isFavorite(item.id);
+  const favStar = isFav ? '★' : '☆';
+  const favActive = isFav ? ' active' : '';
+  const favLabel = isFav ? 'Remover dos favoritos' : 'Marcar como favorito';
   return`<div class="lib-card" id="lib-${item.id}">
 <div class="lib-card-header">
 <div class="lib-card-icon">${item.icon}</div>
 <div class="lib-card-info"><div class="lib-card-title">${item.titulo}</div><div class="lib-card-desc">${item.desc}</div><div class="lib-card-tags">${tags}</div></div>
+<button class="lib-fav-btn${favActive}" data-fav-id="${item.id}" onclick="toggleFavorite('${item.id}',event)" aria-label="${favLabel}" title="${favLabel}">${favStar}</button>
 <div class="lib-card-chevron">▼</div>
 </div>
 <div class="lib-prompt-area">
