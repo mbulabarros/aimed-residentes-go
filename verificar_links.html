@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verificação dos Links · AIMED OS Hub</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0a1929;color:#e8eef5;padding:16px;line-height:1.55;font-size:14px}
+  h1{font-size:1.25rem;margin-bottom:6px;color:#f0c674}
+  .sub{font-size:0.82rem;color:#8a9bb0;margin-bottom:18px}
+  .controls{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+  button{background:#1e3a5f;color:#f0c674;border:1px solid #4a7ab8;border-radius:8px;padding:10px 14px;font-size:0.85rem;font-weight:600;cursor:pointer;font-family:inherit}
+  button:active{background:#2a4878}
+  button.primary{background:#f0c674;color:#0a1929}
+  .summary{background:#152840;border-radius:8px;padding:12px 14px;margin-bottom:18px;font-size:0.85rem;display:grid;grid-template-columns:repeat(4,1fr);gap:8px;text-align:center}
+  .summary .num{font-size:1.4rem;font-weight:700;display:block}
+  .summary .label{font-size:0.7rem;color:#8a9bb0;text-transform:uppercase;letter-spacing:0.06em}
+  .ok{color:#6ab87a}
+  .warn{color:#f0c674}
+  .err{color:#e57373}
+  .pending{color:#8a9bb0}
+  .cat{margin-bottom:18px}
+  .cat-title{font-size:0.95rem;color:#f0c674;font-weight:600;margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid #2a4060}
+  .link{display:flex;align-items:center;gap:10px;padding:12px;background:#152840;border:1px solid #2a4060;border-radius:8px;margin-bottom:6px;text-decoration:none;color:#e8eef5;transition:border-color 0.2s}
+  .link:active{border-color:#f0c674}
+  .link-status{flex-shrink:0;font-size:1.2rem;width:28px;text-align:center}
+  .link-info{flex:1;min-width:0;overflow:hidden}
+  .link-name{font-weight:600;font-size:0.88rem;color:#f0c674}
+  .link-url{font-size:0.7rem;color:#8a9bb0;font-family:monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .link-detail{font-size:0.72rem;color:#8a9bb0;margin-top:2px}
+  .link-actions{display:flex;gap:4px;flex-shrink:0}
+  .mark-btn{background:transparent;color:#8a9bb0;border:1px solid #4a7ab8;padding:6px 10px;font-size:0.7rem;border-radius:6px}
+  .mark-btn.active-ok{background:#6ab87a;color:#0a1929;border-color:#6ab87a}
+  .mark-btn.active-err{background:#e57373;color:#fff;border-color:#e57373}
+  @media(max-width:480px){.summary{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+
+<h1>🔗 Verificação · Hub de Links Essenciais</h1>
+<div class="sub">25 links em 5 categorias. O teste automático faz <strong>fetch no-cors</strong> (verifica se o domínio responde). Para certeza absoluta, toque em "abrir" para validar visualmente.</div>
+
+<div class="controls">
+  <button class="primary" onclick="rodarTesteAuto()">▶ Testar todos automaticamente</button>
+  <button onclick="abrirTodos()">🔗 Abrir todos em sequência</button>
+  <button onclick="exportarResultado()">📋 Copiar resultado</button>
+</div>
+
+<div class="summary">
+  <div><span class="num ok" id="num-ok">0</span><span class="label">OK</span></div>
+  <div><span class="num warn" id="num-warn">0</span><span class="label">Suspeitos</span></div>
+  <div><span class="num err" id="num-err">0</span><span class="label">Erro</span></div>
+  <div><span class="num pending" id="num-pending">25</span><span class="label">Pendentes</span></div>
+</div>
+
+<div id="lista"></div>
+
+<script>
+const LINKS = [
+  { cat:'📋 Diretrizes & Protocolos', items:[
+    { nome:'FEBRASGO · Posicionamentos', url:'https://www.febrasgo.org.br/pt/noticias/category/posicionamentos' },
+    { nome:'FEBRASGO · Tratado de Obstetrícia', url:'https://tratado.febrasgo.org.br/' },
+    { nome:'Gestação de Alto Risco · MS', url:'https://bvsms.saude.gov.br/bvs/publicacoes/manual_tecnico_gestacao_alto_risco.pdf' },
+    { nome:'CFM · Resoluções', url:'https://portal.cfm.org.br/resolucoes' },
+    { nome:'SBP · Documentos Científicos', url:'https://www.sbp.com.br/imprensa/documentos-cientificos/' }
+  ]},
+  { cat:'🤖 IAs Clínicas', items:[
+    { nome:'Gemini', url:'https://gemini.google.com' },
+    { nome:'Claude', url:'https://claude.ai' },
+    { nome:'ChatGPT', url:'https://chatgpt.com' },
+    { nome:'NotebookLM', url:'https://notebooklm.google.com' },
+    { nome:'Perplexity', url:'https://www.perplexity.ai' },
+    { nome:'OpenEvidence', url:'https://www.openevidence.com' }
+  ]},
+  { cat:'🔬 Bases de Evidência', items:[
+    { nome:'PubMed', url:'https://pubmed.ncbi.nlm.nih.gov/' },
+    { nome:'Cochrane Library', url:'https://www.cochranelibrary.com/' },
+    { nome:'SciELO Brasil', url:'https://www.scielo.br/' },
+    { nome:'BVS Saúde', url:'https://bvsalud.org/' },
+    { nome:'Google Scholar', url:'https://scholar.google.com.br/' }
+  ]},
+  { cat:'🧮 Cálculos Clínicos & Bedside', items:[
+    { nome:'MedCalc · OB/GYN', url:'https://www.medcalc.com/obgyn.html' },
+    { nome:'FMF · Pré-Eclâmpsia', url:'https://fetalmedicine.org/research/assess/preeclampsia' },
+    { nome:'Whitebook · PEBMED', url:'https://www.pebmed.com.br/whitebook/' },
+    { nome:'Sanar Medicina', url:'https://www.sanarmedicina.com/' },
+    { nome:'MDCalc', url:'https://www.mdcalc.com/' }
+  ]},
+  { cat:'🎯 Recursos AIMED & Institucionais', items:[
+    { nome:'InovaMed Pro', url:'https://inovamed.pro' },
+    { nome:'GitHub · Releases', url:'https://github.com/mbulabarros/aimed-residentes-go/releases' },
+    { nome:'wa.me (link WhatsApp · T1)', url:'https://wa.me/' },
+    { nome:'wa.me (link WhatsApp · Diário)', url:'https://wa.me/' }
+  ]}
+];
+
+const resultados = {};
+
+function renderLista(){
+  const lista = document.getElementById('lista');
+  let html = '';
+  let idx = 0;
+  LINKS.forEach(cat => {
+    html += '<div class="cat"><div class="cat-title">'+cat.cat+'</div>';
+    cat.items.forEach(it => {
+      const r = resultados[idx] || { status:'pending', detail:'aguardando teste' };
+      const icon = r.status==='ok' ? '✓' : r.status==='err' ? '✗' : r.status==='warn' ? '⚠' : '·';
+      const cls = r.status==='ok' ? 'ok' : r.status==='err' ? 'err' : r.status==='warn' ? 'warn' : 'pending';
+      const markOk = r.manual==='ok' ? 'active-ok' : '';
+      const markErr = r.manual==='err' ? 'active-err' : '';
+      html += '<div style="display:flex;flex-direction:column;gap:6px;margin-bottom:6px">';
+      html += '<a class="link" href="'+it.url+'" target="_blank" rel="noopener noreferrer" data-idx="'+idx+'">';
+      html += '<div class="link-status '+cls+'">'+icon+'</div>';
+      html += '<div class="link-info"><div class="link-name">'+it.nome+'</div>';
+      html += '<div class="link-url">'+it.url+'</div>';
+      html += '<div class="link-detail">'+r.detail+'</div></div>';
+      html += '</a>';
+      html += '<div style="display:flex;gap:6px;padding-left:38px">';
+      html += '<button class="mark-btn '+markOk+'" onclick="marcar('+idx+',\'ok\')">✓ Abriu OK</button>';
+      html += '<button class="mark-btn '+markErr+'" onclick="marcar('+idx+',\'err\')">✗ Quebrou</button>';
+      html += '</div></div>';
+      idx++;
+    });
+    html += '</div>';
+  });
+  lista.innerHTML = html;
+  atualizarSumario();
+}
+
+function atualizarSumario(){
+  let ok=0, warn=0, err=0, pending=0;
+  let totalIdx=0;
+  LINKS.forEach(c=>{c.items.forEach(_=>{
+    const r = resultados[totalIdx];
+    if(!r || r.status==='pending') pending++;
+    else if(r.status==='ok') ok++;
+    else if(r.status==='warn') warn++;
+    else err++;
+    totalIdx++;
+  })});
+  document.getElementById('num-ok').textContent = ok;
+  document.getElementById('num-warn').textContent = warn;
+  document.getElementById('num-err').textContent = err;
+  document.getElementById('num-pending').textContent = pending;
+}
+
+async function testarLink(url, idx){
+  // Tenta fetch no-cors. Sucesso = domínio resolve e responde algo (mesmo opaque).
+  // Falha = DNS quebrado, conexão recusada, ou timeout.
+  try {
+    const ctrl = new AbortController();
+    const timeoutId = setTimeout(()=>ctrl.abort(), 10000);
+    const resp = await fetch(url, { mode:'no-cors', method:'HEAD', signal:ctrl.signal, redirect:'follow' });
+    clearTimeout(timeoutId);
+    resultados[idx] = { status:'ok', detail:'domínio responde · valide visualmente abrindo o link' };
+  } catch(e) {
+    // Tenta GET no-cors (algumas APIs rejeitam HEAD)
+    try {
+      const ctrl2 = new AbortController();
+      const t2 = setTimeout(()=>ctrl2.abort(), 10000);
+      await fetch(url, { mode:'no-cors', method:'GET', signal:ctrl2.signal, redirect:'follow' });
+      clearTimeout(t2);
+      resultados[idx] = { status:'ok', detail:'GET respondeu (HEAD recusado pelo servidor)' };
+    } catch(e2) {
+      const msg = e2.name==='AbortError' ? 'timeout 10s' : (e2.message || 'erro de rede');
+      resultados[idx] = { status:'err', detail:'falha no fetch: '+msg };
+    }
+  }
+}
+
+async function rodarTesteAuto(){
+  let idx = 0;
+  // Limpa resultados anteriores que ainda estavam pending
+  Object.keys(resultados).forEach(k=>{
+    if(resultados[k] && resultados[k].status==='pending') delete resultados[k];
+  });
+  const all = [];
+  LINKS.forEach(cat => cat.items.forEach(it => all.push({ it, idx:idx++ })));
+  // Testa em paralelo (mais rápido em mobile)
+  await Promise.all(all.map(async ({ it, idx }) => {
+    await testarLink(it.url, idx);
+    renderLista(); // re-render a cada conclusão
+  }));
+}
+
+function marcar(idx, status){
+  if(!resultados[idx]) resultados[idx] = { status:'pending', detail:'' };
+  if(resultados[idx].manual === status){
+    delete resultados[idx].manual;
+  } else {
+    resultados[idx].manual = status;
+  }
+  renderLista();
+}
+
+function abrirTodos(){
+  if(!confirm('Vai abrir 25 abas em sequência. Continuar?')) return;
+  let i = 0;
+  LINKS.forEach(c=>{c.items.forEach(it=>{
+    setTimeout(()=>window.open(it.url, '_blank'), i*300);
+    i++;
+  })});
+}
+
+function exportarResultado(){
+  let txt = '🔗 VERIFICAÇÃO DOS LINKS · AIMED OS HUB\n';
+  txt += new Date().toLocaleString('pt-BR')+'\n\n';
+  let idx = 0;
+  LINKS.forEach(cat=>{
+    txt += cat.cat+'\n';
+    cat.items.forEach(it=>{
+      const r = resultados[idx] || { status:'pending', detail:'não testado' };
+      const auto = r.status==='ok' ? '✓' : r.status==='err' ? '✗' : '·';
+      const man = r.manual==='ok' ? ' [marcado OK]' : r.manual==='err' ? ' [marcado QUEBRADO]' : '';
+      txt += '  '+auto+' '+it.nome+man+'\n     '+it.url+'\n     '+r.detail+'\n';
+      idx++;
+    });
+    txt += '\n';
+  });
+  // Copia para clipboard
+  if(navigator.clipboard) {
+    navigator.clipboard.writeText(txt).then(()=>alert('Resultado copiado · cola no WhatsApp/email')).catch(()=>{
+      const ta = document.createElement('textarea'); ta.value=txt; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
+      alert('Resultado copiado · cola no WhatsApp/email');
+    });
+  }
+}
+
+renderLista();
+</script>
+
+</body>
+</html>
