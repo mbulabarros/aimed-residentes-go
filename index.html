@@ -2659,6 +2659,45 @@ body {
         <p>A base científica disso é o <strong>pareamento por apelido</strong>, padrão em pesquisa de educação médica, que permite acompanhamento longitudinal sem violação de privacidade. É o que blinda metodologicamente nossa publicação na RBGO.</p>
       </div>
 
+      <div class="mem-section">
+        <h2 class="mem-section-title">Glossário · o que significa cada sigla</h2>
+        <p>O instrumento usa termos específicos da pesquisa em educação médica. Aqui ficam definidos para consulta rápida sempre que precisar.</p>
+        <div class="mem-features">
+          <div class="mem-feature">
+            <div class="mem-feature-icon">📍</div>
+            <div class="mem-feature-text"><strong>T0</strong> · Linha de base. Respostas dadas <em>antes</em> do curso, até segunda-feira 21/05. Mede o ponto de partida de cada residente.</div>
+          </div>
+          <div class="mem-feature">
+            <div class="mem-feature-icon">🎯</div>
+            <div class="mem-feature-text"><strong>T1</strong> · Pós-imediato. Respostas dadas no <em>domingo à noite após o curso</em>. Mede o impacto inicial — entusiasmo, NPS, primeira aplicação prevista.</div>
+          </div>
+          <div class="mem-feature">
+            <div class="mem-feature-icon">📊</div>
+            <div class="mem-feature-text"><strong>T2</strong> · Pós-quatro-semanas. Respostas dadas no <em>final do Bloco 5</em>. Mede o uso real consolidado — é o que vale para a publicação científica.</div>
+          </div>
+          <div class="mem-feature">
+            <div class="mem-feature-icon">⭐</div>
+            <div class="mem-feature-text"><strong>NPS</strong> · Net Promoter Score. Escala 0-10 que mede probabilidade de recomendar o curso. 9-10 = promotora · 7-8 = passiva · ≤6 = detratora.</div>
+          </div>
+          <div class="mem-feature">
+            <div class="mem-feature-icon">⚔️</div>
+            <div class="mem-feature-text"><strong>TdC</strong> · Teoria do Contrário. Método AIMED no qual cada residente defende argumento <em>oposto</em> à prática institucional, em três fases ao longo do curso. Treina raciocínio crítico ativo.</div>
+          </div>
+          <div class="mem-feature">
+            <div class="mem-feature-icon">🧠</div>
+            <div class="mem-feature-text"><strong>Autoeficácia</strong> · Percepção de "sou capaz de escrever um prompt clínico eficaz". Escala Likert 1-5, presente nos três tempos do estudo.</div>
+          </div>
+          <div class="mem-feature">
+            <div class="mem-feature-icon">🔬</div>
+            <div class="mem-feature-text"><strong>Estudo quasi-experimental pré-pós</strong> · Desenho de pesquisa que compara o mesmo grupo de participantes em momentos diferentes (T0 → T1 → T2). Padrão em educação médica.</div>
+          </div>
+          <div class="mem-feature">
+            <div class="mem-feature-icon">🪪</div>
+            <div class="mem-feature-text"><strong>Apelido de pareamento</strong> · Código auto-gerado (ex: ML47) que permite cruzar T0/T1/T2 da mesma residente sem coletar nome ou telefone. Conformidade com LGPD.</div>
+          </div>
+        </div>
+      </div>
+
       <div class="mem-cta">
         <div class="mem-cta-quote">
           "Vocês não estão saindo daqui com um certificado de papel. Vão sair daqui com cinco semanas de coleta de dados — e na semana 5, cada uma de vocês recebe uma <strong>Memória AIMED personalizada</strong> com sua jornada inteira. É a primeira vez no Brasil que um curso de IA aplicada à medicina faz isso. E não vai ser a última."
@@ -4969,9 +5008,28 @@ function fecharLinks(){document.getElementById('links-overlay').classList.remove
 // ── MEMÓRIA AIMED · overlay informativo ──
 function abrirMemoriaInfo(){
   document.getElementById('memoria-overlay').classList.add('open');
+  // Atualiza URL com hash para que back do navegador funcione e links externos consigam reabrir
+  try { history.replaceState(null, '', '#memoria'); } catch(e){}
 }
 function fecharMemoriaInfo(){
   document.getElementById('memoria-overlay').classList.remove('open');
+  // Remove hash ao fechar para não confundir navegação subsequente
+  try { history.replaceState(null, '', window.location.pathname + window.location.search); } catch(e){}
+}
+// Detecta #memoria no hash da URL e abre overlay automaticamente
+// (usado quando residente volta do memoria.html via "voltar ao AIMED OS")
+function checkMemoriaHash(){
+  if(window.location.hash === '#memoria'){
+    // Pequeno delay para garantir que o DOM/sidebar já carregou
+    setTimeout(()=>{ abrirMemoriaInfo(); }, 300);
+  }
+}
+// Roda no load e em mudanças de hash (ex: usuário cola URL com #memoria)
+window.addEventListener('hashchange', checkMemoriaHash);
+if(document.readyState === 'loading'){
+  document.addEventListener('DOMContentLoaded', checkMemoriaHash);
+} else {
+  checkMemoriaHash();
 }
 function renderLinks(){
   let html='<div style="font-size:0.78rem;color:var(--text-dim);line-height:1.55;margin-bottom:24px;padding:14px 16px;background:rgba(201,168,76,0.06);border-left:3px solid var(--gold);border-radius:6px">'+
