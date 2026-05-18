@@ -844,14 +844,14 @@ body {
   .pre-curso-action-num { font-size: 1.2rem; }
 }
 
-#biblioteca-overlay, #logistica-overlay, #sobre-overlay, #avaliacao-overlay, #instrucoes-overlay, #links-overlay {
+#biblioteca-overlay, #logistica-overlay, #sobre-overlay, #avaliacao-overlay, #instrucoes-overlay, #links-overlay, #memoria-overlay {
   position: fixed; inset: 0;
   z-index: 200;
   display: none;
   align-items: flex-start;
   justify-content: flex-end;
 }
-#biblioteca-overlay.open, #logistica-overlay.open, #sobre-overlay.open, #avaliacao-overlay.open, #instrucoes-overlay.open, #links-overlay.open { display: flex; }
+#biblioteca-overlay.open, #logistica-overlay.open, #sobre-overlay.open, #avaliacao-overlay.open, #instrucoes-overlay.open, #links-overlay.open, #memoria-overlay.open { display: flex; }
 
 /* ── AVALIAÇÃO · TABS E FORMULÁRIOS ── */
 .eval-tabs { display: flex; gap: 6px; padding: 14px 28px 0; border-bottom: 1px solid var(--border-dim); flex-wrap: wrap; }
@@ -1731,6 +1731,166 @@ body {
 
 /* Botão "❓" na sidebar — herda do sidebar-btn */
 .sidebar-btn.btn-instrucoes .sidebar-btn-icon { color: var(--gold); }
+.sidebar-btn.btn-memoria { background: linear-gradient(135deg, rgba(201,168,76,0.12) 0%, rgba(79,195,195,0.08) 100%); border: 1px solid rgba(201,168,76,0.3); }
+.sidebar-btn.btn-memoria:hover { border-color: var(--gold); background: linear-gradient(135deg, rgba(201,168,76,0.18) 0%, rgba(79,195,195,0.12) 100%); }
+.sidebar-btn.btn-memoria .sidebar-btn-icon { color: var(--gold); }
+
+/* ── MEMÓRIA AIMED · overlay informativo ── */
+.mem-hero {
+  text-align: center;
+  padding: 20px 0 28px;
+  border-bottom: 1px solid var(--border-dim);
+  margin-bottom: 28px;
+}
+.mem-hero-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  color: var(--teal);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.mem-hero-title {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 600;
+  font-size: clamp(1.8rem, 5vw, 2.6rem);
+  color: var(--gold);
+  line-height: 1.15;
+  margin-bottom: 10px;
+}
+.mem-hero-sub {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  color: var(--text-dim);
+  font-size: 1.02rem;
+  max-width: 520px;
+  margin: 0 auto;
+}
+.mem-section { margin-bottom: 32px; }
+.mem-section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  color: var(--gold);
+  font-style: italic;
+  margin-bottom: 14px;
+}
+.mem-section p { font-size: 0.93rem; line-height: 1.7; color: var(--text); margin-bottom: 10px; }
+.mem-section p strong { color: var(--gold); }
+.mem-flow {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 10px;
+  margin: 16px 0;
+}
+.mem-flow-step {
+  background: var(--navy-light);
+  border: 1px solid var(--border-dim);
+  border-radius: 10px;
+  padding: 14px;
+  position: relative;
+}
+.mem-flow-step-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.66rem;
+  color: var(--teal);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+.mem-flow-step-title {
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--gold);
+  margin-bottom: 6px;
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+}
+.mem-flow-step-desc {
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  line-height: 1.55;
+}
+.mem-why {
+  background: linear-gradient(135deg, rgba(201,168,76,0.08) 0%, rgba(79,195,195,0.05) 100%);
+  border: 1px solid var(--gold);
+  border-radius: 12px;
+  padding: 20px 22px;
+  margin-bottom: 22px;
+}
+.mem-why-title {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--gold);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.mem-why-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.08rem;
+  color: var(--text);
+  line-height: 1.6;
+  font-style: italic;
+}
+.mem-why-text strong { color: var(--gold); font-style: normal; }
+.mem-features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+.mem-feature {
+  display: flex;
+  gap: 10px;
+  padding: 14px;
+  background: var(--navy-mid);
+  border: 1px solid var(--border-dim);
+  border-radius: 10px;
+}
+.mem-feature-icon { font-size: 1.4rem; flex-shrink: 0; }
+.mem-feature-text { font-size: 0.85rem; line-height: 1.55; color: var(--text); }
+.mem-feature-text strong { color: var(--gold); }
+.mem-cta {
+  text-align: center;
+  padding: 24px;
+  background: linear-gradient(135deg, var(--navy-mid) 0%, var(--navy-light) 100%);
+  border: 2px solid var(--gold);
+  border-radius: 12px;
+  margin-top: 24px;
+}
+.mem-cta-quote {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--text);
+  line-height: 1.55;
+  margin-bottom: 14px;
+}
+.mem-cta-quote strong { color: var(--gold); font-style: normal; }
+.mem-cta-attr {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--gold);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.mem-preview-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 18px;
+  background: var(--gold);
+  color: var(--navy);
+  border: none;
+  padding: 12px 22px;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 0.92rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+}
+.mem-preview-btn:hover { background: var(--gold-light); }
 
 /* ── RESPONSIVIDADE MOBILE · MANUAL ── */
 @media (max-width: 700px) {
@@ -2328,6 +2488,9 @@ body {
     <button class="sidebar-btn" onclick="showLinks()">
       <span class="sidebar-btn-icon">🔗</span> Links Essenciais
     </button>
+    <button class="sidebar-btn btn-memoria" onclick="abrirMemoriaInfo()">
+      <span class="sidebar-btn-icon">✨</span> Memória AIMED
+    </button>
     <button class="sidebar-btn" onclick="showAvaliacao()">
       <span class="sidebar-btn-icon">📊</span> Avaliação · Pesquisa
     </button>
@@ -2391,6 +2554,120 @@ body {
       <button class="overlay-close" onclick="fecharLinks()">✕</button>
     </div>
     <div class="overlay-body" id="links-body"><!-- JS --></div>
+  </div>
+</div>
+
+<!-- MEMÓRIA AIMED · explicação institucional -->
+<div id="memoria-overlay">
+  <div class="overlay-backdrop" onclick="fecharMemoriaInfo()"></div>
+  <div class="overlay-panel">
+    <div class="overlay-header">
+      <div>
+        <div class="overlay-title">Memória AIMED</div>
+        <div class="overlay-sub">Sua jornada de 5 semanas, documentada em uma página personalizada</div>
+      </div>
+      <button class="overlay-close" onclick="fecharMemoriaInfo()">✕</button>
+    </div>
+    <div class="overlay-body">
+
+      <div class="mem-hero">
+        <div class="mem-hero-eyebrow">Inédito no Brasil · Educação Médica em IA</div>
+        <h1 class="mem-hero-title">Você não vai sair só com um certificado.<br>Vai sair com a <em style="font-style:italic">sua história</em>.</h1>
+        <p class="mem-hero-sub">Cinco semanas depois do curso, cada uma de vocês recebe uma página personalizada com a sua evolução individual. Documento próprio, compartilhável, baseado nas suas respostas reais.</p>
+      </div>
+
+      <div class="mem-why">
+        <div class="mem-why-title">O que isso é</div>
+        <div class="mem-why-text">
+          A <strong>Memória AIMED</strong> é uma página única para cada residente, gerada automaticamente a partir das suas respostas no T0 (antes), T1 (logo após) e T2 (4 semanas depois) — mais o seu Diário Semanal. É a primeira vez que um curso brasileiro de IA aplicada à medicina entrega ao aluno o seu próprio relatório longitudinal de evolução. Você não recebe um modelo genérico. Você recebe <strong>o registro da sua trajetória</strong>.
+        </div>
+      </div>
+
+      <div class="mem-section">
+        <h2 class="mem-section-title">Como funciona</h2>
+        <div class="mem-flow">
+          <div class="mem-flow-step">
+            <div class="mem-flow-step-num">Passo 1</div>
+            <div class="mem-flow-step-title">T0 · antes do curso</div>
+            <div class="mem-flow-step-desc">Você responde 10 itens de baseline. Frequência de uso de IA, autoeficácia, confiança, conhecimento da CFM 2.454.</div>
+          </div>
+          <div class="mem-flow-step">
+            <div class="mem-flow-step-num">Passo 2</div>
+            <div class="mem-flow-step-title">T1 · logo após</div>
+            <div class="mem-flow-step-desc">9 itens no domingo à noite. NPS, expectativa atendida, o que vai aplicar primeiro na segunda-feira.</div>
+          </div>
+          <div class="mem-flow-step">
+            <div class="mem-flow-step-num">Passo 3</div>
+            <div class="mem-flow-step-title">Diário das 4 semanas</div>
+            <div class="mem-flow-step-desc">Toda sexta-feira: dias com IA, cumprimento do desafio, observação clínica da semana.</div>
+          </div>
+          <div class="mem-flow-step">
+            <div class="mem-flow-step-num">Passo 4</div>
+            <div class="mem-flow-step-title">T2 · semana 4</div>
+            <div class="mem-flow-step-desc">9 itens finais. Prompts que você customizou, casos reais, mudança mais marcante. É o que vale para a publicação.</div>
+          </div>
+          <div class="mem-flow-step">
+            <div class="mem-flow-step-num">Passo 5</div>
+            <div class="mem-flow-step-title">Semana 5 · entrega</div>
+            <div class="mem-flow-step-desc">Você recebe pelo WhatsApp um link único com sua Memória AIMED personalizada. Pronto.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mem-section">
+        <h2 class="mem-section-title">O que tem na sua Memória</h2>
+        <div class="mem-features">
+          <div class="mem-feature">
+            <div class="mem-feature-icon">📊</div>
+            <div class="mem-feature-text"><strong>Gráficos T0→T1→T2</strong> · Sua evolução em frequência de uso, autoeficácia e confiança, lado a lado nos três tempos. Setas indicando trajetória.</div>
+          </div>
+          <div class="mem-feature">
+            <div class="mem-feature-icon">🎯</div>
+            <div class="mem-feature-text"><strong>4 números-chave</strong> · Dias usando IA, prompts customizados, configurações criadas, casos reais com IA nas 4 semanas.</div>
+          </div>
+          <div class="mem-feature">
+            <div class="mem-feature-icon">📅</div>
+            <div class="mem-feature-text"><strong>Timeline das 4 semanas</strong> · Cada semana com sua observação registrada, seu desafio cumprido, e as descobertas no caminho.</div>
+          </div>
+          <div class="mem-feature">
+            <div class="mem-feature-icon">💬</div>
+            <div class="mem-feature-text"><strong>Sua mudança mais marcante</strong> · O que você escreveu no T2, em destaque editorial, como citação. Sua voz, sua história.</div>
+          </div>
+          <div class="mem-feature">
+            <div class="mem-feature-icon">🏆</div>
+            <div class="mem-feature-text"><strong>Certificado embutido</strong> · 14h InovaMed + 4 semanas pós-curso. Exportável em PDF de um clique.</div>
+          </div>
+          <div class="mem-feature">
+            <div class="mem-feature-icon">🔗</div>
+            <div class="mem-feature-text"><strong>Botões de compartilhar</strong> · WhatsApp, LinkedIn, copiar link, baixar PDF. Sua memória é sua. Compartilhe à vontade.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mem-section">
+        <h2 class="mem-section-title">Por que isso muda o jogo</h2>
+        <p>Cursos tradicionais entregam <strong>um certificado de papel</strong> idêntico para todos os alunos. A Memória AIMED inverte essa lógica em quatro frentes:</p>
+        <p><strong>1. Granularidade individual</strong> — cada residente tem a sua versão única, com seus números, suas frases, sua trajetória. Não é template.</p>
+        <p><strong>2. Antes e depois visíveis</strong> — gráficos lado a lado tornam a evolução <em>palpável</em>. A maioria dos cursos faz pré-pós e nunca devolve isso ao aluno. Quem coletou os dados fica com eles. Aqui você fica com o seu retrato.</p>
+        <p><strong>3. Transparência metodológica</strong> — os mesmos dados que vão compor a publicação científica na RBGO ficam visíveis para você. Você não é apenas <em>sujeito</em> da pesquisa, é <strong>co-protagonista visível</strong>.</p>
+        <p><strong>4. Sua voz preservada</strong> — o que você escreveu no T2 sobre "a mudança mais marcante" aparece em destaque editorial. Não é texto seu sumindo num banco de dados de pesquisador. É o seu registro.</p>
+      </div>
+
+      <div class="mem-section">
+        <h2 class="mem-section-title">Privacidade · LGPD</h2>
+        <p>A Memória AIMED é gerada a partir do <strong>seu apelido de pareamento</strong> (ex: ML47) — o mesmo que você usa no T0/T1/T2. Não há nome completo, telefone, CPF ou qualquer dado identificável estruturado na página pública. O link só fica acessível para quem o recebe via WhatsApp. Você decide com quem compartilhar.</p>
+        <p>A base científica disso é o <strong>pareamento por apelido</strong>, padrão em pesquisa de educação médica, que permite acompanhamento longitudinal sem violação de privacidade. É o que blinda metodologicamente nossa publicação na RBGO.</p>
+      </div>
+
+      <div class="mem-cta">
+        <div class="mem-cta-quote">
+          "Vocês não estão saindo daqui com um certificado de papel. Vão sair daqui com cinco semanas de coleta de dados — e na semana 5, cada uma de vocês recebe uma <strong>Memória AIMED personalizada</strong> com sua jornada inteira. É a primeira vez no Brasil que um curso de IA aplicada à medicina faz isso. E não vai ser a última."
+        </div>
+        <div class="mem-cta-attr">— Encerramento do curso · 23 de Maio de 2026</div>
+        <a class="mem-preview-btn" href="memoria.html?id=DEMO" target="_blank" rel="noopener noreferrer">👁 Ver pré-visualização (exemplo)</a>
+      </div>
+
+    </div>
   </div>
 </div>
 
@@ -4439,7 +4716,7 @@ const LINKS_ESSENCIAIS = [
     sub: 'Documentos oficiais para consulta semanal',
     items: [
       { nome:'FEBRASGO · Posicionamentos', desc:'Documentos oficiais GO · referência primária', url:'https://www.febrasgo.org.br/pt/noticias/category/posicionamentos', icon:'📘' },
-      { nome:'FEBRASGO · Tratado de Obstetrícia', desc:'Referência rápida online', url:'https://tratado.febrasgo.org.br/', icon:'📗' },
+      { nome:'FEBRASGO · Publicações', desc:'Tratado de Obstetrícia, Manuais e documentos oficiais', url:'https://www.febrasgo.org.br/pt/publicacoes', icon:'📗' },
       { nome:'Gestação de Alto Risco · MS', desc:'Manual oficial do Ministério da Saúde', url:'https://bvsms.saude.gov.br/bvs/publicacoes/manual_tecnico_gestacao_alto_risco.pdf', icon:'🏥' },
       { nome:'CFM · Resoluções', desc:'Inclui Res. 2.454/2026 sobre IA na medicina', url:'https://portal.cfm.org.br/resolucoes', icon:'⚖️' },
       { nome:'SBP · Documentos Científicos', desc:'Para casos perinatais e neonatais', url:'https://www.sbp.com.br/imprensa/documentos-cientificos/', icon:'📕' }
@@ -4479,7 +4756,7 @@ const LINKS_ESSENCIAIS = [
     icon: '🧮',
     sub: 'Para uso direto no plantão',
     items: [
-      { nome:'MedCalc · OB/GYN', desc:'IG, EFW, percentis fetais', url:'https://www.medcalc.com/obgyn.html', icon:'⏱️' },
+      { nome:'Perinatology · Calculadoras', desc:'EFW Hadlock · IG · percentis fetais · Doppler', url:'https://perinatology.com/calculators.htm', icon:'⏱️' },
       { nome:'FMF · Pré-Eclâmpsia', desc:'Rastreio do 1º trimestre · calc oficial', url:'https://fetalmedicine.org/research/assess/preeclampsia', icon:'⚠️' },
       { nome:'Whitebook · PEBMED', desc:'App de bolso · doses e diretrizes', url:'https://www.pebmed.com.br/whitebook/', icon:'💊' },
       { nome:'Sanar Medicina', desc:'Consulta rápida · resumos clínicos', url:'https://www.sanarmedicina.com/', icon:'📱' },
@@ -4688,6 +4965,14 @@ function showLinks(){
   document.getElementById('links-body').innerHTML=renderLinks();
 }
 function fecharLinks(){document.getElementById('links-overlay').classList.remove('open');}
+
+// ── MEMÓRIA AIMED · overlay informativo ──
+function abrirMemoriaInfo(){
+  document.getElementById('memoria-overlay').classList.add('open');
+}
+function fecharMemoriaInfo(){
+  document.getElementById('memoria-overlay').classList.remove('open');
+}
 function renderLinks(){
   let html='<div style="font-size:0.78rem;color:var(--text-dim);line-height:1.55;margin-bottom:24px;padding:14px 16px;background:rgba(201,168,76,0.06);border-left:3px solid var(--gold);border-radius:6px">'+
     '<strong style="color:var(--gold)">💡 Hub clínico permanente.</strong> Esses links abrem em aba nova — use no plantão, no estudo, na construção dos casos. Cada recurso aqui foi escolhido por relevância para a residência GO brasileira.'+
