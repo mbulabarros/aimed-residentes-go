@@ -634,6 +634,34 @@ body {
 .tdc-badge.medio { background: rgba(201,168,76,0.15); color: var(--gold); }
 .tdc-badge.baixo { background: rgba(79,195,195,0.15); color: var(--teal); }
 
+/* ── STEP TAG · fluxo orquestrado Gemini → Claude → GPT ── */
+.step-tag {
+  display: inline-block;
+  padding: 5px 12px;
+  border-radius: 4px;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.step-tag.step-gemini { background: rgba(45, 156, 156, 0.12); color: var(--teal);   border: 1px solid var(--teal); }
+.step-tag.step-claude { background: rgba(212, 165, 80, 0.12); color: var(--gold);   border: 1px solid var(--gold); }
+.step-tag.step-gpt    { background: rgba(140, 100, 200, 0.12); color: var(--purple); border: 1px solid var(--purple); }
+
+.btn-open.btn-primary {
+  font-weight: 700;
+  box-shadow: 0 0 0 1px currentColor inset;
+}
+
+/* Separação visual entre os 3 cards do fluxo orquestrado */
+.practice-section + .practice-section {
+  margin-top: 28px;
+  padding-top: 28px;
+  border-top: 1px dashed var(--border-dim);
+}
+
 /* ── PROMPT BOX ── */
 .practice-section { border-top: 1px solid var(--border-dim); padding-top: 40px; margin-top: 8px; }
 .practice-label { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
@@ -3523,7 +3551,7 @@ input[type="date"].calc-input { color-scheme: dark; }
               <ol>
                 <li>Acesse <strong>notebooklm.google.com</strong>.</li>
                 <li>Crie um <strong>Caderno "Memória Clínica MDV"</strong>.</li>
-                <li>Carregue protocolos MDV + diretrizes FEBRASGO + dados Dariza.</li>
+                <li>Carregue protocolos MDV + diretrizes FEBRASGO + dados epidemiológicos de Joinville.</li>
                 <li>Use para consultas internas ao próprio acervo.</li>
               </ol>
             </div>
@@ -3679,7 +3707,7 @@ const PROGRAMA = [
 <div class="platform-card gemini"><div class="platform-name">Bloco 1 · Sex tarde</div><div class="platform-role">Arquiteto</div><ul class="platform-steps"><li>A anatomia do prompt médico</li><li>Por que a maioria falha</li><li>Gemini + Claude + GPT configurados para GO</li></ul></div>
 <div class="platform-card claude"><div class="platform-name">Bloco 2 · Sex noite</div><div class="platform-role">Clínico GO</div><ul class="platform-steps"><li>CTG · USG · Doppler com IA</li><li>Cálculos MDV — MgSO4, ocitocina</li><li>Teoria do Contrário — plantando a semente</li></ul></div>
 <div class="platform-card gpt"><div class="platform-name">Bloco 3 · Sáb manhã</div><div class="platform-role">Pesquisador</div><ul class="platform-steps"><li>Da dúvida GO à pergunta PICO</li><li>Memória Clínica MDV (NotebookLM)</li><li>Nossa Ferramenta MDV — construção</li></ul></div>
-<div class="platform-card notebook"><div class="platform-name">Bloco 4 · Sáb tarde</div><div class="platform-role">Integrador</div><ul class="platform-steps"><li>Caso composto MDV — decisão real</li><li>Dados de Joinville com Dariza</li><li>Teoria do Contrário — colheita</li></ul></div>
+<div class="platform-card notebook"><div class="platform-name">Bloco 4 · Sáb tarde</div><div class="platform-role">Integrador</div><ul class="platform-steps"><li>Caso composto MDV — decisão real</li><li>Dados epidemiológicos de Joinville</li><li>Teoria do Contrário — colheita</li></ul></div>
 </div>`,
       prompts:null
     },
@@ -4080,7 +4108,7 @@ Síntese das três vozes: em que condições o protocolo se sustenta? Onde tem f
 <div class="steps-guide">
 <div class="step-item"><div class="step-num">08h</div><div class="step-body"><div class="step-title">Retomada — o argumento da noite</div><div class="step-desc">Cada residente compartilha seu argumento contrário em uma linha. Trinta segundos. Sem julgamento.</div></div></div>
 <div class="step-item"><div class="step-num">10h</div><div class="step-body"><div class="step-title">Memória Clínica MDV</div><div class="step-desc">NotebookLM carregado com FEBRASGO + dados de Joinville. A ferramenta que nenhum serviço no Brasil tem ainda.</div></div></div>
-<div class="step-item"><div class="step-num">13h30</div><div class="step-body"><div class="step-title">O caso MDV</div><div class="step-desc">Um caso que nenhuma resolve sozinha. Vocês e a IA juntas — com os dados de Joinville que Dariza vai trazer.</div></div></div>
+<div class="step-item"><div class="step-num">13h30</div><div class="step-body"><div class="step-title">O caso MDV</div><div class="step-desc">Um caso que nenhuma resolve sozinha. Vocês e a IA juntas — com os dados epidemiológicos de Joinville disponibilizados no NotebookLM.</div></div></div>
 </div>`,
       prompts:null, isBreak:false
     }
@@ -4111,7 +4139,7 @@ Síntese das três vozes: em que condições o protocolo se sustenta? Onde tem f
 <div class="participant-card"><div class="participant-avatar">St</div><div><div class="participant-name">Stephany</div><div class="participant-role">Restrição hídrica no trabalho de parto</div></div></div>
 <div class="participant-card"><div class="participant-avatar">Gi</div><div><div class="participant-name">Giovana</div><div class="participant-role">Monitorização fetal contínua em baixo risco</div></div></div>
 <div class="participant-card"><div class="participant-avatar">VF</div><div><div class="participant-name">Vitória F</div><div class="participant-role">Ocitocina na fase latente do TP</div></div></div>
-<div class="participant-card special"><div class="participant-avatar">Dz</div><div><div class="participant-name">Dariza</div><div class="participant-role">Dados de Joinville — o que a epidemiologia vê que a clínica não vê</div></div></div>
+<div class="participant-card special"><div class="participant-avatar">Ep</div><div><div class="participant-name">Convidada · Epidemiologia (presença a confirmar)</div><div class="participant-role">Dados de Joinville — o que a epidemiologia vê que a clínica não vê. Se a convidada não puder comparecer, os dados estarão acessíveis pelo NotebookLM.</div></div></div>
 </div>`,
       prompts:null
     },
@@ -4175,49 +4203,178 @@ Quais são os principais estudos? Qual o NNT? Qual o posicionamento atual da FEB
     },
     {
       id:'tres-ias-go', horario:'09:15–10:00', titulo:'As Três IAs na Análise Científica GO',
-      summary:'Gemini encontra os artigos. Claude lê os PDFs e analisa metodologia. GPT sintetiza para a equipe. Dariza valida o desenho do estudo com olhar de epidemiologista.',
+      summary:'Gemini busca e empacota. Claude recebe o pacote do Gemini e analisa os PDFs. GPT recebe a análise do Claude e sintetiza para a equipe. A validação coletiva traz o olhar epidemiológico sobre o desenho dos estudos encontrados.',
       avatar:'Ud6P1jbHgcI',
-      conteudo:`<h3>A orquestra das três IAs — papéis distintos</h3>
-<p>Nenhuma IA faz tudo igualmente bem. A diferença entre uma residente que usa IA para pesquisa e uma que usa IA de forma orquestrada é a compreensão dos papéis distintos de cada plataforma.</p>
+      conteudo:`<h3>A orquestra das três IAs — papéis distintos com handoff explícito</h3>
+<p>Nenhuma IA faz tudo igualmente bem. A diferença entre uma residente que usa IA para pesquisa e uma que usa IA de forma orquestrada é a compreensão dos papéis distintos de cada plataforma <strong>e do mecanismo de passagem de contexto entre elas</strong>.</p>
+<div class="callout"><div class="callout-label">Este módulo é a continuação do anterior</div><p>O fluxo orquestrado <strong>não começa aqui</strong>: começa no módulo "Da Dúvida GO à Pergunta PICO" (08:15–09:15), onde vocês transformaram protocolo TdC em pergunta PICO estruturada. O output daquele módulo (PICO + termos de busca + síntese inicial + veredicto de prática) é o <strong>input do Gemini</strong> agora. Mantenham aquela conversa aberta — vocês vão copiar o bloco final do PICO-GO e colar no Gemini para iniciar a Etapa 1.</p></div>
 <div class="platform-grid">
-<div class="platform-card gemini"><div class="platform-name">🔵 Gemini · Buscador</div><div class="platform-role">Etapa 1 — encontrar</div><ul class="platform-steps"><li>Acesso ao Google Scholar integrado</li><li>Busca com PICO como query estruturada</li><li>Filtra por recência e nível de evidência</li><li>Entrega: lista de artigos com DOI e resumo de relevância</li></ul></div>
-<div class="platform-card claude"><div class="platform-name">🟡 Claude · Analista</div><div class="platform-role">Etapa 2 — analisar PDFs</div><ul class="platform-steps"><li>Carrega PDFs dos artigos encontrados</li><li>Analisa metodologia: viés, tamanho de amostra, desfechos</li><li>Extrai NNT/NNH, IC 95%, p-values com interpretação</li><li>Entrega: análise crítica com avaliação GRADE</li></ul></div>
-<div class="platform-card gpt"><div class="platform-name">🟣 GPT · Sintetizador</div><div class="platform-role">Etapa 3 — sintetizar</div><ul class="platform-steps"><li>Recebe a análise do Claude</li><li>Produz síntese compreensível para equipe</li><li>Formata para apresentação em reunião clínica</li><li>Entrega: parágrafo de síntese pronto para discussão</li></ul></div>
+<div class="platform-card gemini"><div class="platform-name">🔵 Gemini · Buscador</div><div class="platform-role">Etapa 1 — recebe PICO, busca e empacota</div><ul class="platform-steps"><li><strong>Recebe o pacote do módulo anterior</strong> (PICO-GO · 08:15)</li><li>Extrai PICO + protocolo TdC do bloco recebido</li><li>Acessa Google Scholar e filtra por recência/evidência</li><li>Entrega: tabela de artigos <strong>+ bloco "PARA COLAR NO CLAUDE"</strong></li></ul></div>
+<div class="platform-card claude"><div class="platform-name">🟡 Claude · Analista</div><div class="platform-role">Etapa 2 — analisar PDFs</div><ul class="platform-steps"><li>Recebe o bloco do Gemini + os PDFs no Projeto GO/MDV</li><li>Analisa metodologia: viés, tamanho de amostra, desfechos</li><li>Extrai NNT/NNH, IC 95%, p-values com avaliação GRADE</li><li>Entrega: análise crítica <strong>+ bloco "PARA COLAR NO GPT"</strong></li></ul></div>
+<div class="platform-card gpt"><div class="platform-name">🟣 GPT · Sintetizador</div><div class="platform-role">Etapa 3 — sintetizar</div><ul class="platform-steps"><li>Recebe o bloco do Claude</li><li>Produz 3 produtos comunicacionais (técnico, parágrafo, ação MDV)</li><li>Formata para apresentação em reunião clínica</li><li>Entrega: material pronto para a TdC</li></ul></div>
 </div>
-<div class="callout"><div class="callout-label">O papel de Dariza — o olhar que nenhuma clínica tem</div><p>Dariza é epidemiologista da Prefeitura de Joinville. Ela não vai comentar conduta clínica — mas vai fazer algo mais valioso: validar o desenho dos estudos que vocês encontraram. <em>"Este estudo tem viés de seleção para nossa população?"</em> <em>"O desfecho escolhido é relevante para o contexto do SUS?"</em> Isso é o que uma epidemiologista traz que nenhuma IA substitui.</p></div>
+<div class="callout"><div class="callout-label">O segredo do fluxo: o handoff delimitado</div><p>Em vez de copiar a resposta inteira de uma IA para a próxima (que carrega ruído e estoura contexto), cada prompt instrui a IA a produzir <strong>um bloco final delimitado por <code>═══ BLOCO PARA COLAR NO [PRÓXIMA IA] ═══</code></strong>. A residente copia só esse bloco. A próxima IA recebe contexto declarado, limpo e completo. Esse é o "padrão de orquestração AIMED" — replicável para qualquer fluxo multi-IA.</p></div>
+<div class="callout"><div class="callout-label">O olhar epidemiológico — o que nenhuma clínica tem sozinha</div><p>Se houver convidada da epidemiologia presente, esse é o momento dela: validar o desenho dos estudos que vocês encontraram. <em>"Este estudo tem viés de seleção para nossa população?"</em> <em>"O desfecho escolhido é relevante para o contexto do SUS?"</em> Na ausência da convidada, a validação metodológica fica como tarefa coletiva da turma — usem as perguntas acima como roteiro e consultem o NotebookLM com os dados de Joinville para contextualizar.</p></div>
 <h3>O fluxo completo em 45 minutos</h3>
 <div class="steps-guide">
-<div class="step-item"><div class="step-num">15'</div><div class="step-body"><div class="step-title">Gemini busca (em duplas)</div><div class="step-desc">Cada dupla usa seu PICO como query. Gemini + Scholar. Salvar os 3 artigos mais relevantes.</div></div></div>
-<div class="step-item"><div class="step-num">20'</div><div class="step-body"><div class="step-title">Claude analisa (individual)</div><div class="step-desc">Carregar PDF no Claude (Projeto GO/MDV). Usar o prompt de análise crítica. Anotar NNT, qualidade GRADE, conclusão.</div></div></div>
-<div class="step-item"><div class="step-num">10'</div><div class="step-body"><div class="step-title">Dariza valida (coletivo)</div><div class="step-desc">3-4 residentes compartilham seus achados. Dariza comenta o desenho do estudo e contextualiza para Joinville.</div></div></div>
+<div class="step-item"><div class="step-num">15'</div><div class="step-body"><div class="step-title">Gemini busca e empacota</div><div class="step-desc">Cada residente <strong>copia o bloco final do PICO-GO</strong> (módulo anterior) e cola no Gemini com o prompt N3 desta etapa. Gemini + Scholar buscam usando o PICO já construído. Salvar os 3 artigos mais relevantes <strong>e copiar o bloco final "PARA COLAR NO CLAUDE"</strong>.</div></div></div>
+<div class="step-item"><div class="step-num">20'</div><div class="step-body"><div class="step-title">Claude analisa (individual)</div><div class="step-desc">Carregar PDFs no Claude (Projeto GO/MDV). <strong>Colar o bloco do Gemini</strong>, depois colar o prompt N3 do Claude. Ao final, copiar o bloco "PARA COLAR NO GPT".</div></div></div>
+<div class="step-item"><div class="step-num">10'</div><div class="step-body"><div class="step-title">Validação coletiva com olhar epidemiológico</div><div class="step-desc">3-4 residentes compartilham seus achados. A turma comenta o desenho do estudo e contextualiza para Joinville — com apoio da convidada de epidemiologia, se presente, ou com consulta direta ao NotebookLM. Quem quiser, fecha no GPT em paralelo.</div></div></div>
 </div>`,
+      promptsGemini:{
+        titulo:'Buscador GO + Empacotamento para Claude — Gemini',
+        subtitulo:'Use no Gemini com Google Scholar ativado · Etapa 1/3 do fluxo orquestrado',
+        nivel1:{label:'Nível 1 · Resumo básico', desc:'Absorve PICO do módulo anterior → lista de artigos', texto:`O bloco acima é o output do prompt "Transformador PICO GO" do módulo anterior (Da Dúvida GO à Pergunta PICO · 08:15–09:15). Contém: construção PICO + termos de busca + síntese inicial de evidência + veredicto de prática.
+
+Extraia desse bloco o tema clínico e o PICO. Em seguida, busque no Google Scholar artigos relacionados.
+Filtros: últimos 5 anos · humanos · revisões sistemáticas ou RCTs.
+Liste 5 artigos com título, autores, ano, DOI e 1 frase de relevância.
+
+Ao final, gere um bloco delimitado por:
+═══ BLOCO PARA COLAR NO CLAUDE ═══
+Com: pergunta PICO original (extraída do bloco anterior) + 3 artigos priorizados + 1 pergunta clínica nuclear que o Claude deve responder ao analisar os PDFs.
+═══ FIM DO BLOCO ═══`},
+        nivel2:{label:'Nível 2 · Análise crítica', desc:'Absorve PICO do módulo anterior + busca estruturada + handoff', texto:`O bloco acima é o output do prompt "Transformador PICO GO" do módulo anterior (Da Dúvida GO à Pergunta PICO · 08:15–09:15). Contém: construção PICO + termos de busca + síntese inicial de evidência + veredicto de prática.
+
+Extraia desse bloco a pergunta PICO completa (P, I, C, O) e o protocolo TdC analisado. Em seguida, faça uma busca acadêmica estruturada via Google Scholar usando exatamente esse PICO — não reformule.
+
+Filtros obrigatórios:
+- Tipos: RCT, meta-análise, revisão sistemática Cochrane
+- Janela: últimos 10 anos (priorizar últimos 5)
+- Idioma: inglês ou português
+- Excluir: estudos em animais, séries de caso < 50 pacientes
+
+Entregue tabela com: Título · Autor/Ano · DOI · Tipo · N · Frase de relevância.
+
+DEPOIS DA TABELA, gere obrigatoriamente este bloco para handoff ao Claude:
+
+═══ BLOCO PARA COLAR NO CLAUDE ═══
+PICO original (reproduzido do bloco anterior do PICO-GO): [reproduza P, I, C, O]
+Protocolo TdC analisado (reproduzido do bloco anterior): [reproduza]
+Artigos priorizados (top 3 com DOI): [lista]
+Pergunta clínica nuclear para o Claude: [1 pergunta específica]
+═══ FIM DO BLOCO ═══`},
+        nivel3:{label:'Nível 3 · AIMED Gemini Buscador GO · com handoff Claude', desc:'Busca orquestrada com triagem de viés, priorização MDV e empacotamento explícito para a Etapa 2', texto:`[A] Você é bibliotecário médico especializado em GO com domínio de medicina baseada em evidências. Sua função é converter perguntas clínicas em estratégias de busca de alta sensibilidade no Google Scholar, triar a literatura recuperada pelo nível de evidência e aplicabilidade a maternidades de referência do SUS brasileiro, e empacotar o resultado em um bloco autocontido pronto para a Etapa 2 do fluxo AIMED (análise crítica no Claude).
+
+[I] CONTEXTO RECEBIDO DO MÓDULO ANTERIOR (acima neste chat, output do prompt "Transformador PICO GO" do módulo "Da Dúvida GO à Pergunta PICO" · 08:15–09:15):
+O bloco acima foi produzido no módulo anterior e contém:
+- Construção PICO completa (P, I, C, O) com precisão clínica
+- Termos de busca em inglês e operadores booleanos sugeridos
+- Síntese inicial de evidência (estudos-chave, NNT/NNH, GRADE, posicionamento FEBRASGO vs ACOG vs Cochrane)
+- Veredicto de prática (alinhamento do protocolo MDV com a melhor evidência)
+
+Extraia desse bloco anterior:
+- A pergunta PICO completa (não reformule — use exatamente como construída no módulo anterior)
+- O protocolo TdC analisado
+- A dúvida clínica que originou a investigação
+
+Contexto de aplicação: Maternidade Darcy Vargas, Joinville/SC — referência GO norte catarinense, SUS, atendimento de alto risco.
+
+[M] Execute a busca em 4 fases:
+
+1. ESTRATÉGIA DE BUSCA
+   - Use os termos de busca já produzidos pelo módulo anterior (PICO-GO) como ponto de partida
+   - Refine ou complemente com termos MeSH adicionais em inglês quando necessário
+   - Confirme ou ajuste os operadores booleanos sugeridos (AND/OR/NOT)
+   - Apresente a string final formatada para Google Scholar (declarando se manteve ou ajustou em relação ao módulo anterior)
+
+2. RECUPERAÇÃO E TRIAGEM
+   - 5 artigos mais relevantes (priorizar Cochrane, BMJ, Lancet, NEJM, Obstet Gynecol, AJOG, BJOG)
+   - Janela: últimos 10 anos · priorize últimos 5
+   - Hierarquia decrescente: meta-análise > RS Cochrane > RCT multicêntrico > RCT unicêntrico > coorte prospectiva
+
+3. TABELA DE EVIDÊNCIAS
+   Para cada artigo: Título · Autor/Ano · DOI · Tipo · N · Desfecho principal · Nível de evidência (Oxford) · Relevância PICO (alta/média/baixa)
+
+4. EMPACOTAMENTO PARA O CLAUDE (Etapa 2)
+   Gere o bloco delimitado abaixo. Esse bloco será copiado integralmente pela residente e colado no Claude antes do prompt N3 da Etapa 2. Não inclua nada além do que está entre os marcadores.
+
+═══ BLOCO PARA COLAR NO CLAUDE — FLUXO AIMED ETAPA 2 ═══
+
+[ORIGEM] Output do Gemini · Etapa 1 do fluxo orquestrado AIMED · As Três IAs na Análise Científica GO.
+
+[PICO ORIGINAL] (reproduzido do output do PICO-GO, sem reformulação)
+P: [reproduza exatamente]
+I: [reproduza]
+C: [reproduza]
+O: [reproduza]
+
+[PROTOCOLO TdC ANALISADO] (reproduzido do PICO-GO)
+[reproduza o protocolo TdC e a dúvida clínica que originou a pesquisa]
+
+[TOP 3 ARTIGOS PRIORIZADOS]
+1. [Título · Autor/Ano · DOI · Tipo · N · 1 frase de relevância]
+2. [idem]
+3. [idem]
+
+[JUSTIFICATIVA DE PRIORIZAÇÃO]
+- Por que estes 3 e não os outros 2 — uma frase por escolha
+
+[PERGUNTA CLÍNICA NUCLEAR PARA O CLAUDE]
+[Formule UMA pergunta específica e respondível que o Claude deve responder ao analisar os PDFs. Essa pergunta orienta toda a análise crítica da Etapa 2.]
+
+[ALERTAS METODOLÓGICOS PRÉVIOS]
+[Liste 1-3 sinais de alerta percebidos na triagem que o Claude deve verificar nos PDFs — ex.: heterogeneidade entre estudos, conflito de interesse declarado, contexto de pesquisa muito distante do SUS]
+
+═══ FIM DO BLOCO ═══
+
+[E] 4 seções numeradas + o bloco delimitado obrigatório ao final. Tabela em markdown. Sem prosa decorativa. Linguagem técnica para residente R2/R3.
+
+[D]
+- Não fabrique DOI ou referência — se não tiver certeza, declare "verificar"
+- Se a pergunta PICO estiver mal formulada, sinalize antes de buscar e proponha refinamento
+- Se a literatura disponível for de baixa qualidade, declare a lacuna explicitamente no bloco de handoff
+- Não confunda recomendação de guideline com evidência primária — separe
+- O bloco final deve ser autocontido: o Claude não terá acesso à conversa anterior, só ao que estiver entre os marcadores`}
+      },
       prompts:{
-        titulo:'Análise Crítica de Artigo GO — Claude',
-        subtitulo:'Cole o PDF no Claude (Projeto GO/MDV) e use este prompt',
-        nivel1:{label:'Nível 1 · Resumo básico', desc:'O que o artigo diz', texto:`Resuma este artigo sobre [tema GO]. Qual a conclusão principal?`},
-        nivel2:{label:'Nível 2 · Análise crítica', desc:'Com avaliação de metodologia', texto:`[A] Você é especialista em leitura crítica de literatura científica em GO.
+        titulo:'Análise Crítica de Artigo GO — Claude (recebe do Gemini)',
+        subtitulo:'Cole primeiro o bloco do Gemini, depois este prompt, no Claude (Projeto GO/MDV) com os PDFs anexados · Etapa 2/3',
+        nivel1:{label:'Nível 1 · Resumo básico', desc:'O que o artigo diz', texto:`O bloco acima foi produzido pelo Gemini na Etapa 1 deste fluxo orquestrado e contém: a pergunta PICO original, os 3 artigos priorizados e a pergunta clínica nuclear.
 
-[I] Artigo carregado acima (PDF).
+Os PDFs dos 3 artigos estão anexados a este Projeto GO/MDV.
 
-[M] Analise:
+Resuma cada artigo em 5 linhas e responda objetivamente a pergunta clínica nuclear formulada pelo Gemini.`},
+        nivel2:{label:'Nível 2 · Análise crítica', desc:'Com avaliação de metodologia', texto:`O bloco acima foi produzido pelo Gemini na Etapa 1 deste fluxo orquestrado AIMED.
+
+[A] Você é especialista em leitura crítica de literatura científica em GO.
+
+[I] Pacote recebido do Gemini (acima): PICO + 3 artigos priorizados + pergunta clínica nuclear + alertas metodológicos.
+PDFs dos artigos: anexados a este Projeto GO/MDV.
+
+[M] Para cada um dos 3 artigos:
 1. Tipo de estudo e nível de evidência
 2. Tamanho da amostra e poder estatístico
 3. Desfecho primário e como foi medido
 4. Principais resultados com IC 95%
 5. Limitações declaradas pelos autores
-6. Aplicabilidade para maternidade de referência no Brasil`},
-        nivel3:{label:'Nível 3 · AIMED Análise Científica GO', desc:'Análise completa com GRADE e aplicabilidade MDV', texto:`[A] Você é revisor de periódico especializado em GO e medicina baseada em evidências. Combina rigor metodológico com aplicabilidade clínica para o contexto brasileiro.
+6. Aplicabilidade para maternidade de referência no Brasil
 
-[I] Artigo carregado: [título do artigo — o PDF está no contexto]
-Minha pergunta PICO: [cole seu PICO aqui]
-Contexto de aplicação: Maternidade Darcy Vargas, Joinville/SC — referência GO norte catarinense, SUS
+Ao final, responda a pergunta clínica nuclear do Gemini com base na evidência analisada.
 
-[M] Execute análise em 5 dimensões:
+Gere um bloco delimitado por:
+═══ BLOCO PARA COLAR NO GPT ═══
+Com a síntese consolidada para a Etapa 3.
+═══ FIM DO BLOCO ═══`},
+        nivel3:{label:'Nível 3 · AIMED Claude Analista GO · com handoff GPT', desc:'Análise GRADE completa, aplicabilidade MDV e empacotamento explícito para a Etapa 3', texto:`[A] Você é revisor de periódico especializado em GO e medicina baseada em evidências. Combina rigor metodológico com aplicabilidade clínica para o contexto brasileiro. Está atuando como Etapa 2 do fluxo orquestrado AIMED · As Três IAs na Análise Científica GO: recebe um pacote do Gemini (Etapa 1) e entrega um pacote para o GPT (Etapa 3).
+
+[I] CONTEXTO RECEBIDO DO GEMINI (acima neste chat, no bloco delimitado por ═══):
+O bloco acima foi produzido pelo Gemini na Etapa 1. Ele contém:
+- A pergunta PICO original
+- Os 3 artigos priorizados (com DOI e justificativa de priorização)
+- A pergunta clínica nuclear que esta Etapa 2 deve responder
+- O protocolo TdC analisado e a dúvida clínica original (herdados do módulo PICO-GO via Gemini)
+- Os alertas metodológicos prévios identificados pelo Gemini na triagem
+
+PDFs dos 3 artigos: anexados a este Projeto GO/MDV.
+Contexto de aplicação: Maternidade Darcy Vargas, Joinville/SC — referência GO norte catarinense, SUS.
+
+[M] Execute análise em 5 dimensões para cada artigo, depois consolide:
 
 1. VALIDADE INTERNA
    - Tipo de estudo (RCT / coorte / caso-controle / revisão)
    - Randomização adequada? Cegamento? Análise por intenção de tratar?
-   - Principais fontes de viés identificadas
+   - Principais fontes de viés (confirme ou refute os alertas do Gemini)
 
 2. RESULTADOS PRINCIPAIS
    - Desfecho primário: resultado + IC 95% + p-value
@@ -4234,21 +4391,132 @@ Contexto de aplicação: Maternidade Darcy Vargas, Joinville/SC — referência 
    - Há aspectos do contexto brasileiro (SUS, FEBRASGO, acesso) que modificam a aplicabilidade?
 
 5. VEREDICTO PARA A TDC
-   - Este estudo fortalece ou enfraquece o argumento contrário que você construiu?
+   - Este estudo fortalece ou enfraquece o argumento contrário?
    - Qual modificação ao protocolo atual ele sugere?
 
-[E] Estruturado por dimensão. Linguagem técnica mas compreensível para residente R2/R3. Alertas quando o estudo contradiz a prática atual da MDV.
+Após a análise individual dos 3 artigos, EMPACOTE OBRIGATORIAMENTE o resultado para o GPT (Etapa 3). Não inclua nada além do que está entre os marcadores abaixo, no bloco final.
+
+═══ BLOCO PARA COLAR NO GPT — FLUXO AIMED ETAPA 3 ═══
+
+[ORIGEM] Output do Claude · Etapa 2 do fluxo orquestrado AIMED · As Três IAs na Análise Científica GO. Análise crítica de 3 artigos com avaliação GRADE.
+
+[PICO ORIGINAL] (herdado do PICO-GO via Gemini)
+P: [reproduza]
+I: [reproduza]
+C: [reproduza]
+O: [reproduza]
+
+[PROTOCOLO TdC ANALISADO] (herdado do PICO-GO via Gemini)
+[reproduza o protocolo TdC e a dúvida clínica original]
+
+[ARTIGOS ANALISADOS]
+1. [Autor/Ano · DOI · Tipo · N · GRADE]
+2. [idem]
+3. [idem]
+
+[RESPOSTA À PERGUNTA CLÍNICA NUCLEAR DO GEMINI]
+[Resposta direta em 3-5 linhas, baseada na evidência analisada]
+
+[SÍNTESE DE EVIDÊNCIA]
+- Qualidade GRADE agregada: [alta / moderada / baixa / muito baixa]
+- Magnitude do efeito (com NNT/NNH em linguagem clínica): [descreva]
+- Direção do efeito: [favorece intervenção / favorece comparador / inconclusivo]
+- Heterogeneidade entre os estudos: [descreva]
+
+[DIVERGÊNCIAS RELEVANTES]
+- Entre os 3 artigos: [se houver]
+- Entre os artigos e as guidelines (FEBRASGO/ACOG, se conhecidas): [se houver]
+
+[APLICABILIDADE MDV]
+- Veredicto: [aplicável / aplicável com ressalvas / não aplicável]
+- Justificativa: [2-3 linhas]
+- Recursos exigidos disponíveis na MDV: [sim / não / parcial]
+
+[VEREDICTO PARA A TDC]
+[Este conjunto de evidências sustenta, modifica ou contradiz o protocolo MDV atual? Responda objetivamente]
+
+[LIMITAÇÕES E LACUNAS]
+[O que ainda falta saber. O que o GPT NÃO deve extrapolar]
+
+═══ FIM DO BLOCO ═══
+
+[E] 5 dimensões por artigo + bloco de handoff obrigatório ao final. Linguagem técnica mas compreensível para residente R2/R3. Alertas quando o estudo contradiz a prática atual da MDV.
 
 [D]
 - Se o artigo for de baixa qualidade: declarar explicitamente, não usá-lo como argumento forte
 - Não extrapolar conclusões além do que os dados permitem
-- Se o estudo vier de contexto de alta renda (EUA, Europa): alertar sobre limitações de generalização`}
+- Se o estudo vier de contexto de alta renda (EUA, Europa): alertar sobre limitações de generalização
+- O bloco final deve ser autocontido: o GPT não terá acesso a este chat, só ao bloco entre os marcadores
+- Se a pergunta clínica nuclear do Gemini não puder ser respondida com os dados dos artigos, declarar a lacuna explicitamente em vez de inventar resposta`}
+      },
+      promptsGPT:{
+        titulo:'Síntese para Reunião Clínica — GPT (recebe do Claude)',
+        subtitulo:'Cole primeiro o bloco do Claude, depois este prompt · Etapa 3/3',
+        nivel1:{label:'Nível 1 · Resumo executivo', desc:'Um parágrafo para a equipe', texto:`O bloco acima foi produzido pelo Claude na Etapa 2 deste fluxo orquestrado AIMED. Contém: PICO original, análise GRADE de 3 artigos, síntese de evidência, aplicabilidade MDV e veredicto para a TdC.
+
+Com base nele, escreva um parágrafo único (8-10 linhas) que resuma a evidência atual para apresentação rápida em reunião clínica na Maternidade Darcy Vargas.`},
+        nivel2:{label:'Nível 2 · Síntese para discussão clínica', desc:'Estrutura para reunião de serviço', texto:`O bloco acima foi produzido pelo Claude na Etapa 2 deste fluxo orquestrado AIMED.
+
+[A] Coordenador científico de serviço GO.
+
+[I] Pacote recebido do Claude (acima): PICO + análise GRADE de 3 artigos + síntese de evidência + aplicabilidade MDV + veredicto para a TdC + limitações.
+
+[M]
+1. CONSENSO ATUAL · O que a melhor evidência diz hoje? (3-4 linhas)
+2. DIVERGÊNCIAS · Onde os estudos discordam? Por quê? (3-4 linhas)
+3. GUIDELINES · O que FEBRASGO e ACOG recomendam? Convergem ou divergem entre si e com a evidência primária? (3-4 linhas)
+4. PARÁGRAFO PARA APRESENTAÇÃO · Síntese final pronta para reunião clínica (máx 10 linhas)
+
+[D] Não extrapole além do que o Claude entregou. Se o Claude declarou uma lacuna, mantenha-a explícita.`},
+        nivel3:{label:'Nível 3 · AIMED GPT Sintetizador GO · MDV', desc:'Síntese estratificada por audiência com plano de ação MDV', texto:`[A] Você é coordenador científico de serviço de GO de maternidade de alto risco. Sua função é traduzir análise crítica de literatura em produto comunicacional acionável, em três camadas de audiência distintas, sem perder fidelidade aos achados originais. Está atuando como Etapa 3 do fluxo orquestrado AIMED · As Três IAs na Análise Científica GO.
+
+[I] CONTEXTO RECEBIDO DO CLAUDE (acima neste chat, no bloco delimitado por ═══):
+O bloco acima foi produzido pelo Claude na Etapa 2 deste fluxo, com base em pacote enviado pelo Gemini na Etapa 1. Contém:
+- A pergunta PICO original
+- A análise GRADE individual de 3 artigos
+- A resposta à pergunta clínica nuclear formulada pelo Gemini
+- A síntese de evidência (qualidade GRADE agregada, magnitude do efeito, divergências)
+- O veredicto de aplicabilidade MDV
+- O veredicto para a TdC
+- O protocolo TdC analisado e a dúvida clínica original (propagados desde o módulo PICO-GO)
+- As limitações e lacunas declaradas explicitamente pelo Claude
+
+Contexto: Maternidade Darcy Vargas, Joinville/SC — referência GO norte catarinense, SUS.
+Audiência da apresentação: reunião clínica multiprofissional MDV (preceptores, residentes R1-R3, enfermagem obstétrica).
+
+[M] Produza três entregáveis em sequência, cada um com sua audiência:
+
+1. SÍNTESE TÉCNICA (para os preceptores · 12-15 linhas)
+   - Estado atual da evidência (reproduza a qualidade GRADE agregada do Claude)
+   - Magnitude do efeito + NNT/NNH em linguagem clínica
+   - Principais limitações que a equipe precisa conhecer
+   - Comparação FEBRASGO vs ACOG vs evidência primária
+
+2. PARÁGRAFO DE APRESENTAÇÃO (para abrir a reunião · 8-10 linhas)
+   - Linguagem para residente R1 entender sem perder rigor
+   - Sem jargão estatístico não traduzido (NNT vira "número de pacientes a tratar para evitar 1 evento")
+   - Termina com pergunta provocativa para discussão
+
+3. PROPOSTA DE AÇÃO MDV (para a TdC · 5-7 linhas)
+   - Esta evidência sustenta, modifica ou contradiz o protocolo MDV atual? (reproduza o veredicto do Claude)
+   - Se modifica: qual ajuste específico propor à comissão clínica?
+   - Se contradiz: qual o argumento contrário mais forte para a Teoria do Contrário?
+   - Próximo passo concreto (não vago)
+
+[E] Cada bloco em seção separada com cabeçalho. Markdown limpo. Sem repetição entre os três blocos — cada um é específico para sua audiência.
+
+[D]
+- Não extrapole conclusões além do que a análise do Claude permite
+- Se o Claude declarou divergência ou lacuna, mantenha-a explícita
+- Se a evidência for fraca: a proposta de ação deve refletir isso ("manter protocolo até nova evidência" é uma ação válida)
+- Não fabrique referência — se citar, replique exatamente o que o Claude entregou
+- Se for citar guideline (FEBRASGO/ACOG), declarar a fonte e o ano; se não souber, declarar "a confirmar" em vez de inventar`}
       }
     },
     {id:'cafe-2', horario:'10:00–10:15', titulo:'Café · Intervalo', summary:'Pausa.', avatar:null, conteudo:`<div class="callout"><div class="callout-label">Intervalo · 15 min</div><p>Consulte os artigos que encontrou. Salve os PDFs para carregar no Claude Projects. Se não conseguiu artigos com o Gemini, tente com o ChatGPT + Scholar — ou peça ajuda.</p></div>`, prompts:null, isBreak:true},
     {
       id:'notebooklm-go', horario:'10:15–11:00', titulo:'NotebookLM — Memória Clínica MDV',
-      summary:'O NotebookLM transforma documentos estáticos em consultor clínico interativo. Com dados de Joinville de Dariza + FEBRASGO + protocolos MDV, vira a memória institucional que nenhum serviço no Brasil tem ainda.',
+      summary:'O NotebookLM transforma documentos estáticos em consultor clínico interativo. Com dados epidemiológicos de Joinville + FEBRASGO + protocolos MDV, vira a memória institucional que nenhum serviço no Brasil tem ainda.',
       avatar:'1Ohy5i19nZ0',
       conteudo:`<h3>O que é o NotebookLM e por que muda tudo</h3>
 <p>O <span class="gloss" data-def="Ferramenta gratuita do Google para criação de base de conhecimento consultável por IA; usada no curso para Memória Clínica MDV">NotebookLM</span> não é mais uma IA de chat. É uma ferramenta que você alimenta com documentos — e depois consulta com citação precisa da fonte. Quando você pergunta algo, ele responde citando exatamente de onde tirou. Sem alucinação. Sem fabricação.</p>
@@ -4256,19 +4524,19 @@ Contexto de aplicação: Maternidade Darcy Vargas, Joinville/SC — referência 
 <h3>O que vai no Notebook GO/MDV</h3>
 <div class="platform-grid">
 <div class="platform-card gemini"><div class="platform-name">📋 Protocolos</div><ul class="platform-steps"><li>FEBRASGO 2024 (PDF)</li><li>Protocolos internos MDV (quando disponíveis)</li><li>Diretrizes ACOG em GO (versão PT quando houver)</li><li>Protocolo MgSO4 do serviço</li></ul></div>
-<div class="platform-card coral" style="border-top-color:var(--coral)"><div class="platform-name">📊 Dados Joinville</div><ul class="platform-steps"><li>Dados de mortalidade materna · Dariza</li><li>Perfil epidemiológico das gestantes MDV</li><li>Taxa de complicações por diagnóstico</li><li>Dados SINASC Joinville 2023-2024</li></ul></div>
+<div class="platform-card coral" style="border-top-color:var(--coral)"><div class="platform-name">📊 Dados Joinville</div><ul class="platform-steps"><li>Dados de mortalidade materna · Joinville</li><li>Perfil epidemiológico das gestantes MDV</li><li>Taxa de complicações por diagnóstico</li><li>Dados SINASC Joinville 2023-2024</li></ul></div>
 <div class="platform-card claude"><div class="platform-name">📚 Literatura</div><ul class="platform-steps"><li>Artigos encontrados na sessão anterior</li><li>Revisões sistemáticas por tema TdC</li><li>Cochrane Reviews GO selecionadas</li><li>Artigos dos protocolos questionados</li></ul></div>
 </div>
 <h3>Consultas que transformam a prática</h3>
 <div class="steps-guide">
-<div class="step-item"><div class="step-num">01</div><div class="step-body"><div class="step-title">Para a revisão de óbito materno</div><div class="step-desc">"Quais foram os fatores evitáveis identificados nos óbitos maternos por complicação hipertensiva em Joinville?" → Resposta com citação do relatório de Dariza.</div></div></div>
+<div class="step-item"><div class="step-num">01</div><div class="step-body"><div class="step-title">Para a revisão de óbito materno</div><div class="step-desc">"Quais foram os fatores evitáveis identificados nos óbitos maternos por complicação hipertensiva em Joinville?" → Resposta com citação do relatório epidemiológico de Joinville carregado no NotebookLM.</div></div></div>
 <div class="step-item"><div class="step-num">02</div><div class="step-body"><div class="step-title">Para a TdC</div><div class="step-desc">"A FEBRASGO recomenda MgSO4 em pré-eclâmpsia sem critérios de gravidade? Qual a página e o nível de evidência?" → Resposta com citação precisa.</div></div></div>
 <div class="step-item"><div class="step-num">03</div><div class="step-body"><div class="step-title">Para o plantão</div><div class="step-desc">"Qual é o protocolo de clampeamento de cordão para prematuros abaixo de 32 semanas segundo a MDV?" → Resposta com o protocolo interno.</div></div></div>
 </div>
-<div class="alert-box success"><div class="alert-label">Dariza — o momento dela</div><p>Dariza carrega os dados de mortalidade materna de Joinville no Notebook. A partir deste momento, todas as residentes têm acesso a esses dados — para sempre. Ela transforma números populacionais em memória institucional consultável por IA. Isso é inédito em serviços GO brasileiros.</p></div>`,
+<div class="alert-box success"><div class="alert-label">Os dados epidemiológicos no Notebook — o momento dos dados</div><p>Os dados de mortalidade materna de Joinville são carregados no Notebook (idealmente com apresentação ao vivo da convidada de epidemiologia; na ausência dela, a curadoria fica com a coordenação do curso). A partir deste momento, todas as residentes têm acesso a esses dados — para sempre. Números populacionais viram memória institucional consultável por IA. Isso é inédito em serviços GO brasileiros.</p></div>`,
       prompts:{
         titulo:'Consulta à Memória Clínica MDV — NotebookLM',
-        subtitulo:'Use no NotebookLM após carregar os documentos MDV + FEBRASGO + dados Dariza',
+        subtitulo:'Use no NotebookLM após carregar os documentos MDV + FEBRASGO + dados epidemiológicos de Joinville',
         nivel1:{label:'Nível 1 · Consulta direta', desc:'Pergunta simples ao notebook', texto:`Qual é o protocolo para manejo de pré-eclâmpsia grave no terceiro trimestre?`},
         nivel2:{label:'Nível 2 · Consulta com contexto', desc:'Com referência específica pedida', texto:`Baseando-se nos documentos carregados:
 
@@ -4284,7 +4552,7 @@ CASO EM DISCUSSÃO: [descreva o caso brevemente — anonimizado]
 PERGUNTAS PARA A REVISÃO:
 
 1. PERFIL EPIDEMIOLÓGICO
-Qual o perfil de casos similares em Joinville nos últimos 2 anos? (dados Dariza)
+Qual o perfil de casos similares em Joinville nos últimos 2 anos? (dados epidemiológicos Joinville)
 Fatores de risco populacionais identificados para este desfecho?
 
 2. CONFORMIDADE PROTOCOLAR
@@ -4376,7 +4644,7 @@ RECURSOS DISPONÍVEIS: [CC disponível? UTI neonatal? Staff presente?]
   modulos:[
     {
       id:'caso-mdv', horario:'13:30–13:40', titulo:'O Caso MDV — Nenhuma Residente Resolve Sozinha',
-      summary:'Um caso composto baseado nos padrões reais da MDV. Dariza traz os dados de Joinville. A decisão mais difícil do plantão — tomada coletivamente, com IA como aliada.',
+      summary:'Um caso composto baseado nos padrões reais da MDV. Os dados epidemiológicos de Joinville estão disponíveis no NotebookLM (e podem ser apresentados ao vivo pela convidada de epidemiologia, se presente). A decisão mais difícil do plantão — tomada coletivamente, com IA como aliada.',
       avatar:'hQysHMLOJ9c',
       conteudo:`<div class="tdc-manifesto"><div class="tdc-manifesto-label">Bloco 4 · O Clímax do Curso</div><div class="tdc-manifesto-text">Este caso não tem resposta única. Tem dados incompletos, pressões contraditórias, e uma paciente que quer ir para casa.<br><em>Exatamente como o plantão real.</em></div></div>
 <div class="case-dossier"><div class="case-header"><div class="case-badge case-critical">Caso MDV · Composto</div><div class="case-id">Baseado em padrões reais da MDV · Anonimizado · Joinville 2026</div></div>
@@ -4423,12 +4691,12 @@ RECURSOS DISPONÍVEIS: [CC disponível? UTI neonatal? Staff presente?]
     },
     {
       id:'discussao-go', horario:'13:40–15:10', titulo:'Discussão Clínica GO com IA — 90 Minutos',
-      summary:'Noventa minutos. O caso. Vocês todas. A IA como escriba e consultora. Dariza com os dados de Joinville. A decisão não é fácil — e esse é o ponto.',
+      summary:'Noventa minutos. O caso. Vocês todas. A IA como escriba e consultora. Os dados epidemiológicos de Joinville no NotebookLM (apresentação ao vivo se houver convidada de epidemiologia presente). A decisão não é fácil — e esse é o ponto.',
       avatar:'vyopIFF4NXA',
       conteudo:`<h3>A estrutura dos 90 minutos</h3>
 <div class="steps-guide">
 <div class="step-item"><div class="step-num">20'</div><div class="step-body"><div class="step-title">Análise em grupos (4 grupos de 3)</div><div class="step-desc">Cada grupo analisa uma dimensão do caso: (1) diagnóstico e critérios de gravidade, (2) MgSO4 — sim/não/qual esquema, (3) timing e via de parto, (4) comunicação com a paciente e o marido.</div></div></div>
-<div class="step-item"><div class="step-num">15'</div><div class="step-body"><div class="step-title">Dariza apresenta — os dados de Joinville</div><div class="step-desc">Dariza consulta o NotebookLM ao vivo: perfil epidemiológico das pacientes com quadro similar em Joinville 2024. O que acontece com gestantes que recebem alta nesse contexto? A 45 min da MDV?</div></div></div>
+<div class="step-item"><div class="step-num">15'</div><div class="step-body"><div class="step-title">Os dados de Joinville — apresentação ou consulta direta</div><div class="step-desc">Consulta ao vivo do NotebookLM: perfil epidemiológico das pacientes com quadro similar em Joinville 2024. O que acontece com gestantes que recebem alta nesse contexto? A 45 min da MDV? Se a convidada de epidemiologia estiver presente, ela conduz; caso contrário, a coordenação do curso conduz a consulta com a turma.</div></div></div>
 <div class="step-item"><div class="step-num">30'</div><div class="step-body"><div class="step-title">Discussão coletiva — com IA como escriba</div><div class="step-desc">A IA documenta em tempo real: argumentos levantados, referências citadas, decisões tomadas. Ao final, gera a síntese clínica do caso para todos.</div></div></div>
 <div class="step-item"><div class="step-num">25'</div><div class="step-body"><div class="step-title">Conexão com a TdC de cada uma</div><div class="step-desc">O caso cruza com os 12 protocolos questionados: MgSO4 sem critérios (Maria Luiza), CTG Categoria II (Ana Júlia), corticóide tardio (Ana Luiza). A TdC encontra o caso real.</div></div></div>
 </div>
@@ -4441,7 +4709,7 @@ RECURSOS DISPONÍVEIS: [CC disponível? UTI neonatal? Staff presente?]
 <div class="participant-card"><div class="participant-avatar">VK</div><div><div class="participant-name">Vitória K</div><div class="participant-role">Como você comunica para uma paciente que quer ir para casa que ela não pode ir? Com autonomia e segurança.</div></div></div>
 <div class="participant-card"><div class="participant-avatar">Ta</div><div><div class="participant-name">Tabatha</div><div class="participant-role">Quando acionar o neonatologista? Antes ou depois da decisão de via de parto?</div></div></div>
 <div class="participant-card"><div class="participant-avatar">St</div><div><div class="participant-name">Stephany</div><div class="participant-role">O que você documenta no prontuário nos próximos 30 minutos? Com qual linguagem?</div></div></div>
-<div class="participant-card special"><div class="participant-avatar">Dz</div><div><div class="participant-name">Dariza</div><div class="participant-role">Os dados de Joinville: qual o desfecho típico em gestantes com esse perfil que recebem alta? O que a epidemiologia diz sobre distância casa-hospital nesse contexto?</div></div></div>
+<div class="participant-card special"><div class="participant-avatar">Ep</div><div><div class="participant-name">Convidada · Epidemiologia (presença a confirmar)</div><div class="participant-role">Os dados de Joinville: qual o desfecho típico em gestantes com esse perfil que recebem alta? O que a epidemiologia diz sobre distância casa-hospital nesse contexto? Na ausência da convidada, os mesmos dados ficam acessíveis pelo NotebookLM.</div></div></div>
 <div class="participant-card special"><div class="participant-avatar">An</div><div><div class="participant-name">Andrea</div><div class="participant-role">Síntese final: o que vocês decidiram e por quê. O que a MDV faria diferente com este caso amanhã?</div></div></div>
 </div>`,
       prompts:{
@@ -4465,8 +4733,8 @@ Diagnóstico em discussão: pré-eclâmpsia com critérios de gravidade (Plt 98k
 Dados da discussão (resumo do que o grupo debateu):
 [cole aqui os principais pontos levantados durante a discussão]
 
-Dado epidemiológico de Dariza:
-[cole aqui o que Dariza apresentou sobre dados de Joinville]
+Dado epidemiológico de Joinville:
+[cole aqui os dados de Joinville apresentados ao vivo ou consultados no NotebookLM]
 
 [M] Gere dois documentos:
 
@@ -4590,7 +4858,7 @@ Para o arquivo do grupo (não vai ao prontuário):
       summary:'Use o prompt de Revisão de Óbito Materno da Biblioteca AIMED GO com um caso da MDV — real ou do NotebookLM. O primeiro serviço GO do Brasil com revisão de óbito assistida por IA.',
       avatar:null,
       avatarPlaceholder:{icon:'🕯️', text:'Semana 2 · Revisão de Óbito<br>· vídeo · pós-curso ·'},
-      conteudo:`<div class="challenge-card"><div class="challenge-week">⚡ Desafio · Semana 2 · 30-45 minutos</div><div class="challenge-title">Primeira Revisão de Óbito com IA — MDV</div><ul class="challenge-steps"><li>Abra o prompt "Revisão de Óbito Materno AIMED" na Biblioteca AIMED GO</li><li>Use com um caso do NotebookLM (dados de Joinville que Dariza carregou) — ou com um caso anonimizado que você viveu</li><li>Gere a síntese estruturada: fatores evitáveis + recomendação institucional</li><li>Compartilhe a síntese com a Andrea — primeira revisão de óbito assistida por IA na MDV</li></ul><div class="challenge-whatsapp"><strong>📱 Compartilhe no grupo:</strong> "Desafio 2 concluído · Usei o prompt de revisão de óbito · O que ele identificou que eu não havia pensado: [insight]"</div></div>
+      conteudo:`<div class="challenge-card"><div class="challenge-week">⚡ Desafio · Semana 2 · 30-45 minutos</div><div class="challenge-title">Primeira Revisão de Óbito com IA — MDV</div><ul class="challenge-steps"><li>Abra o prompt "Revisão de Óbito Materno AIMED" na Biblioteca AIMED GO</li><li>Use com um caso do NotebookLM (dados epidemiológicos de Joinville já carregados) — ou com um caso anonimizado que você viveu</li><li>Gere a síntese estruturada: fatores evitáveis + recomendação institucional</li><li>Compartilhe a síntese com a Andrea — primeira revisão de óbito assistida por IA na MDV</li></ul><div class="challenge-whatsapp"><strong>📱 Compartilhe no grupo:</strong> "Desafio 2 concluído · Usei o prompt de revisão de óbito · O que ele identificou que eu não havia pensado: [insight]"</div></div>
 <div class="alert-box info"><div class="alert-label">O impacto que poucas residentes percebem</div><p>A revisão de óbito materno é obrigatória em toda maternidade brasileira. É feita de forma despadronizada, frequentemente culpabilizante, raramente gerando aprendizado institucional. Uma residente GO que sai daqui sabendo estruturar essa revisão com IA — e ensinar as colegas — transforma o serviço inteiro.</p></div>`,
       prompts:null
     },
@@ -4809,7 +5077,7 @@ ULTRASSONOGRAFIA (data [DD/MM/AAAA]):
 - Diagnóstico final: [causa do óbito / CID]
 - Resumo do caso: [narrativa cronológica em 10-15 linhas — DO INÍCIO AO DESFECHO]
 - Contexto socioeconômico: [quando relevante e disponível]
-- Dados populacionais disponíveis (Dariza): [cole aqui os dados epidemiológicos de Joinville quando disponíveis]
+- Dados populacionais disponíveis: [cole aqui os dados epidemiológicos de Joinville quando disponíveis]
 
 [M] Execute a revisão de óbito em 5 dimensões:
 
@@ -6384,24 +6652,58 @@ function renderModuleNav(moduloId){
 
 // ── RENDER PROMPT BOX ──
 function renderPromptBox(modulo){
-  if(!modulo.prompts)return'';
-  const p=modulo.prompts;
-  const nivelKey='nivel'+currentLevel;
-  const nivel=p[nivelKey]||p.nivel2||p.nivel1;
-  if(!nivel)return'';
-  return`<div class="practice-section">
+  if(!modulo.prompts && !modulo.promptsGemini && !modulo.promptsGPT) return '';
+
+  // Fluxo orquestrado: Gemini → Claude → GPT (renderiza múltiplos cards)
+  if(modulo.promptsGemini || modulo.promptsGPT){
+    let html = '';
+    if(modulo.promptsGemini) html += renderSinglePromptBox(modulo, modulo.promptsGemini, 'gemini', 'Etapa 1 · Gemini busca');
+    if(modulo.prompts)       html += renderSinglePromptBox(modulo, modulo.prompts,       'claude', 'Etapa 2 · Claude analisa');
+    if(modulo.promptsGPT)    html += renderSinglePromptBox(modulo, modulo.promptsGPT,    'gpt',    'Etapa 3 · GPT sintetiza');
+    return html;
+  }
+
+  // Modo legado: prompt único (mantém comportamento atual de todos os outros módulos)
+  return renderSinglePromptBox(modulo, modulo.prompts, 'all', null);
+}
+
+// Renderiza um único card de prompt. focusIA: 'gemini' | 'claude' | 'gpt' | 'all'
+function renderSinglePromptBox(modulo, p, focusIA, etapaLabel){
+  const nivelKey = 'nivel' + currentLevel;
+  const nivel = p[nivelKey] || p.nivel2 || p.nivel1;
+  if(!nivel) return '';
+  const idSuffix = focusIA === 'all' ? modulo.id : `${modulo.id}-${focusIA}`;
+  const etapaTag = etapaLabel ? `<div class="step-tag step-${focusIA}">${etapaLabel}</div>` : '';
+
+  let botoes;
+  if(focusIA === 'gemini'){
+    botoes = `<a class="btn-open gemini btn-primary" href="javascript:void(0)" role="button" onclick="abrirGeminiModal('prompt-text-${idSuffix}');return false;">▶ Abrir no Gemini</a>
+<button class="btn-copy" onclick="copyToClipboard(document.getElementById('prompt-text-${idSuffix}').innerText,this)">📋 Copiar prompt</button>`;
+  } else if(focusIA === 'claude'){
+    botoes = `<a class="btn-open claude btn-primary" href="https://claude.ai/new?q=${encodeURIComponent(nivel.texto)}" target="_blank" rel="noopener noreferrer">▶ Abrir no Claude</a>
+<button class="btn-copy" onclick="copyToClipboard(document.getElementById('prompt-text-${idSuffix}').innerText,this)">📋 Copiar prompt</button>`;
+  } else if(focusIA === 'gpt'){
+    botoes = `<a class="btn-open gpt btn-primary" href="https://chatgpt.com/?q=${encodeURIComponent(nivel.texto)}" target="_blank" rel="noopener noreferrer">▶ Abrir no GPT</a>
+<button class="btn-copy" onclick="copyToClipboard(document.getElementById('prompt-text-${idSuffix}').innerText,this)">📋 Copiar prompt</button>`;
+  } else {
+    botoes = `<button class="btn-copy" onclick="copyToClipboard(document.getElementById('prompt-text-${idSuffix}').innerText,this)">📋 Copiar prompt</button>
+<a class="btn-open claude" href="https://claude.ai/new?q=${encodeURIComponent(nivel.texto)}" target="_blank" rel="noopener noreferrer">Abrir no Claude</a>
+<a class="btn-open gemini" href="javascript:void(0)" role="button" title="Abre fluxo guiado: copiar prompt e abrir Gemini (funciona em qualquer celular/navegador)." onclick="abrirGeminiModal('prompt-text-${idSuffix}');return false;">Abrir no Gemini</a>
+<a class="btn-open gpt" href="https://chatgpt.com/?q=${encodeURIComponent(nivel.texto)}" target="_blank" rel="noopener noreferrer">Abrir no GPT</a>`;
+  }
+
+  const textoFormatado = nivel.texto.replace(/\[A\]/g,'<span class="aimed-a">[A]</span>').replace(/\[I\]/g,'<span class="aimed-i">[I]</span>').replace(/\[M\]/g,'<span class="aimed-m">[M]</span>').replace(/\[E\]/g,'<span class="aimed-e">[E]</span>').replace(/\[D\]/g,'<span class="aimed-d">[D]</span>').replace(/\[([A-ZÁÉÍÓÚÀÂÊÔÃ][^\]]{2,50})\]/g,'<span class="field">[$1]</span>');
+
+  return `<div class="practice-section">
+${etapaTag}
 <div class="practice-label">Prompt AIMED GO · ${nivel.label}</div>
 <div class="prompt-title">${p.titulo}</div>
 <div class="prompt-subtitle">${nivel.desc||p.subtitulo||''}</div>
 <div class="prompt-container">
-<div class="prompt-box" id="prompt-text-${modulo.id}">${nivel.texto.replace(/\[A\]/g,'<span class="aimed-a">[A]</span>').replace(/\[I\]/g,'<span class="aimed-i">[I]</span>').replace(/\[M\]/g,'<span class="aimed-m">[M]</span>').replace(/\[E\]/g,'<span class="aimed-e">[E]</span>').replace(/\[D\]/g,'<span class="aimed-d">[D]</span>').replace(/\[([A-ZÁÉÍÓÚÀÂÊÔÃ][^\]]{2,50})\]/g,'<span class="field">[$1]</span>')}</div>
-<div class="prompt-actions">
-<button class="btn-copy" onclick="copyToClipboard(document.getElementById('prompt-text-${modulo.id}').innerText,this)">📋 Copiar prompt</button>
-<a class="btn-open claude" href="https://claude.ai/new?q=${encodeURIComponent(nivel.texto)}" target="_blank" rel="noopener noreferrer">Abrir no Claude</a>
-<a class="btn-open gemini" href="javascript:void(0)" role="button" title="Abre fluxo guiado: copiar prompt e abrir Gemini (funciona em qualquer celular/navegador)." onclick="abrirGeminiModal('prompt-text-${modulo.id}');return false;">Abrir no Gemini</a>
-<a class="btn-open gpt" href="https://chatgpt.com/?q=${encodeURIComponent(nivel.texto)}" target="_blank" rel="noopener noreferrer">Abrir no GPT</a>
+<div class="prompt-box" id="prompt-text-${idSuffix}">${textoFormatado}</div>
+<div class="prompt-actions">${botoes}</div>
 </div>
-</div></div>`;
+</div>`;
 }
 
 // ── RENDER MODULE ──
@@ -6600,7 +6902,7 @@ function renderLogistica(){
 <div class="log-item"><span class="log-key">Datas</span><span class="log-val">22 e 23 de Maio de 2026 · Sexta e Sábado</span></div>
 <div class="log-item"><span class="log-key">Local</span><span class="log-val">Hotel Le Canard · Joinville · SC</span></div>
 <div class="log-item"><span class="log-key">Carga horária</span><span class="log-val">14 horas efetivas (70% hands-on) + 4 semanas pós-curso</span></div>
-<div class="log-item"><span class="log-key">Turma</span><span class="log-val">13 residentes GO + Dariza (epidemiologista) + Andrea (preceptora)</span></div>
+<div class="log-item"><span class="log-key">Turma</span><span class="log-val">13 residentes GO + Andrea (preceptora) + convidada de epidemiologia (presença a confirmar)</span></div>
 <div class="log-item"><span class="log-key">Instrutor</span><span class="log-val">Dr. Mbula Luzingu Barros · InovaMed</span></div>
 </div>
 
@@ -6885,23 +7187,31 @@ function construirIndiceBusca(){
         textoBusca: baseTexto + ' bloco ' + bloco.numero + ' ' + normalizar(bloco.role),
         acao: ()=>navigateTo(mod.id)
       });
-      // 1b) Prompts dentro de módulos (N1/N2/N3)
-      if(mod.prompts){
+      // 1b) Prompts dentro de módulos (N1/N2/N3) — inclui fluxo orquestrado Gemini/Claude/GPT
+      const promptChaves = [
+        {chave:'promptsGemini', etapa:'Etapa 1 · Gemini'},
+        {chave:'prompts',       etapa:''},
+        {chave:'promptsGPT',    etapa:'Etapa 3 · GPT'}
+      ];
+      promptChaves.forEach(({chave, etapa})=>{
+        const promptObj = mod[chave];
+        if(!promptObj) return;
         ['nivel1','nivel2','nivel3'].forEach(nv=>{
-          const niv = mod.prompts[nv];
+          const niv = promptObj[nv];
           if(!niv) return;
+          const tituloPrefixo = etapa ? `${etapa} · ` : '';
           idx.push({
             tipo:'prompt-modulo',
             grupo:'Prompts dos Módulos',
             icone:'⚙️',
-            titulo: `${mod.prompts.titulo||mod.titulo} · ${niv.label||nv}`,
-            descricao: niv.desc || mod.prompts.subtitulo || '',
+            titulo: `${tituloPrefixo}${promptObj.titulo||mod.titulo} · ${niv.label||nv}`,
+            descricao: niv.desc || promptObj.subtitulo || '',
             meta: `Em: ${mod.titulo}`,
-            textoBusca: normalizar((mod.prompts.titulo||'')+' '+(niv.label||'')+' '+(niv.desc||'')+' '+(niv.texto||'')+' '+mod.titulo),
+            textoBusca: normalizar((promptObj.titulo||'')+' '+(niv.label||'')+' '+(niv.desc||'')+' '+(niv.texto||'')+' '+mod.titulo+' '+etapa),
             acao: ()=>navigateTo(mod.id)
           });
         });
-      }
+      });
     });
   });
   // 2) Biblioteca AIMED GO (18 prompts)
