@@ -3551,7 +3551,7 @@ input[type="date"].calc-input { color-scheme: dark; }
               <ol>
                 <li>Acesse <strong>notebooklm.google.com</strong>.</li>
                 <li>Crie um <strong>Caderno "Memória Clínica MDV"</strong>.</li>
-                <li>Carregue protocolos MDV + diretrizes FEBRASGO + dados epidemiológicos de Joinville.</li>
+                <li>Carregue protocolos MDV + diretrizes FEBRASGO. O Notebook fica preparado para incorporar dados públicos (SINASC/DATASUS) posteriormente, conforme amadurecimento do serviço.</li>
                 <li>Use para consultas internas ao próprio acervo.</li>
               </ol>
             </div>
@@ -3707,7 +3707,7 @@ const PROGRAMA = [
 <div class="platform-card gemini"><div class="platform-name">Bloco 1 · Sex tarde</div><div class="platform-role">Arquiteto</div><ul class="platform-steps"><li>A anatomia do prompt médico</li><li>Por que a maioria falha</li><li>Gemini + Claude + GPT configurados para GO</li></ul></div>
 <div class="platform-card claude"><div class="platform-name">Bloco 2 · Sex noite</div><div class="platform-role">Clínico GO</div><ul class="platform-steps"><li>CTG · USG · Doppler com IA</li><li>Cálculos MDV — MgSO4, ocitocina</li><li>Teoria do Contrário — plantando a semente</li></ul></div>
 <div class="platform-card gpt"><div class="platform-name">Bloco 3 · Sáb manhã</div><div class="platform-role">Pesquisador</div><ul class="platform-steps"><li>Da dúvida GO à pergunta PICO</li><li>Memória Clínica MDV (NotebookLM)</li><li>Nossa Ferramenta MDV — construção</li></ul></div>
-<div class="platform-card notebook"><div class="platform-name">Bloco 4 · Sáb tarde</div><div class="platform-role">Integrador</div><ul class="platform-steps"><li>Caso composto MDV — decisão real</li><li>Dados epidemiológicos de Joinville</li><li>Teoria do Contrário — colheita</li></ul></div>
+<div class="platform-card notebook"><div class="platform-name">Bloco 4 · Sáb tarde</div><div class="platform-role">Integrador</div><ul class="platform-steps"><li>Caso composto MDV — decisão real</li><li>Teoria do Contrário — colheita</li></ul></div>
 </div>`,
       prompts:null
     },
@@ -4107,8 +4107,8 @@ Síntese das três vozes: em que condições o protocolo se sustenta? Onde tem f
 <h3>O que amanhã traz</h3>
 <div class="steps-guide">
 <div class="step-item"><div class="step-num">08h</div><div class="step-body"><div class="step-title">Retomada — o argumento da noite</div><div class="step-desc">Cada residente compartilha seu argumento contrário em uma linha. Trinta segundos. Sem julgamento.</div></div></div>
-<div class="step-item"><div class="step-num">10h</div><div class="step-body"><div class="step-title">Memória Clínica MDV</div><div class="step-desc">NotebookLM carregado com FEBRASGO + dados de Joinville. A ferramenta que nenhum serviço no Brasil tem ainda.</div></div></div>
-<div class="step-item"><div class="step-num">13h30</div><div class="step-body"><div class="step-title">O caso MDV</div><div class="step-desc">Um caso que nenhuma resolve sozinha. Vocês e a IA juntas — com os dados epidemiológicos de Joinville disponibilizados no NotebookLM.</div></div></div>
+<div class="step-item"><div class="step-num">10h</div><div class="step-body"><div class="step-title">Memória Clínica MDV</div><div class="step-desc">NotebookLM carregado com FEBRASGO + protocolos MDV. Esta aula é o piloto da memória institucional MDV — fontes públicas (SINASC/DATASUS) podem ser agregadas posteriormente conforme o serviço evolui.</div></div></div>
+<div class="step-item"><div class="step-num">13h30</div><div class="step-body"><div class="step-title">O caso MDV</div><div class="step-desc">Um caso que nenhuma resolve sozinha. Vocês e a IA juntas — usando a base de evidências FEBRASGO e os protocolos MDV carregados no Notebook.</div></div></div>
 </div>`,
       prompts:null, isBreak:false
     }
@@ -4214,12 +4214,12 @@ Quais são os principais estudos? Qual o NNT? Qual o posicionamento atual da FEB
 <div class="platform-card gpt"><div class="platform-name">🟣 GPT · Sintetizador</div><div class="platform-role">Etapa 3 — sintetizar</div><ul class="platform-steps"><li>Recebe o bloco do Claude</li><li>Produz 3 produtos comunicacionais (técnico, parágrafo, ação MDV)</li><li>Formata para apresentação em reunião clínica</li><li>Entrega: material pronto para a TdC</li></ul></div>
 </div>
 <div class="callout"><div class="callout-label">O segredo do fluxo: o handoff delimitado</div><p>Em vez de copiar a resposta inteira de uma IA para a próxima (que carrega ruído e estoura contexto), cada prompt instrui a IA a produzir <strong>um bloco final delimitado por <code>═══ BLOCO PARA COLAR NO [PRÓXIMA IA] ═══</code></strong>. A residente copia só esse bloco. A próxima IA recebe contexto declarado, limpo e completo. Esse é o "padrão de orquestração AIMED" — replicável para qualquer fluxo multi-IA.</p></div>
-<div class="callout"><div class="callout-label">O olhar epidemiológico — o que nenhuma clínica tem sozinha</div><p>Se houver convidada da epidemiologia presente, esse é o momento dela: validar o desenho dos estudos que vocês encontraram. <em>"Este estudo tem viés de seleção para nossa população?"</em> <em>"O desfecho escolhido é relevante para o contexto do SUS?"</em> Na ausência da convidada, a validação metodológica fica como tarefa coletiva da turma — usem as perguntas acima como roteiro e consultem o NotebookLM com os dados de Joinville para contextualizar.</p></div>
+<div class="callout"><div class="callout-label">O olhar epidemiológico — o que nenhuma clínica tem sozinha</div><p>Se houver convidada da epidemiologia presente, esse é o momento dela: validar o desenho dos estudos que vocês encontraram. <em>"Este estudo tem viés de seleção para nossa população?"</em> <em>"O desfecho escolhido é relevante para o contexto do SUS?"</em> Na ausência da convidada, a validação metodológica fica como tarefa coletiva da turma — usem as perguntas acima como roteiro e a literatura epidemiológica que cada artigo traz para contextualizar.</p></div>
 <h3>O fluxo completo em 45 minutos</h3>
 <div class="steps-guide">
 <div class="step-item"><div class="step-num">15'</div><div class="step-body"><div class="step-title">Gemini busca e empacota</div><div class="step-desc">Cada residente <strong>copia o bloco final do PICO-GO</strong> (módulo anterior) e cola no Gemini com o prompt N3 desta etapa. Gemini + Scholar buscam usando o PICO já construído. Salvar os 3 artigos mais relevantes <strong>e copiar o bloco final "PARA COLAR NO CLAUDE"</strong>.</div></div></div>
 <div class="step-item"><div class="step-num">20'</div><div class="step-body"><div class="step-title">Claude analisa (individual)</div><div class="step-desc">Carregar PDFs no Claude (Projeto GO/MDV). <strong>Colar o bloco do Gemini</strong>, depois colar o prompt N3 do Claude. Ao final, copiar o bloco "PARA COLAR NO GPT".</div></div></div>
-<div class="step-item"><div class="step-num">10'</div><div class="step-body"><div class="step-title">Validação coletiva com olhar epidemiológico</div><div class="step-desc">3-4 residentes compartilham seus achados. A turma comenta o desenho do estudo e contextualiza para Joinville — com apoio da convidada de epidemiologia, se presente, ou com consulta direta ao NotebookLM. Quem quiser, fecha no GPT em paralelo.</div></div></div>
+<div class="step-item"><div class="step-num">10'</div><div class="step-body"><div class="step-title">Validação coletiva com olhar epidemiológico</div><div class="step-desc">3-4 residentes compartilham seus achados. A turma comenta o desenho do estudo e contextualiza para o SUS — com apoio da convidada de epidemiologia, se presente, ou usando as 2 perguntas-chave do callout (viés de seleção? desfecho relevante para o SUS?) como roteiro. Quem quiser, fecha no GPT em paralelo.</div></div></div>
 </div>`,
       promptsGemini:{
         titulo:'Buscador GO + Empacotamento para Claude — Gemini',
@@ -4516,27 +4516,27 @@ Audiência da apresentação: reunião clínica multiprofissional MDV (preceptor
     {id:'cafe-2', horario:'10:00–10:15', titulo:'Café · Intervalo', summary:'Pausa.', avatar:null, conteudo:`<div class="callout"><div class="callout-label">Intervalo · 15 min</div><p>Consulte os artigos que encontrou. Salve os PDFs para carregar no Claude Projects. Se não conseguiu artigos com o Gemini, tente com o ChatGPT + Scholar — ou peça ajuda.</p></div>`, prompts:null, isBreak:true},
     {
       id:'notebooklm-go', horario:'10:15–11:00', titulo:'NotebookLM — Memória Clínica MDV',
-      summary:'O NotebookLM transforma documentos estáticos em consultor clínico interativo. Com dados epidemiológicos de Joinville + FEBRASGO + protocolos MDV, vira a memória institucional que nenhum serviço no Brasil tem ainda.',
+      summary:'O NotebookLM transforma documentos estáticos em consultor clínico interativo. Carregado com FEBRASGO + protocolos MDV, vira o piloto de uma memória institucional inédita no Brasil. Bases públicas (SINASC/DATASUS) podem ser agregadas posteriormente conforme o serviço escolher.',
       avatar:'1Ohy5i19nZ0',
       conteudo:`<h3>O que é o NotebookLM e por que muda tudo</h3>
 <p>O <span class="gloss" data-def="Ferramenta gratuita do Google para criação de base de conhecimento consultável por IA; usada no curso para Memória Clínica MDV">NotebookLM</span> não é mais uma IA de chat. É uma ferramenta que você alimenta com documentos — e depois consulta com citação precisa da fonte. Quando você pergunta algo, ele responde citando exatamente de onde tirou. Sem alucinação. Sem fabricação.</p>
-<div class="callout"><div class="callout-label">O diferencial clínico real</div><p>Nas revisões de óbito materno da MDV, as discussões costumam ser baseadas em memória e experiência pessoal. Com o NotebookLM carregado com dados de Joinville, alguém pode perguntar ao vivo: <em>"Quantos óbitos por complicação hipertensiva em Joinville nos últimos 2 anos?"</em> — e receber a resposta com a fonte exata. Isso não existe em nenhum serviço do Brasil ainda.</p></div>
+<div class="callout"><div class="callout-label">O diferencial clínico real</div><p>Nas revisões de óbito materno da MDV, as discussões costumam ser baseadas em memória e experiência pessoal. Carregado com FEBRASGO e protocolos MDV, o Notebook já permite perguntas como: <em>"Em qual diretriz FEBRASGO está definido o critério de gravidade para pré-eclâmpsia?"</em> — e receber resposta com a fonte exata. Esta aula é o primeiro passo para construir uma memória institucional consultável por IA, etapa que nenhum serviço brasileiro consolidou ainda.</p></div>
 <h3>O que vai no Notebook GO/MDV</h3>
 <div class="platform-grid">
 <div class="platform-card gemini"><div class="platform-name">📋 Protocolos</div><ul class="platform-steps"><li>FEBRASGO 2024 (PDF)</li><li>Protocolos internos MDV (quando disponíveis)</li><li>Diretrizes ACOG em GO (versão PT quando houver)</li><li>Protocolo MgSO4 do serviço</li></ul></div>
-<div class="platform-card coral" style="border-top-color:var(--coral)"><div class="platform-name">📊 Dados Joinville</div><ul class="platform-steps"><li>Dados de mortalidade materna · Joinville</li><li>Perfil epidemiológico das gestantes MDV</li><li>Taxa de complicações por diagnóstico</li><li>Dados SINASC Joinville 2023-2024</li></ul></div>
+<div class="platform-card coral" style="border-top-color:var(--coral)"><div class="platform-name">📊 Future scope — pós-curso</div><ul class="platform-steps"><li>Mortalidade materna · SINASC/SIM (Santa Catarina)</li><li>Perfil de nascimentos por município · DATASUS</li><li>Indicadores assistenciais · ANS/CNES</li><li>Fontes públicas acessíveis para futura ampliação do Notebook</li></ul></div>
 <div class="platform-card claude"><div class="platform-name">📚 Literatura</div><ul class="platform-steps"><li>Artigos encontrados na sessão anterior</li><li>Revisões sistemáticas por tema TdC</li><li>Cochrane Reviews GO selecionadas</li><li>Artigos dos protocolos questionados</li></ul></div>
 </div>
 <h3>Consultas que transformam a prática</h3>
 <div class="steps-guide">
-<div class="step-item"><div class="step-num">01</div><div class="step-body"><div class="step-title">Para a revisão de óbito materno</div><div class="step-desc">"Quais foram os fatores evitáveis identificados nos óbitos maternos por complicação hipertensiva em Joinville?" → Resposta com citação do relatório epidemiológico de Joinville carregado no NotebookLM.</div></div></div>
+<div class="step-item"><div class="step-num">01</div><div class="step-body"><div class="step-title">Para a revisão de óbito materno</div><div class="step-desc">"Quais são os fatores evitáveis classicamente identificados em óbitos maternos por complicação hipertensiva, segundo as diretrizes FEBRASGO?" → Resposta cita as diretrizes FEBRASGO e os protocolos MDV carregados, com formato pronto para discussão de caso.</div></div></div>
 <div class="step-item"><div class="step-num">02</div><div class="step-body"><div class="step-title">Para a TdC</div><div class="step-desc">"A FEBRASGO recomenda MgSO4 em pré-eclâmpsia sem critérios de gravidade? Qual a página e o nível de evidência?" → Resposta com citação precisa.</div></div></div>
 <div class="step-item"><div class="step-num">03</div><div class="step-body"><div class="step-title">Para o plantão</div><div class="step-desc">"Qual é o protocolo de clampeamento de cordão para prematuros abaixo de 32 semanas segundo a MDV?" → Resposta com o protocolo interno.</div></div></div>
 </div>
-<div class="alert-box success"><div class="alert-label">Os dados epidemiológicos no Notebook — o momento dos dados</div><p>Os dados de mortalidade materna de Joinville são carregados no Notebook (idealmente com apresentação ao vivo da convidada de epidemiologia; na ausência dela, a curadoria fica com a coordenação do curso). A partir deste momento, todas as residentes têm acesso a esses dados — para sempre. Números populacionais viram memória institucional consultável por IA. Isso é inédito em serviços GO brasileiros.</p></div>`,
+<div class="alert-box success"><div class="alert-label">A primeira pedra da memória institucional MDV</div><p>O Notebook fica carregado com <strong>protocolos MDV + FEBRASGO</strong>. A partir deste momento, todas as residentes têm acesso permanente a uma base de evidências consultável por IA, com fontes citadas e respostas rastreáveis. É a primeira pedra de uma memória institucional MDV — fontes adicionais (relatórios epidemiológicos regionais, casos didáticos, séries históricas de revisão de óbito) podem ser incorporadas conforme o serviço amadurece. Esse é o caminho que nenhum serviço GO brasileiro percorreu ainda.</p></div></div>`,
       prompts:{
         titulo:'Consulta à Memória Clínica MDV — NotebookLM',
-        subtitulo:'Use no NotebookLM após carregar os documentos MDV + FEBRASGO + dados epidemiológicos de Joinville',
+        subtitulo:'Use no NotebookLM após carregar os documentos MDV + FEBRASGO',
         nivel1:{label:'Nível 1 · Consulta direta', desc:'Pergunta simples ao notebook', texto:`Qual é o protocolo para manejo de pré-eclâmpsia grave no terceiro trimestre?`},
         nivel2:{label:'Nível 2 · Consulta com contexto', desc:'Com referência específica pedida', texto:`Baseando-se nos documentos carregados:
 
@@ -4545,7 +4545,7 @@ Audiência da apresentação: reunião clínica multiprofissional MDV (preceptor
 2. Cite a página e o nível de evidência.
 
 3. Existe alguma divergência com o que está nos protocolos MDV carregados?`},
-        nivel3:{label:'Nível 3 · Síntese MDV — Revisão de Óbito', desc:'Query para discussão de caso de mortalidade materna', texto:`Baseando-se em todos os documentos carregados neste Notebook (FEBRASGO + dados epidemiológicos de Joinville + protocolos MDV + literatura selecionada):
+        nivel3:{label:'Nível 3 · Síntese MDV — Revisão de Óbito', desc:'Query para discussão de caso de mortalidade materna', texto:`Baseando-se em todos os documentos carregados neste Notebook (FEBRASGO + protocolos MDV (e quaisquer fontes adicionais que o serviço incorporar posteriormente) + literatura selecionada):
 
 CASO EM DISCUSSÃO: [descreva o caso brevemente — anonimizado]
 
@@ -4644,7 +4644,7 @@ RECURSOS DISPONÍVEIS: [CC disponível? UTI neonatal? Staff presente?]
   modulos:[
     {
       id:'caso-mdv', horario:'13:30–13:40', titulo:'O Caso MDV — Nenhuma Residente Resolve Sozinha',
-      summary:'Um caso composto baseado nos padrões reais da MDV. Os dados epidemiológicos de Joinville estão disponíveis no NotebookLM (e podem ser apresentados ao vivo pela convidada de epidemiologia, se presente). A decisão mais difícil do plantão — tomada coletivamente, com IA como aliada.',
+      summary:'Um caso composto baseado nos padrões reais da MDV. A turma usa a base de evidências carregada (FEBRASGO + protocolos MDV) — com apoio da convidada de epidemiologia, se presente, para validação metodológica e contextual. A decisão mais difícil do plantão — tomada coletivamente, com IA como aliada.',
       avatar:'hQysHMLOJ9c',
       conteudo:`<div class="tdc-manifesto"><div class="tdc-manifesto-label">Bloco 4 · O Clímax do Curso</div><div class="tdc-manifesto-text">Este caso não tem resposta única. Tem dados incompletos, pressões contraditórias, e uma paciente que quer ir para casa.<br><em>Exatamente como o plantão real.</em></div></div>
 <div class="case-dossier"><div class="case-header"><div class="case-badge case-critical">Caso MDV · Composto</div><div class="case-id">Baseado em padrões reais da MDV · Anonimizado · Joinville 2026</div></div>
@@ -4691,16 +4691,15 @@ RECURSOS DISPONÍVEIS: [CC disponível? UTI neonatal? Staff presente?]
     },
     {
       id:'discussao-go', horario:'13:40–15:10', titulo:'Discussão Clínica GO com IA — 90 Minutos',
-      summary:'Noventa minutos. O caso. Vocês todas. A IA como escriba e consultora. Os dados epidemiológicos de Joinville no NotebookLM (apresentação ao vivo se houver convidada de epidemiologia presente). A decisão não é fácil — e esse é o ponto.',
+      summary:'Noventa minutos. O caso. Vocês todas. A IA como escriba e consultora, ancorada na base FEBRASGO + protocolos MDV carregada no Notebook. A decisão não é fácil — e esse é o ponto.',
       avatar:'vyopIFF4NXA',
       conteudo:`<h3>A estrutura dos 90 minutos</h3>
 <div class="steps-guide">
-<div class="step-item"><div class="step-num">20'</div><div class="step-body"><div class="step-title">Análise em grupos (4 grupos de 3)</div><div class="step-desc">Cada grupo analisa uma dimensão do caso: (1) diagnóstico e critérios de gravidade, (2) MgSO4 — sim/não/qual esquema, (3) timing e via de parto, (4) comunicação com a paciente e o marido.</div></div></div>
-<div class="step-item"><div class="step-num">15'</div><div class="step-body"><div class="step-title">Os dados de Joinville — apresentação ou consulta direta</div><div class="step-desc">Consulta ao vivo do NotebookLM: perfil epidemiológico das pacientes com quadro similar em Joinville 2024. O que acontece com gestantes que recebem alta nesse contexto? A 45 min da MDV? Se a convidada de epidemiologia estiver presente, ela conduz; caso contrário, a coordenação do curso conduz a consulta com a turma.</div></div></div>
-<div class="step-item"><div class="step-num">30'</div><div class="step-body"><div class="step-title">Discussão coletiva — com IA como escriba</div><div class="step-desc">A IA documenta em tempo real: argumentos levantados, referências citadas, decisões tomadas. Ao final, gera a síntese clínica do caso para todos.</div></div></div>
-<div class="step-item"><div class="step-num">25'</div><div class="step-body"><div class="step-title">Conexão com a TdC de cada uma</div><div class="step-desc">O caso cruza com os 12 protocolos questionados: MgSO4 sem critérios (Maria Luiza), CTG Categoria II (Ana Júlia), corticóide tardio (Ana Luiza). A TdC encontra o caso real.</div></div></div>
+<div class="step-item"><div class="step-num">10'</div><div class="step-body"><div class="step-title">Setup + ativação da gravação</div><div class="step-desc">Uma residente voluntária assume a gravação contínua de toda a discussão usando a ferramenta de captura de voz de sua preferência (consentimento do grupo, caso anonimizado). Andrea relê o caso em voz alta — essa releitura entra no áudio como referência de abertura.</div></div></div>
+<div class="step-item"><div class="step-num">70'</div><div class="step-body"><div class="step-title">Discussão clínica coletiva · 4 dimensões em sequência</div><div class="step-desc">Sem divisão em grupos. A turma inteira discute em sequência, com Andrea conduzindo a transição entre dimensões: (1) diagnóstico e critérios de gravidade — ~18'; (2) MgSO4 — sim/não/qual esquema — ~18'; (3) timing e via de parto — ~17'; (4) comunicação com a paciente e o marido — ~17'. Cada residente contribui à medida que a dimensão cruza sua TdC pessoal. A gravação continua ininterrupta.</div></div></div>
+<div class="step-item"><div class="step-num">10'</div><div class="step-body"><div class="step-title">Síntese — IA transcreve e estrutura a ata</div><div class="step-desc">Encerrada a gravação, a residente da captura transcreve com a ferramenta de voz de sua preferência e cola a transcrição bruta no prompt <strong>"Escriba de Áudio AIMED"</strong> (Biblioteca). A ata estruturada é projetada para a turma como fechamento — e o caso conecta naturalmente com a TdC de cada residente, porque cada dimensão discutida cruzou pelo menos um dos 12 protocolos questionados ontem.</div></div></div>
 </div>
-<div class="callout"><div class="callout-label">🎙️ Fluxo de áudio · IA como escriba real</div><p>Durante esta discussão, <strong>uma residente grava o áudio no celular</strong> (com consentimento do grupo, caso anonimizado). Ao final dos 90 minutos, transcreve com Whisper, ChatGPT em modo voz ou ferramenta de transcrição preferida. Cola a transcrição bruta no prompt <strong>"Escriba de Áudio AIMED"</strong> disponível na Biblioteca AIMED GO. A saída entrega — em 2 a 3 minutos — ata estruturada com mapeamento de vozes, divergências preservadas, nota pronta para prontuário, e referências citadas catalogadas. Cada ata arquivada no NotebookLM do serviço vira <em>acervo pedagógico permanente</em>: uma residente do 3º ano pode reler a discussão em que participou no 1º ano e ver exatamente como seu raciocínio clínico evoluiu. Nenhum hospital-escola brasileiro tem isso institucionalizado hoje.</p></div>
+<div class="callout"><div class="callout-label">🎙️ Fluxo de áudio · IA como escriba real</div><p>Durante esta discussão, uma residente grava o áudio do celular continuamente (com consentimento do grupo, caso anonimizado), usando a ferramenta de gravação e transcrição de voz de sua preferência. Ao final dos 90 minutos, transcreve e cola a transcrição bruta no prompt <strong>"Escriba de Áudio AIMED"</strong> disponível na Biblioteca AIMED GO. A saída entrega — em 2 a 3 minutos — ata estruturada com mapeamento de vozes, divergências preservadas, nota pronta para prontuário e referências citadas catalogadas. Cada ata arquivada no NotebookLM do serviço vira <em>acervo pedagógico permanente</em>: uma residente do 3º ano pode reler a discussão em que participou no 1º ano e ver exatamente como seu raciocínio clínico evoluiu. Nenhum hospital-escola brasileiro tem isso institucionalizado hoje.</p></div>
 <h3>A dimensão que o caso força</h3>
 <div class="participant-grid">
 <div class="participant-card"><div class="participant-avatar">ML</div><div><div class="participant-name">Maria Luiza</div><div class="participant-role">Este caso tem critérios de gravidade? O TGO 118 é ≥2x ULN? MgSO4 obrigatório aqui? (Sua TdC, ao vivo)</div></div></div>
@@ -4709,7 +4708,7 @@ RECURSOS DISPONÍVEIS: [CC disponível? UTI neonatal? Staff presente?]
 <div class="participant-card"><div class="participant-avatar">VK</div><div><div class="participant-name">Vitória K</div><div class="participant-role">Como você comunica para uma paciente que quer ir para casa que ela não pode ir? Com autonomia e segurança.</div></div></div>
 <div class="participant-card"><div class="participant-avatar">Ta</div><div><div class="participant-name">Tabatha</div><div class="participant-role">Quando acionar o neonatologista? Antes ou depois da decisão de via de parto?</div></div></div>
 <div class="participant-card"><div class="participant-avatar">St</div><div><div class="participant-name">Stephany</div><div class="participant-role">O que você documenta no prontuário nos próximos 30 minutos? Com qual linguagem?</div></div></div>
-<div class="participant-card special"><div class="participant-avatar">Ep</div><div><div class="participant-name">Convidada · Epidemiologia (presença a confirmar)</div><div class="participant-role">Os dados de Joinville: qual o desfecho típico em gestantes com esse perfil que recebem alta? O que a epidemiologia diz sobre distância casa-hospital nesse contexto? Na ausência da convidada, os mesmos dados ficam acessíveis pelo NotebookLM.</div></div></div>
+<div class="participant-card special"><div class="participant-avatar">Ep</div><div><div class="participant-name">Convidada · Epidemiologia (presença a confirmar)</div><div class="participant-role">Olhar epidemiológico crítico sobre o caso: vieses de seleção da literatura, contexto populacional brasileiro, o que a literatura epidemiológica diz sobre distância casa-hospital. Na ausência da convidada, a turma incorpora esse olhar a partir das diretrizes e da discussão coletiva.</div></div></div>
 <div class="participant-card special"><div class="participant-avatar">An</div><div><div class="participant-name">Andrea</div><div class="participant-role">Síntese final: o que vocês decidiram e por quê. O que a MDV faria diferente com este caso amanhã?</div></div></div>
 </div>`,
       prompts:{
@@ -4732,9 +4731,6 @@ Diagnóstico em discussão: pré-eclâmpsia com critérios de gravidade (Plt 98k
 
 Dados da discussão (resumo do que o grupo debateu):
 [cole aqui os principais pontos levantados durante a discussão]
-
-Dado epidemiológico de Joinville:
-[cole aqui os dados de Joinville apresentados ao vivo ou consultados no NotebookLM]
 
 [M] Gere dois documentos:
 
@@ -4787,7 +4783,45 @@ Para o arquivo do grupo (não vai ao prontuário):
 <tr><td>11</td><td class="tdc-name">Stephany</td><td class="tdc-protocol">Restrição hídrica no trabalho de parto</td></tr>
 <tr><td>12</td><td class="tdc-name">Vitória F</td><td class="tdc-protocol">Ocitocina na fase latente do TP</td></tr>
 </tbody></table>`,
-      prompts:null
+      prompts:{
+        titulo:'Teoria do Contrário GO — Construtor de Argumento',
+        subtitulo:'Mesmo prompt do módulo "Plantando a Semente" — para revisitar o argumento construído ontem antes do veredicto',
+        nivel1:{label:'Nível 1 · Pergunta direta', desc:'O básico', texto:`Quais são as críticas ao uso de MgSO4 em pré-eclâmpsia sem critérios de gravidade?`},
+        nivel2:{label:'Nível 2 · TdC estruturada', desc:'Com protocolo e pedido de argumento contrário', texto:`[A] Você é um obstetra crítico especializado em medicina baseada em evidências, com viés para questionar protocolos estabelecidos usando literatura de ponta.
+
+[I] Protocolo a questionar: uso de MgSO4 em pré-eclâmpsia SEM critérios de gravidade, conforme praticado em maternidades brasileiras.
+
+[M] Construa o argumento contrário mais forte possível contra este protocolo. Inclua: 1) base epidemiológica (NNT, NNH), 2) estudos que questionam o benefício, 3) riscos para a paciente, 4) alternativas estudadas.
+
+[D] Não amenize o argumento. Construa o contraditório mais robusto que a evidência permite — mesmo que você pessoalmente concorde com o protocolo.`},
+        nivel3:{label:'Nível 3 · TdC AIMED Ultra GO', desc:'Argumento completo + fontes + fronteiras + veredicto', texto:`[A] Você é um painel de três especialistas em GO com opiniões divergentes: (1) obstetra com viés conservador/protocolar, (2) especialista em medicina baseada em evidências com viés crítico, (3) epidemiologista clínica com foco em NNT/NNH e impacto populacional.
+
+[I] Protocolo analisado: [DESCREVA SEU PROTOCOLO AQUI]
+Contexto de prática: maternidade de referência brasileira (FEBRASGO como referência primária)
+Nível de evidência atual que suporta o protocolo: [descreva o que você sabe]
+
+[M] Execute a Teoria do Contrário em 4 fases:
+
+FASE 1 — O ARGUMENTO CONTRÁRIO MAIS FORTE
+O especialista em MBE constrói o argumento mais devastador possível contra o protocolo. Sem suavizar. Usando os dados mais críticos disponíveis.
+
+FASE 2 — A DEFESA DO PROTOCOLO
+O obstetra conservador responde com a melhor defesa possível. Baseada em guideline, prática e contexto brasileiro.
+
+FASE 3 — O DADO EPIDEMIOLÓGICO
+A epidemiologista apresenta NNT, NNH, taxa de eventos adversos prevenidos vs causados. Contextualiza para a realidade da MDV.
+
+FASE 4 — O VEREDICTO PROVISÓRIO
+Síntese das três vozes: em que condições o protocolo se sustenta? Onde tem fronteiras? Qual seria a modificação evidence-based ideal?
+
+[E] Cada voz identificada claramente. Dados com referência (Cochrane / ACOG / FEBRASGO / RCT específico). Veredicto em formato de decisão clínica acionável.
+
+[D]
+- Nunca fabricar referência — se não houver estudo, declarar "evidência ausente"
+- O objetivo é fortalecer o raciocínio clínico, não descreditar a prática
+- Declarar quando há divergência entre evidência internacional e contexto brasileiro
+- Mencionar implicações para o contexto SUS/MDV quando relevante`}
+      }
     },
     {id:'cafe-3', horario:'15:40–16:00', titulo:'Café · Intervalo', summary:'Pausa.', avatar:null, conteudo:`<div class="callout"><div class="callout-label">Intervalo · 20 min</div><p>Último café do curso. Use para preparar sua apresentação de Nossa Ferramenta MDV.</p></div>`, prompts:null, isBreak:true},
     {
@@ -4835,7 +4869,7 @@ Para o arquivo do grupo (não vai ao prontuário):
 </div>
 <h3>Os 4 desafios pós-curso</h3>
 <p>Depois que o curso termina, o AIMED OS continua. No Bloco 5 — Crescimento — você encontra um desafio por semana. Cada um leva 20-30 minutos. São o que transformam este evento de 14 horas num programa de 5 semanas.</p>
-<div class="alert-box success"><div class="alert-label">✅ O que você tem agora</div><p>• Acesso permanente ao AIMED OS · Residentes GO<br>• Biblioteca AIMED GO com 9 prompts clínicos de alta performance<br>• Projeto Claude GO/MDV configurado com FEBRASGO<br>• Notebook Memória Clínica MDV com dados de Joinville<br>• Nossa Ferramenta MDV v1.0<br>• 4 desafios pós-curso no Bloco 5<br>• Comunidade GO/MDV no WhatsApp</p></div>`,
+<div class="alert-box success"><div class="alert-label">✅ O que você tem agora</div><p>• Acesso permanente ao AIMED OS · Residentes GO<br>• Biblioteca AIMED GO com 9 prompts clínicos de alta performance<br>• Projeto Claude GO/MDV configurado com FEBRASGO<br>• Notebook Memória Clínica MDV (FEBRASGO + protocolos MDV) — pronto para incorporar dados públicos conforme construção do serviço<br>• Nossa Ferramenta MDV v1.0<br>• 4 desafios pós-curso no Bloco 5<br>• Comunidade GO/MDV no WhatsApp</p></div>`,
       prompts:null
     }
   ]
@@ -4858,7 +4892,7 @@ Para o arquivo do grupo (não vai ao prontuário):
       summary:'Use o prompt de Revisão de Óbito Materno da Biblioteca AIMED GO com um caso da MDV — real ou do NotebookLM. O primeiro serviço GO do Brasil com revisão de óbito assistida por IA.',
       avatar:null,
       avatarPlaceholder:{icon:'🕯️', text:'Semana 2 · Revisão de Óbito<br>· vídeo · pós-curso ·'},
-      conteudo:`<div class="challenge-card"><div class="challenge-week">⚡ Desafio · Semana 2 · 30-45 minutos</div><div class="challenge-title">Primeira Revisão de Óbito com IA — MDV</div><ul class="challenge-steps"><li>Abra o prompt "Revisão de Óbito Materno AIMED" na Biblioteca AIMED GO</li><li>Use com um caso do NotebookLM (dados epidemiológicos de Joinville já carregados) — ou com um caso anonimizado que você viveu</li><li>Gere a síntese estruturada: fatores evitáveis + recomendação institucional</li><li>Compartilhe a síntese com a Andrea — primeira revisão de óbito assistida por IA na MDV</li></ul><div class="challenge-whatsapp"><strong>📱 Compartilhe no grupo:</strong> "Desafio 2 concluído · Usei o prompt de revisão de óbito · O que ele identificou que eu não havia pensado: [insight]"</div></div>
+      conteudo:`<div class="challenge-card"><div class="challenge-week">⚡ Desafio · Semana 2 · 30-45 minutos</div><div class="challenge-title">Primeira Revisão de Óbito com IA — MDV</div><ul class="challenge-steps"><li>Abra o prompt "Revisão de Óbito Materno AIMED" na Biblioteca AIMED GO</li><li>Use com um caso anonimizado que você viveu — ou com um caso composto disponibilizado pela coordenação. Consultas a SINASC/DATASUS Tabnet são opcionais (pós-curso, no seu tempo)</li><li>Gere a síntese estruturada: fatores evitáveis + recomendação institucional</li><li>Compartilhe a síntese com a Andrea — primeira revisão de óbito assistida por IA na MDV</li></ul><div class="challenge-whatsapp"><strong>📱 Compartilhe no grupo:</strong> "Desafio 2 concluído · Usei o prompt de revisão de óbito · O que ele identificou que eu não havia pensado: [insight]"</div></div>
 <div class="alert-box info"><div class="alert-label">O impacto que poucas residentes percebem</div><p>A revisão de óbito materno é obrigatória em toda maternidade brasileira. É feita de forma despadronizada, frequentemente culpabilizante, raramente gerando aprendizado institucional. Uma residente GO que sai daqui sabendo estruturar essa revisão com IA — e ensinar as colegas — transforma o serviço inteiro.</p></div>`,
       prompts:null
     },
@@ -5068,7 +5102,7 @@ ULTRASSONOGRAFIA (data [DD/MM/AAAA]):
   },
   {
     id:'obito-materno', icon:'🕯️', titulo:'Revisão de Óbito Materno AIMED',
-    desc:'Framework estruturado para discussão de caso de mortalidade materna — fatores evitáveis, conformidade protocolar, dados populacionais de Joinville e recomendação institucional para a MDV.',
+    desc:'Framework estruturado para discussão de caso de mortalidade materna — fatores evitáveis, conformidade protocolar, dados populacionais públicos (SINASC/DATASUS quando disponíveis) e recomendação institucional para a MDV.',
     tags:['go','unique'], specs:['universal'], prompt:`[A] Você é especialista em qualidade assistencial e auditoria de mortalidade materna, com expertise em análise de óbitos segundo metodologia SEADE/DANE e diretrizes do Ministério da Saúde brasileiro. Sua análise é isenta, não culpabilizante, e orientada a aprendizado institucional.
 
 [I] Caso para revisão (anonimizado obrigatoriamente):
@@ -5077,7 +5111,7 @@ ULTRASSONOGRAFIA (data [DD/MM/AAAA]):
 - Diagnóstico final: [causa do óbito / CID]
 - Resumo do caso: [narrativa cronológica em 10-15 linhas — DO INÍCIO AO DESFECHO]
 - Contexto socioeconômico: [quando relevante e disponível]
-- Dados populacionais disponíveis: [cole aqui os dados epidemiológicos de Joinville quando disponíveis]
+- Dados populacionais disponíveis: [cole aqui os dados consultados no SINASC/DATASUS, se relevantes para o caso]
 
 [M] Execute a revisão de óbito em 5 dimensões:
 
